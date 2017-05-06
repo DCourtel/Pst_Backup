@@ -1,4 +1,4 @@
-# Pst_Bakup
+﻿# Pst_Backup
 Automatically backup your PST files at closing
 
 This is an Outlook add-in to backup your PST files at closing.
