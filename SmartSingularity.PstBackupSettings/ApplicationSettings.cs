@@ -90,7 +90,7 @@ namespace SmartSingularity.PstBackupSettings
         /// <summary>
         /// Constructor for the class.
         /// </summary>
-        /// <param name="readSettingsFrom">Where to read registry values. Can be either 'GPO', so values will be read from "Software\Policies\PST Backup 2013", or 'Local', so values will read from "Software\PST Backup 2013".</param>        
+        /// <param name="readSettingsFrom">Where to read registry values. Can be either 'GPO', so values will be read from "Software\Policies\PST Backup", or 'Local', so values will read from "Software\PST Backup".</param>        
         public ApplicationSettings(SourceSettings readSettingsFrom)
         {
             _readSettingsFrom = readSettingsFrom;

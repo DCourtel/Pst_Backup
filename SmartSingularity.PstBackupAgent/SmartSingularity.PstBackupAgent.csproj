@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Pst Backup 2013 128X128.ico</ApplicationIcon>
+    <ApplicationIcon>Pst Backup 128X128.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>SmartSingularity.PstBackupAgent.Program</StartupObject>
@@ -103,7 +103,7 @@
     <Content Include="Logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Pst Backup 2013 128X128.ico" />
+    <Content Include="Pst Backup 128X128.ico" />
     <Content Include="SQLite.Interop.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
