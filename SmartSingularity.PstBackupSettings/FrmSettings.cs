@@ -14,8 +14,6 @@ namespace SmartSingularity.PstBackupSettings
         private ApplicationSettings _localSettings = new ApplicationSettings(ApplicationSettings.SourceSettings.Local);
         private ApplicationSettings _gpoSettings = new ApplicationSettings(ApplicationSettings.SourceSettings.GPO);
         
-        // ToDo : block compression option when destination is server
-
         public FrmSettings()
         {
             //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
@@ -75,7 +73,8 @@ namespace SmartSingularity.PstBackupSettings
                 txtBxDestination.Text = _localSettings.FilesAndFoldersDestinationPath;
                 txtBxBackupServerName.Text = _localSettings.FilesAndFoldersBackupServer;
                 nupBackupServerPort.Value = (decimal)_localSettings.FilesAndFoldersBackupPort;
-                chkBxCompressFile.Checked = _localSettings.FilesAndFoldersCompressFiles;
+                chkBxCompressFile.Checked = _localSettings.FilesAndFoldersCompressFiles && rdBtnFileSystem.Checked && (_localSettings.BackupAgentBackupMethod == ApplicationSettings.BackupMethod.Full);
+                chkBxCompressFile.Enabled = rdBtnFileSystem.Checked && (_localSettings.BackupAgentBackupMethod == ApplicationSettings.BackupMethod.Full);
             }
             catch (Exception) { }
 
@@ -165,7 +164,7 @@ namespace SmartSingularity.PstBackupSettings
                 btnBrowse.Enabled = rdBtnFileSystem.Checked && !_gpoSettings.IsFilesAndFoldersDestinationPathDefine;
                 txtBxBackupServerName.Enabled = rdBtnBackupServer.Checked && !_gpoSettings.IsFilesAndFoldersBackupServerDefine;
                 nupBackupServerPort.Enabled = rdBtnBackupServer.Checked && !_gpoSettings.IsFilesAndFoldersBackupPortDefine;
-                chkBxCompressFile.Enabled = !_gpoSettings.IsFilesAndFoldersCompressFilesDefine;
+                chkBxCompressFile.Enabled = !_gpoSettings.IsFilesAndFoldersCompressFilesDefine && (_localSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.FileSystem) && (_localSettings.BackupAgentBackupMethod == ApplicationSettings.BackupMethod.Full);
             }
             catch (Exception) { }
 
@@ -425,11 +424,15 @@ namespace SmartSingularity.PstBackupSettings
                 btnBrowse.Enabled = !_gpoSettings.IsFilesAndFoldersDestinationPathDefine;
                 txtBxBackupServerName.Enabled = false;
                 nupBackupServerPort.Enabled = false;
+                chkBxCompressFile.Enabled = rdBtnMethodFull.Checked;
+                chkBxCompressFile.Checked = rdBtnMethodFull.Checked && _localSettings.FilesAndFoldersCompressFiles;
             }
             else                        // Destination : Backup Server
             {
                 txtBxDestination.Enabled = false;
                 btnBrowse.Enabled = false;
+                chkBxCompressFile.Checked = false;
+                chkBxCompressFile.Enabled = false;
                 txtBxBackupServerName.Enabled = !_gpoSettings.IsFilesAndFoldersBackupServerDefine;
                 nupBackupServerPort.Enabled = !_gpoSettings.IsFilesAndFoldersBackupPortDefine;
             }
@@ -541,6 +544,17 @@ namespace SmartSingularity.PstBackupSettings
         }
 
         // Backup Agent Tab
+
+        /// <summary>
+        /// Occurs when the user switch between full and differential backup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rdBtnMethodFull_CheckedChanged(object sender, EventArgs e)
+        {
+            chkBxCompressFile.Enabled = rdBtnMethodFull.Checked && rdBtnFileSystem.Checked;
+            chkBxCompressFile.Checked = !chkBxCompressFile.Enabled ? false : (rdBtnFileSystem.Checked && _localSettings.FilesAndFoldersCompressFiles);
+        }
 
         /// <summary>
         /// Occurs when the user change if he wish to backup over WAN or not

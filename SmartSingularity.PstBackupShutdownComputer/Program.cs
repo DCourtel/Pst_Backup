@@ -16,8 +16,18 @@ namespace SmartSingularity.PstBackupShutdownComputer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // ToDo: Avoid multiple instance of this form
-            Application.Run(new FrmShutdownComputer());
+
+            bool createdNew = true;
+            using (System.Threading.Mutex mutex = new System.Threading.Mutex(true, "FrmShutdownComputer", out createdNew))
+            {
+                if (createdNew)
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    FrmShutdownComputer instance = new FrmShutdownComputer();
+                    Application.Run(instance);
+                }
+            }
         }
     }
 }

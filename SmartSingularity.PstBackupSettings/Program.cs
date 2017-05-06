@@ -14,9 +14,19 @@ namespace SmartSingularity.PstBackupSettings
         static void Main()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            // ToDo : Avoid launching multiple instance of this form
-            Application.Run(new FrmSettings());
+            Application.SetCompatibleTextRenderingDefault(false);            
+
+            bool createdNew = true;
+            using (System.Threading.Mutex mutex = new System.Threading.Mutex(true, "PstBackupSettings", out createdNew))
+            {
+                if (createdNew)
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    FrmSettings instance = new FrmSettings();
+                    Application.Run(instance);
+                }
+            }
         }
     }
 }

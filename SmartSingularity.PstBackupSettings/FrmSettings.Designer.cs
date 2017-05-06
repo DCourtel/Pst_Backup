@@ -445,6 +445,7 @@
             resources.ApplyResources(this.rdBtnMethodDifferential, "rdBtnMethodDifferential");
             this.rdBtnMethodDifferential.Name = "rdBtnMethodDifferential";
             this.rdBtnMethodDifferential.UseVisualStyleBackColor = true;
+            this.rdBtnMethodDifferential.CheckedChanged += new System.EventHandler(this.rdBtnMethodFull_CheckedChanged);
             // 
             // rdBtnMethodFull
             // 
@@ -453,6 +454,7 @@
             this.rdBtnMethodFull.Name = "rdBtnMethodFull";
             this.rdBtnMethodFull.TabStop = true;
             this.rdBtnMethodFull.UseVisualStyleBackColor = true;
+            this.rdBtnMethodFull.CheckedChanged += new System.EventHandler(this.rdBtnMethodFull_CheckedChanged);
             // 
             // txtBxAdditionalSubnets
             // 

@@ -17,8 +17,17 @@ namespace SmartSingularity.PstBackupAgent
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            FrmAgent frmAgent = new FrmAgent();
-            frmAgent.Backup();
+            bool createdNew = true;
+            using (System.Threading.Mutex mutex = new System.Threading.Mutex(true, "PstBackupAgent", out createdNew))
+            {
+                if (createdNew)
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    FrmAgent frmAgent = new FrmAgent();
+                    frmAgent.Backup();
+                }
+            }
         }
     }
 }
