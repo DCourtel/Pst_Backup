@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <Binary Id="RegisterOutlookAddin" SourceFile="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\RegisterOutlookAddin.CA.dll"/>
+    <CustomAction Id="ca_RegisterOutlookAddin" BinaryKey="RegisterOutlookAddin" DllEntry="RegisterOutlookAddin" Execute="deferred" Return="check" Impersonate="no" />
+
+    <Binary Id="UnregisterOutlookAddin" SourceFile="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\RegisterOutlookAddin.CA.dll"/>
+    <CustomAction Id="ca_UnregisterOutlookAddin" BinaryKey="UnregisterOutlookAddin" DllEntry="UnRegisterOutlookAddin" Execute="deferred" Return="check" Impersonate="no" />
+
+    <Binary Id="RollbackRegisterOutlookAddin" SourceFile="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\RegisterOutlookAddin.CA.dll"/>
+    <CustomAction Id="ca_RollbackRegisterOutlookAddin" BinaryKey="RollbackRegisterOutlookAddin" DllEntry="UnRegisterOutlookAddin" Execute="rollback" Return="check" Impersonate="no" />
+	</Fragment>
+</Wix>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Fragment>
+    <ComponentGroup Id="cg_PstBackup">
+
+      <!-- Copy Files -->
+
+      <Component Guid="*" Id="c_Agent_exe" Directory="INSTALLFOLDER">
+        <File Id="Agent_exe" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupAgent.exe" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Settings_exe" Directory="INSTALLFOLDER">
+        <File Id="Settings_exe" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupSettings.exe" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Shutdown_exe" Directory="INSTALLFOLDER">
+        <File Id="Shutdown_exe" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupShutdownComputer.exe" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Tools_Common_dll" Directory="INSTALLFOLDER">
+        <File Id="Tools_Common_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\Microsoft.Office.Tools.Common.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Tools_CommonV4_dll" Directory="INSTALLFOLDER">
+        <File Id="Tools_CommonV4_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Tools_dll" Directory="INSTALLFOLDER">
+        <File Id="Tools_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\Microsoft.Office.Tools.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Tools_Outlook_dll" Directory="INSTALLFOLDER">
+        <File Id="Tools_Outlook_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\Microsoft.Office.Tools.Outlook.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Tools_OutlookV4_dll" Directory="INSTALLFOLDER">
+        <File Id="Tools_OutlookV4_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_ToolsV4_dll" Directory="INSTALLFOLDER">
+        <File Id="ToolsV4_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\Microsoft.Office.Tools.v4.0.Framework.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Tools_Applications_dll" Directory="INSTALLFOLDER">
+        <File Id="Tools_Applications_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\Microsoft.VisualStudio.Tools.Applications.Runtime.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Addin_dll" Directory="INSTALLFOLDER">
+        <File Id="Addin_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupAddin.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_ClientDB_dll" Directory="INSTALLFOLDER">
+        <File Id="Tools_ClientDB_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupClientDb.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Engine_dll" Directory="INSTALLFOLDER">
+        <File Id="Engine_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupEngine.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_FileSystem_dll" Directory="INSTALLFOLDER">
+        <File Id="FileSystem_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupFileSystem.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Logger_dll" Directory="INSTALLFOLDER">
+        <File Id="Logger_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupLogger.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Network_dll" Directory="INSTALLFOLDER">
+        <File Id="Network_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupNetwork.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_SQLiteInterop_dll" Directory="INSTALLFOLDER">
+        <File Id="SQLiteInterop_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SQLite.Interop.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Data_SQLite_dll" Directory="INSTALLFOLDER">
+        <File Id="Data_SQLite_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\System.Data.SQLite.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Logo_png" Directory="INSTALLFOLDER">
+        <File Id="Logo_png" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\Logo.png" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Addin_vsto" Directory="INSTALLFOLDER">
+        <File Id="Addin_vsto" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupAddin.vsto" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Agent_en_dll" Directory="en">
+        <File Id="Agent_en_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\en\SmartSingularity.PstBackupAgent.resources.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Addin_fr_dll" Directory="fr">
+        <File Id="Addin_fr_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\fr\SmartSingularity.PstBackupAddin.resources.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Agent_fr_dll" Directory="fr">
+        <File Id="Agent_fr_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\fr\SmartSingularity.PstBackupAgent.resources.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Settings_fr_dll" Directory="fr">
+        <File Id="Settings_fr_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\fr\SmartSingularity.PstBackupSettings.resources.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+      <Component Guid="*" Id="c_Shutdown_fr_dll" Directory="fr">
+        <File Id="Shutdown_fr_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\fr\SmartSingularity.PstBackupShutdownComputer.resources.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>
+
+      <!-- Create Event Log Source -->
+
+      <Component Guid="*" Id="EventLogSource" Directory="INSTALLFOLDER">
+        <util:EventSource EventMessageFile="[NETFRAMEWORK40FULLINSTALLROOTDIR]EventLogMessages.dll" Log="Application" Name="Pst Backup" SupportsErrors="yes" SupportsInformationals="yes" SupportsWarnings="yes" KeyPath="yes"/>
+      </Component>
+    </ComponentGroup>
+
+    <!-- Provide Icon for ARP -->
+
+    <Icon Id="ArpIcon" SourceFile="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupAgent.exe"/>
+  </Fragment>
+</Wix>

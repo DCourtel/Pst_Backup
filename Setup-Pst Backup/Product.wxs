@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  <Product Id="*" Name="Pst Backup" Language="1033" Version="!(bind.FileVersion.Agent_exe)" Manufacturer="Smart Singularity" UpgradeCode="4d716257-5700-BA5E-1DEA-d253f6401f3c">
+    <Package Manufacturer="Smart Singularity" Comments="Automatically backup your Outlook PST files to a safe location." InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Pst Backup is already installed." AllowSameVersionUpgrades="yes" />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Property Id="VERSION" Value="!(bind.FileVersion.Agent_exe)"/>
+    <Property Id="ARPNOMODIFY" Value="1"/>
+    <Property Id="ARPPRODUCTICON" Value="ArpIcon"/>
+    <Property Id="ARPCOMMENTS" Value="Automatically backup your PST files."/>
+    <Property Id="DONOTSEARCHOUTLOOK"/>
+       
+    <!-- Get installation path of .NET40 for adding Event Log source -->
+
+    <PropertyRef Id="NETFRAMEWORK40FULLINSTALLROOTDIR" />
+
+    <!-- Check that .NET Framework 4.6 is installed -->
+
+    <PropertyRef Id="WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED"/>
+    <Condition Message="This application requires .NET Framework 4.6 or later. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]>
+    </Condition>
+
+    <!-- Check that Outlook 2013 or Outlook 2016 is installed -->
+
+    <Property Id="OUTLOOK2013_32BIT">
+    <RegistrySearch Id="Outlook2013_32Bit_Reg" Type="raw" Root="HKLM" Key="SOFTWARE\Microsoft\Office\15.0\Outlook\InstallRoot" Name="Path" Win64="no"/>    
+    </Property>
+    <Property Id="OUTLOOK2013_64BIT">
+    <RegistrySearch Id="Outlook2013_64Bit_Reg" Type="raw" Root="HKLM" Key="SOFTWARE\Microsoft\Office\15.0\Outlook\InstallRoot" Name="Path" Win64="yes"/>
+    </Property>
+
+    <Property Id="OUTLOOK2016_32BIT">
+    <RegistrySearch Id="Outlook2016_32Bit_Reg" Type="raw" Root="HKLM" Key="SOFTWARE\Microsoft\Office\16.0\Outlook\InstallRoot" Name="Path" Win64="no"/>    
+    </Property>
+    <Property Id="OUTLOOK2016_64BIT">
+    <RegistrySearch Id="Outlook2016_64Bit_Reg" Type="raw" Root="HKLM" Key="SOFTWARE\Microsoft\Office\16.0\Outlook\InstallRoot" Name="Path" Win64="yes"/>
+    </Property>
+    
+    <Condition Message="Neither Outlook 2013 nor Outlook 2016 have been detected on this computer.">Installed OR OUTLOOK2013_32BIT OR OUTLOOK2013_64BIT OR OUTLOOK2016_32BIT OR OUTLOOK2016_64BIT OR DONOTSEARCHOUTLOOK</Condition>
+    
+    <!-- Process to the installation -->
+
+    <Feature Id="ProductFeature" Title="Pst Backup" Level="1" InstallDefault="local" Absent="disallow" AllowAdvertise="no">
+      <ComponentGroupRef Id="cg_PstBackup"/>
+      <ComponentRef Id="RegistryValues"/>
+    </Feature>
+
+    <!-- Register Outlook Addin and Whitelist it -->
+    
+    <InstallExecuteSequence>
+      <Custom Action="ca_RollbackRegisterOutlookAddin" After="InstallFiles">(NOT Installed) OR REINSTALL</Custom>
+      <Custom Action="ca_RegisterOutlookAddin" After="ca_RollbackRegisterOutlookAddin">(NOT Installed) OR REINSTALL</Custom>
+      <Custom Action="ca_UnregisterOutlookAddin" After="InstallFiles">REMOVE</Custom>
+    </InstallExecuteSequence>    
+  </Product>
+</Wix>
