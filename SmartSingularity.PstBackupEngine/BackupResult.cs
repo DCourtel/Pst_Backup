@@ -7,16 +7,24 @@ using SmartSingularity.PstBackupSettings;
 
 namespace SmartSingularity.PstBackupEngine
 {
-    public class BackupResult
+    public class BackupResultInfo
     {
-        public BackupResult(PSTRegistryEntry pstFile)
+        public enum BackupResult
+        {
+            NotStarted,
+            Success,
+            Failed,
+            Canceled
+        }
+
+        public BackupResultInfo(PSTRegistryEntry pstFile)
         {
             System.IO.FileInfo fileToSave = new System.IO.FileInfo(pstFile.SourcePath);
             LocalPath = fileToSave.FullName;
             FileSize = fileToSave.Length;
             SentChunks = 0;
             BackupStartTime = DateTime.UtcNow;
-            HasFailed = true;
+            Result = BackupResult.NotStarted;
             ErrorMessage = "An unknown error occurs.";
         }
 
@@ -63,9 +71,9 @@ namespace SmartSingularity.PstBackupEngine
         public long CompressedSize { get; set; }
 
         /// <summary>
-        /// Gets or Sets if the backup have failed
+        /// Gets or Sets the result of the backup operation
         /// </summary>
-        public bool HasFailed { get; set; }
+        public BackupResult Result { get; set; }
 
         /// <summary>
         /// Gets or Sets the error message in case where the backup have failed

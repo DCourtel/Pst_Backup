@@ -14,7 +14,7 @@ namespace SmartSingularity.PstBackupEngine
         /// </summary>
         /// <param name="pstRegistryEntry">A reference to the PstRegistryEntry</param>
         /// <param name="backupResult">A reference to the Result of the backup</param>
-        public BackupFinishedEventArgs(PSTRegistryEntry pstRegistryEntry, BackupResult backupResult)
+        public BackupFinishedEventArgs(PSTRegistryEntry pstRegistryEntry, BackupResultInfo backupResult)
         {
             PstRegistryEntry = pstRegistryEntry;
             Result = backupResult;
@@ -28,6 +28,6 @@ namespace SmartSingularity.PstBackupEngine
         /// <summary>
         /// Gets or Sets the result of the backup
         /// </summary>
-        public BackupResult Result { get; private set; }
+        public BackupResultInfo Result { get; private set; }
     }
 }

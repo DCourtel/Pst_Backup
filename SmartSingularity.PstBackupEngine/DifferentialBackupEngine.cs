@@ -50,7 +50,7 @@ namespace SmartSingularity.PstBackupEngine
             try
             {
                 PSTRegistryEntry pstFileToSave = (PSTRegistryEntry)objPstFileToSave;
-                BackupResult backupResult = new BackupResult(pstFileToSave);
+                BackupResultInfo backupResult = new BackupResultInfo(pstFileToSave);
                 backupResult.IsCompressed = false;
 
                 if (AppSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.FileSystem)
@@ -69,7 +69,7 @@ namespace SmartSingularity.PstBackupEngine
                     pstFileToSave.Save();
                     backupResult.RemotePath = backupFileNewName;
                     backupResult.CompressedSize = 0;
-                    backupResult.HasFailed = false;
+                    backupResult.Result = BackupResultInfo.BackupResult.Failed;
                     backupResult.ErrorMessage = String.Empty;
                     backupResult.BackupEndTime = DateTime.UtcNow;
                     Logger.Write(30012, pstFileToSave + " have been successfuly saved", Logger.MessageSeverity.Debug);

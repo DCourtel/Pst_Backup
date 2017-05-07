@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SmartSingularity.PstBackupSettings;
 using SmartSingularity.PstBackupFileSystem;
+using SmartSingularity.PstBackupExceptions;
 using Logger = SmartSingularity.PstBackupLogger.Logger;
 
 namespace SmartSingularity.PstBackupEngine
@@ -16,84 +17,92 @@ namespace SmartSingularity.PstBackupEngine
 
         public override void Backup(object objPstFileToSave)
         {
+            PSTRegistryEntry pstFileToSave = (PSTRegistryEntry)objPstFileToSave;
+            BackupResultInfo backupResult = new BackupResultInfo(pstFileToSave);
             try
             {
-                PSTRegistryEntry pstFileToSave = (PSTRegistryEntry)objPstFileToSave;
-                BackupResult backupResult = new BackupResult(pstFileToSave);
 
                 if (AppSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.FileSystem)
                 {
-                    // Backup to SMB destination
                     Logger.Write(30015, "Starting to backup " + pstFileToSave.SourcePath + " to file system with full method\r\n", Logger.MessageSeverity.Debug);
-                    if (!base.IsCancelRequired)
-                    {
-                        FileInfo sourceFile = new FileInfo(pstFileToSave.SourcePath);
-                        string finalDestinationFolder = FileSystem.ExpandDestinationFolder(AppSettings.FilesAndFoldersDestinationPath);
-
-                        if (AppSettings.FilesAndFoldersCompressFiles)
-                        {
-                            backupResult.IsCompressed = true;
-                            DirectoryInfo compressionFolder = new DirectoryInfo(FileSystem.GetTemporaryFolder());
-                            if (HasEnoughDiskspace(compressionFolder, sourceFile.Length / 2))
-                            {
-                                string destinationFilePath = Path.Combine(compressionFolder.FullName, sourceFile.Name + ".gz.temp");
-                                CompressFile(sourceFile.FullName, destinationFilePath);
-
-                                CopyFile(destinationFilePath, Path.Combine(finalDestinationFolder, sourceFile.Name + ".gz.temp"), true);
-                                FileInfo compressedFile = new FileInfo(Path.Combine(finalDestinationFolder, sourceFile.Name + ".gz"));
-                                FileSystem.RenameFile(Path.Combine(finalDestinationFolder, sourceFile.Name + ".gz.temp"), compressedFile.FullName);
-                                backupResult.RemotePath = compressedFile.FullName;
-                                backupResult.CompressedSize = compressedFile.Length;
-                                backupResult.HasFailed = false;
-                                backupResult.ErrorMessage = String.Empty;
-                                backupResult.BackupEndTime = DateTime.UtcNow;
-                                pstFileToSave.LastSuccessfulBackup = DateTime.UtcNow;
-
-                                try
-                                {
-                                    compressionFolder.Delete(true);
-                                }
-                                catch (Exception) { }
-                            }
-                            else
-                            {
-                                Logger.Write(10002, "Not enough disk space on the remot folder", Logger.MessageSeverity.Warning, System.Diagnostics.EventLogEntryType.Warning);
-                                backupResult.RemotePath = compressionFolder.FullName;
-                                backupResult.HasFailed = true;
-                                backupResult.ErrorMessage = "Not enough diskspace on the remote folder.";
-                                backupResult.BackupEndTime = DateTime.UtcNow;
-                            }
-                        }
-                        else
-                        {
-                            backupResult.IsCompressed = false;
-                            CopyFile(sourceFile.FullName, Path.Combine(finalDestinationFolder, sourceFile.Name + ".temp"), false);
-                            FileSystem.RenameFile(Path.Combine(finalDestinationFolder, sourceFile.Name + ".temp"), Path.Combine(finalDestinationFolder, sourceFile.Name));
-                            backupResult.RemotePath = Path.Combine(finalDestinationFolder, sourceFile.Name);
-                            backupResult.CompressedSize = 0;
-                            backupResult.HasFailed = false;
-                            backupResult.ErrorMessage = String.Empty;
-                            backupResult.BackupEndTime = DateTime.UtcNow;
-                            pstFileToSave.LastSuccessfulBackup = DateTime.UtcNow;
-                        }
-                        pstFileToSave.Save();
-                        Logger.Write(30012, "PST file have been successfuly saved", Logger.MessageSeverity.Debug);
-                    }
+                    // Backup to SMB destination
+                    backupResult.IsCompressed = AppSettings.FilesAndFoldersCompressFiles;
+                    backupResult = AppSettings.FilesAndFoldersCompressFiles ? BackupToSmbWithCompression(pstFileToSave, backupResult) : BackupToSmbWithoutCompression(pstFileToSave, backupResult);
                 }
                 else
                 {
                     // Backup to Server
 
                 }
-                if (!base.IsCancelRequired)
-                {
-                    BackupFinished(new BackupFinishedEventArgs(pstFileToSave, backupResult));
-                }
+                backupResult.Result = BackupResultInfo.BackupResult.Success;
+                backupResult.ErrorMessage = String.Empty;
+                pstFileToSave.LastSuccessfulBackup = DateTime.UtcNow;
+            }
+            catch (BackupCanceledException ex)
+            {
+                Logger.Write(24, "Backup of " + ex.PstFilename + " have been canceled by user", Logger.MessageSeverity.Warning);
+                backupResult.Result = BackupResultInfo.BackupResult.Canceled;
+                backupResult.ErrorMessage = "Backup canceled by the user";
+            }
+            catch (NotEnoughEstimatedDiskSpace ex)
+            {
+                Logger.Write(10002, "Not enough estimated disk space on " + ex.Destination, Logger.MessageSeverity.Warning, System.Diagnostics.EventLogEntryType.Warning);
+                backupResult.Result = BackupResultInfo.BackupResult.Failed;
+                backupResult.ErrorMessage = "Not enough estimated disk space on " + ex.Destination;
             }
             catch (Exception ex)
             {
-                Logger.Write(20025, "An error occurs while backuping a PST file with full method\r\n" + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
+                Logger.Write(20025, "An error occurs while saving a PST file with full method\r\n" + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
+                backupResult.Result = BackupResultInfo.BackupResult.Failed;
+                backupResult.ErrorMessage = ex.Message;
             }
+            backupResult.BackupEndTime = DateTime.UtcNow;
+            pstFileToSave.Save();
+            if (!base.IsCancelRequired)
+            { BackupFinished(new BackupFinishedEventArgs(pstFileToSave, backupResult)); }
+        }
+
+        private BackupResultInfo BackupToSmbWithCompression(PSTRegistryEntry pstFileToSave, BackupResultInfo backupResult)
+        {
+            FileInfo sourceFile = new FileInfo(pstFileToSave.SourcePath);
+            string finalDestinationFolder = FileSystem.ExpandDestinationFolder(AppSettings.FilesAndFoldersDestinationPath);
+
+            DirectoryInfo compressionFolder = new DirectoryInfo(FileSystem.GetTemporaryFolder());
+            if (HasEnoughDiskspace(compressionFolder, sourceFile.Length / 2))
+            {
+                string destinationFilePath = Path.Combine(compressionFolder.FullName, sourceFile.Name + ".gz.temp");
+                CompressFile(sourceFile.FullName, destinationFilePath);
+                CopyFile(destinationFilePath, Path.Combine(finalDestinationFolder, sourceFile.Name + ".gz.temp"), true);
+                FileInfo compressedFile = new FileInfo(Path.Combine(finalDestinationFolder, sourceFile.Name + ".gz"));
+                FileSystem.RenameFile(Path.Combine(finalDestinationFolder, sourceFile.Name + ".gz.temp"), compressedFile.FullName);
+                backupResult.RemotePath = compressedFile.FullName;
+                backupResult.CompressedSize = compressedFile.Length;
+
+                try
+                {
+                    compressionFolder.Delete(true);
+                }
+                catch (Exception) { }
+            }
+            else
+            {
+                throw new NotEnoughEstimatedDiskSpace(compressionFolder.FullName);
+            }
+
+            return backupResult;
+        }
+
+        private BackupResultInfo BackupToSmbWithoutCompression(PSTRegistryEntry pstFileToSave, BackupResultInfo backupResult)
+        {
+            FileInfo sourceFile = new FileInfo(pstFileToSave.SourcePath);
+            string finalDestinationFolder = FileSystem.ExpandDestinationFolder(AppSettings.FilesAndFoldersDestinationPath);
+
+            CopyFile(sourceFile.FullName, Path.Combine(finalDestinationFolder, sourceFile.Name + ".temp"), false);
+            FileSystem.RenameFile(Path.Combine(finalDestinationFolder, sourceFile.Name + ".temp"), Path.Combine(finalDestinationFolder, sourceFile.Name));
+            backupResult.RemotePath = Path.Combine(finalDestinationFolder, sourceFile.Name);
+            backupResult.CompressedSize = backupResult.FileSize;
+
+            return backupResult;
         }
 
         private void CompressFile(string sourceFilePath, string outputFilePath)
@@ -123,11 +132,11 @@ namespace SmartSingularity.PstBackupEngine
                     {
                         outputFile.Close();
                         File.Delete(outputFilePath);
-                        break;
+                        throw new BackupCanceledException(sourceFilePath);
                     }
                 }
             }
-            Logger.Write(30017, "Compression finished", Logger.MessageSeverity.Debug);
+            Logger.Write(30017, "Compression completed", Logger.MessageSeverity.Debug);
         }
 
         private void CopyFile(string sourceFilePath, string outputFilePath, bool isCompressed)
@@ -160,11 +169,11 @@ namespace SmartSingularity.PstBackupEngine
                     {
                         outputFile.Close();
                         File.Delete(outputFilePath);
-                        break;
+                        throw new BackupCanceledException(sourceFilePath);
                     }
                 }
             }
-            Logger.Write(30019, "Copy finished", Logger.MessageSeverity.Debug);
+            Logger.Write(30019, "Copy completed", Logger.MessageSeverity.Debug);
         }
 
         /// <summary>

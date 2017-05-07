@@ -63,6 +63,10 @@
       <Project>{096eaa4d-cdb0-4f44-9ed7-794f854cbbe1}</Project>
       <Name>SmartSingularity.PstBackupClientDb</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SmartSingularity.PstBackupExceptions\SmartSingularity.PstBackupExceptions.csproj">
+      <Project>{67fb22a2-623c-4cac-a55e-034a896eb22b}</Project>
+      <Name>SmartSingularity.PstBackupExceptions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SmartSingularity.PstBackupFileSystem\SmartSingularity.PstBackupFileSystem.csproj">
       <Project>{0bd5cb9f-2597-4ab9-a7e5-8f14329fa80a}</Project>
       <Name>SmartSingularity.PstBackupFileSystem</Name>

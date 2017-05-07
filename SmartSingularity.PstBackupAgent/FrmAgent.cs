@@ -77,6 +77,7 @@ namespace SmartSingularity.PstBackupAgent
         {
             try
             {
+                Logger.Write(23, "Starting to save " + pstFileToSave.SourcePath, Logger.MessageSeverity.Information);
                 Action SetCurrentFileFinished = () =>
                    { chkLstBxPstFiles.SetItemCheckState(_currentFileIndex, CheckState.Indeterminate); };
                 if (this.InvokeRequired)
@@ -180,7 +181,7 @@ namespace SmartSingularity.PstBackupAgent
 
         private void BckEngine_OnBackupFinished(object sender, BackupFinishedEventArgs e)
         {
-            BackupResult result = e.Result;
+            BackupResultInfo result = e.Result;            
             UpdateUI(100);
             pstFilesToSave.RemoveAt(0);
             _currentFileIndex++;
