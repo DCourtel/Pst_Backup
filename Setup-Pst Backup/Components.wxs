@@ -38,12 +38,18 @@
       <Component Guid="*" Id="c_Addin_dll" Directory="INSTALLFOLDER">
         <File Id="Addin_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupAddin.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
       </Component>
+      <Component Guid="*" Id="c_Manifest_dll" Directory="INSTALLFOLDER">
+        <File Id="Manifest_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupAddin.dll.manifest" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>      
       <Component Guid="*" Id="c_ClientDB_dll" Directory="INSTALLFOLDER">
         <File Id="Tools_ClientDB_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupClientDb.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
       </Component>
       <Component Guid="*" Id="c_Engine_dll" Directory="INSTALLFOLDER">
         <File Id="Engine_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupEngine.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
       </Component>
+      <Component Guid="*" Id="c_Exceptions_dll" Directory="INSTALLFOLDER">
+        <File Id="Exceptions_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupExceptions.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
+      </Component>      
       <Component Guid="*" Id="c_FileSystem_dll" Directory="INSTALLFOLDER">
         <File Id="FileSystem_dll" Source="C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\Build\Release\SmartSingularity.PstBackupFileSystem.dll" Checksum="yes" Vital="yes" KeyPath="yes"></File>
       </Component>

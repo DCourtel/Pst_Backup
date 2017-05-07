@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
 using Outlook = Microsoft.Office.Interop.Outlook;
-using Office = Microsoft.Office.Core;
 using Logger = SmartSingularity.PstBackupLogger.Logger;
 using SmartSingularity.PstBackupSettings;
-using SmartSingularity.PstBackupEngine;
 
 namespace SmartSingularity.PstBackupAddin
 {
@@ -29,10 +24,16 @@ namespace SmartSingularity.PstBackupAddin
         {
             Logger.Write(30001, "Outlook is closing.", Logger.MessageSeverity.Debug);
             UpdateRegistryEntries();
-#if(DEBUG)
+
+            System.IO.FileInfo currentAssembly = new System.IO.FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string currentPath = currentAssembly.DirectoryName;
+
+#if (DEBUG)
             string bckAgentPath = @"C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\SmartSingularity.PstBackupAgent\bin\Debug\SmartSingularity.PstBackupAgent.exe";
 #else
-            string bckAgentPath = "SmartSingularity.PstBackupAgent.exe";
+
+            string bckAgentPath = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Pst Backup", "SmartSingularity.PstBackupAgent.exe");
+            Logger.Write(30000, "Launching Backup-Agent at " + bckAgentPath, Logger.MessageSeverity.Debug);
 #endif
             try
             {

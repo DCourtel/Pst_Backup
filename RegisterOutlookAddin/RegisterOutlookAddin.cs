@@ -16,6 +16,7 @@ namespace RegisterOutlookAddin
 
         public enum OfficeRelease
         {
+            Office2010,
             Office2013,
             Office2016,
             Unknown
@@ -93,7 +94,7 @@ namespace RegisterOutlookAddin
 
             addinKey.SetValue("Description", (object)"Automatically backup your PST files at closing.", RegistryValueKind.String);
             addinKey.SetValue("FriendlyName", (object)"Pst Backup", RegistryValueKind.String);
-            addinKey.SetValue("LoadBehavior", (object)1, RegistryValueKind.DWord);
+            addinKey.SetValue("LoadBehavior", (object)3, RegistryValueKind.DWord);
             addinKey.SetValue("Manifest", (object)manifestLocation, RegistryValueKind.String);
 
             addinKey.Close();
@@ -126,6 +127,9 @@ namespace RegisterOutlookAddin
 
             switch (officeRelease)
             {
+                case OfficeRelease.Office2010:
+                    officeKey = HKLM.CreateSubKey(@"SOFTWARE\Microsoft\Office\14.0\Outlook\Resiliency\DoNotDisableAddinList", true);
+                    break;
                 case OfficeRelease.Office2013:
                     officeKey = HKLM.CreateSubKey(@"SOFTWARE\Microsoft\Office\15.0\Outlook\Resiliency\DoNotDisableAddinList", true);
                     break;
@@ -173,6 +177,7 @@ namespace RegisterOutlookAddin
         private static OfficeBitness GetOfficeBitness(OsBitness osBitness)
         {
             RegistryKey HKLM = Registry.LocalMachine;
+            RegistryKey officeKey14 = null;
             RegistryKey officeKey15 = null;
             RegistryKey officeKey16 = null;
 
@@ -183,16 +188,18 @@ namespace RegisterOutlookAddin
                 case OsBitness.OS64:
                     // Search Office 32Bit
                     HKLM = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
+                    officeKey14 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\14.0\Outlook\InstallRoot", false);
                     officeKey15 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\15.0\Outlook\InstallRoot", false);
                     officeKey16 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\16.0\Outlook\InstallRoot", false);
-                    if (officeKey15 != null || officeKey16 != null)
+                    if (officeKey14 != null || officeKey15 != null || officeKey16 != null)
                         return OfficeBitness.Office32;
 
                     // Search Office 64Bit
                     HKLM = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+                    officeKey14 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\14.0\Outlook\InstallRoot", false);
                     officeKey15 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\15.0\Outlook\InstallRoot", false);
                     officeKey16 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\16.0\Outlook\InstallRoot", false);
-                    if (officeKey15 != null || officeKey16 != null)
+                    if (officeKey14 != null || officeKey15 != null || officeKey16 != null)
                         return OfficeBitness.Office64;
                     break;
             }
@@ -202,6 +209,7 @@ namespace RegisterOutlookAddin
         private static OfficeRelease GetOfficeRelease(OsBitness osBitness)
         {
             RegistryKey HKLM = Registry.LocalMachine;
+            RegistryKey officeKey14 = null;
             RegistryKey officeKey15 = null;
             RegistryKey officeKey16 = null;
 
@@ -209,8 +217,11 @@ namespace RegisterOutlookAddin
             {
                 case OsBitness.OS32:
                     HKLM = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
+                    officeKey14 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\14.0\Outlook\InstallRoot", false);
                     officeKey15 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\15.0\Outlook\InstallRoot", false);
                     officeKey16 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\16.0\Outlook\InstallRoot", false);
+                    if (officeKey14 != null)
+                        return OfficeRelease.Office2010;
                     if (officeKey15 != null)
                         return OfficeRelease.Office2013;
                     if (officeKey16 != null)
@@ -218,15 +229,21 @@ namespace RegisterOutlookAddin
                     break;
                 case OsBitness.OS64:
                     HKLM = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
+                    officeKey14 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\14.0\Outlook\InstallRoot", false);
                     officeKey15 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\15.0\Outlook\InstallRoot", false);
                     officeKey16 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\16.0\Outlook\InstallRoot", false);
+                    if (officeKey14 != null)
+                        return OfficeRelease.Office2010;
                     if (officeKey15 != null)
                         return OfficeRelease.Office2013;
                     if (officeKey16 != null)
                         return OfficeRelease.Office2016;
                     HKLM = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+                    officeKey14 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\14.0\Outlook\InstallRoot", false);
                     officeKey15 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\15.0\Outlook\InstallRoot", false);
                     officeKey16 = HKLM.OpenSubKey(@"SOFTWARE\Microsoft\Office\16.0\Outlook\InstallRoot", false);
+                    if (officeKey14 != null)
+                        return OfficeRelease.Office2010;
                     if (officeKey15 != null)
                         return OfficeRelease.Office2013;
                     if (officeKey16 != null)

@@ -10,7 +10,6 @@
     <Property Id="ARPNOMODIFY" Value="1"/>
     <Property Id="ARPPRODUCTICON" Value="ArpIcon"/>
     <Property Id="ARPCOMMENTS" Value="Automatically backup your PST files."/>
-    <Property Id="DONOTSEARCHOUTLOOK"/>
        
     <!-- Get installation path of .NET40 for adding Event Log source -->
 
@@ -23,7 +22,14 @@
       <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_46_OR_LATER_INSTALLED]]>
     </Condition>
 
-    <!-- Check that Outlook 2013 or Outlook 2016 is installed -->
+    <!-- Check that Outlook 2010, Outlook 2013 or Outlook 2016 is installed -->
+
+    <Property Id="OUTLOOK2010_32BIT">
+      <RegistrySearch Id="Outlook2010_32Bit_Reg" Type="raw" Root="HKLM" Key="SOFTWARE\Microsoft\Office\14.0\Outlook\InstallRoot" Name="Path" Win64="no"/>
+    </Property>
+    <Property Id="OUTLOOK2010_64BIT">
+      <RegistrySearch Id="Outlook2010_64Bit_Reg" Type="raw" Root="HKLM" Key="SOFTWARE\Microsoft\Office\14.0\Outlook\InstallRoot" Name="Path" Win64="yes"/>
+    </Property>
 
     <Property Id="OUTLOOK2013_32BIT">
     <RegistrySearch Id="Outlook2013_32Bit_Reg" Type="raw" Root="HKLM" Key="SOFTWARE\Microsoft\Office\15.0\Outlook\InstallRoot" Name="Path" Win64="no"/>    
@@ -39,7 +45,7 @@
     <RegistrySearch Id="Outlook2016_64Bit_Reg" Type="raw" Root="HKLM" Key="SOFTWARE\Microsoft\Office\16.0\Outlook\InstallRoot" Name="Path" Win64="yes"/>
     </Property>
     
-    <Condition Message="Neither Outlook 2013 nor Outlook 2016 have been detected on this computer.">Installed OR OUTLOOK2013_32BIT OR OUTLOOK2013_64BIT OR OUTLOOK2016_32BIT OR OUTLOOK2016_64BIT OR DONOTSEARCHOUTLOOK</Condition>
+    <Condition Message="Neither Outlook 2010, Outlook 2013 nor Outlook 2016 have been detected on this computer.">Installed OR OUTLOOK2010_32BIT OR OUTLOOK2010_64BIT OR OUTLOOK2013_32BIT OR OUTLOOK2013_64BIT OR OUTLOOK2016_32BIT OR OUTLOOK2016_64BIT OR DONOTSEARCHOUTLOOK</Condition>
     
     <!-- Process to the installation -->
 
