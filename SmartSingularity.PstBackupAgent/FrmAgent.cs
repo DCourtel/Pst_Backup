@@ -47,13 +47,14 @@ namespace SmartSingularity.PstBackupAgent
                 List<PSTRegistryEntry> allPstFiles = ApplicationSettings.GetPstRegistryEntries();
                 Logger.Write(17, "Found " + allPstFiles.Count + " Pst file(s) registered in Outlook.", Logger.MessageSeverity.Information);
 #if (DEBUG)
-                DateTime _lastYear = DateTime.Today.AddYears(-1);
+                System.Random rnd = new Random(DateTime.Now.Millisecond);
                 for (int i = 0; i < allPstFiles.Count; i++)
                 {
-                    allPstFiles[i].LastSuccessfulBackup = _lastYear;
+                    allPstFiles[i].LastSuccessfulBackup = DateTime.Now.Subtract(new TimeSpan(rnd.Next(72, 300), 0, 0, 0));
                 }
 #endif
-            (_bckEngine as CoreBackupEngine).SelectPstFilesToSave(allPstFiles, out pstFilesToSave, out pstFilesToNotSave);
+                (_bckEngine as CoreBackupEngine).SelectPstFilesToSave(allPstFiles, out pstFilesToSave, out pstFilesToNotSave);
+                pstFilesToSave.Sort();
                 DisplayFileList(pstFilesToSave);
                 if (pstFilesToSave.Count > 0)
                 {
@@ -61,10 +62,6 @@ namespace SmartSingularity.PstBackupAgent
                     LaunchBackup(pstFilesToSave[0]);
                     this.ShowDialog();
                 }
-#if (DEBUG)
-                else
-                    MessageBox.Show("No PST file to save");
-#endif
             }
             catch (Exception ex)
             {
@@ -150,7 +147,8 @@ namespace SmartSingularity.PstBackupAgent
                             chkLstBxPstFiles.Items[_currentFileIndex] = pstFilesToSave[0].SourcePath + " : " + DateTime.Today.ToShortDateString();
                         }
                     };
-                this.Invoke(updateProgressBar);
+                if (!this.Disposing || !_bckEngine.IsCancelRequired)
+                    this.Invoke(updateProgressBar);
             }
             catch (Exception) { }
         }
@@ -161,13 +159,12 @@ namespace SmartSingularity.PstBackupAgent
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            Logger.Write(11, "User has press Cancel Button", Logger.MessageSeverity.Information);
+            Logger.Write(11, "User have pressed Cancel button", Logger.MessageSeverity.Information);
             try
             {
+                _bckEngine.IsCancelRequired = true;
                 btnCancel.Enabled = false;
                 btnCancel.Refresh();
-                Hide();
-                _bckEngine.IsCancelRequired = true;
                 _backupThread.Join(3000);
                 Close();
             }
@@ -181,7 +178,7 @@ namespace SmartSingularity.PstBackupAgent
 
         private void BckEngine_OnBackupFinished(object sender, BackupFinishedEventArgs e)
         {
-            BackupResultInfo result = e.Result;            
+            BackupResultInfo result = e.Result;
             UpdateUI(100);
             pstFilesToSave.RemoveAt(0);
             _currentFileIndex++;

@@ -41,8 +41,6 @@ namespace SmartSingularity.PstBackupEngine
             catch (BackupCanceledException ex)
             {
                 Logger.Write(24, "Backup of " + ex.PstFilename + " have been canceled by user", Logger.MessageSeverity.Warning);
-                backupResult.Result = BackupResultInfo.BackupResult.Canceled;
-                backupResult.ErrorMessage = "Backup canceled by the user";
             }
             catch (NotEnoughEstimatedDiskSpace ex)
             {
@@ -56,10 +54,12 @@ namespace SmartSingularity.PstBackupEngine
                 backupResult.Result = BackupResultInfo.BackupResult.Failed;
                 backupResult.ErrorMessage = ex.Message;
             }
-            backupResult.BackupEndTime = DateTime.UtcNow;
-            pstFileToSave.Save();
             if (!base.IsCancelRequired)
-            { BackupFinished(new BackupFinishedEventArgs(pstFileToSave, backupResult)); }
+            {
+                backupResult.BackupEndTime = DateTime.UtcNow;
+                pstFileToSave.Save();
+                BackupFinished(new BackupFinishedEventArgs(pstFileToSave, backupResult));
+            }
         }
 
         private BackupResultInfo BackupToSmbWithCompression(PSTRegistryEntry pstFileToSave, BackupResultInfo backupResult)
@@ -125,14 +125,17 @@ namespace SmartSingularity.PstBackupEngine
                     percentage = totalReadBytes * 50.0 / sourceLength;
 
                     outputFile.Write(buffer, 0, readBytes);
-                    progressEventArgs.Percent = (int)percentage;
-                    BackupProgress(progressEventArgs);
 
                     if (base.IsCancelRequired)
                     {
                         outputFile.Close();
-                        File.Delete(outputFilePath);
+                        (new System.IO.FileInfo(outputFilePath)).Directory.Delete(true);
                         throw new BackupCanceledException(sourceFilePath);
+                    }
+                    else
+                    {
+                        progressEventArgs.Percent = (int)percentage;
+                        BackupProgress(progressEventArgs);
                     }
                 }
             }
@@ -162,14 +165,17 @@ namespace SmartSingularity.PstBackupEngine
                     { percentage = totalReadBytes * 100.0 / sourceLength; }
 
                     outputFile.Write(buffer, 0, readBytes);
-                    progressEventArgs.Percent = (int)percentage;
-                    BackupProgress(progressEventArgs);
 
                     if (base.IsCancelRequired)
                     {
                         outputFile.Close();
-                        File.Delete(outputFilePath);
+                        (new System.IO.FileInfo(outputFilePath)).Directory.Delete(true);
                         throw new BackupCanceledException(sourceFilePath);
+                    }
+                    else
+                    {
+                        progressEventArgs.Percent = (int)percentage;
+                        BackupProgress(progressEventArgs);
                     }
                 }
             }

@@ -11,7 +11,7 @@ namespace SmartSingularity.PstBackupSettings
     /// <summary>
     /// A class to store informations on a PST file mount in Outlook
     /// </summary>
-    public class PSTRegistryEntry
+    public class PSTRegistryEntry : IComparable
     {
         public PSTRegistryEntry()
         {
@@ -52,6 +52,11 @@ namespace SmartSingularity.PstBackupSettings
         }
 
         public override string ToString() { return SourcePath; }
+
+        public int CompareTo(object obj)
+        {
+            return DateTime.Compare(this.LastSuccessfulBackup, (obj as PSTRegistryEntry).LastSuccessfulBackup);
+        }
 
     }
 }

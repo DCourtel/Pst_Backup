@@ -161,7 +161,6 @@ namespace SmartSingularity.PstBackupSettings
                     rdBtnBackupServer.Enabled = false;
                 }
                 txtBxDestination.Enabled = rdBtnFileSystem.Checked && !_gpoSettings.IsFilesAndFoldersDestinationPathDefine;
-                btnBrowse.Enabled = rdBtnFileSystem.Checked && !_gpoSettings.IsFilesAndFoldersDestinationPathDefine;
                 txtBxBackupServerName.Enabled = rdBtnBackupServer.Checked && !_gpoSettings.IsFilesAndFoldersBackupServerDefine;
                 nupBackupServerPort.Enabled = rdBtnBackupServer.Checked && !_gpoSettings.IsFilesAndFoldersBackupPortDefine;
                 chkBxCompressFile.Enabled = !_gpoSettings.IsFilesAndFoldersCompressFilesDefine && (_localSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.FileSystem) && (_localSettings.BackupAgentBackupMethod == ApplicationSettings.BackupMethod.Full);
@@ -412,34 +411,6 @@ namespace SmartSingularity.PstBackupSettings
         // Files and Folders Tab
 
         /// <summary>
-        /// Occurs when the user click on the button to browse to destination folder
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
-
-                if (!String.IsNullOrWhiteSpace(txtBxDestination.Text))
-                {
-                    System.IO.DirectoryInfo destinationFolder = new System.IO.DirectoryInfo(txtBxDestination.Text);
-                    if (destinationFolder.Exists)
-                    { folderBrowser.SelectedPath = destinationFolder.FullName; }
-                }
-                if (folderBrowser.ShowDialog() == DialogResult.OK)
-                {
-                    txtBxDestination.Text = folderBrowser.SelectedPath;
-                }
-            }
-            catch (Exception ex)
-            {
-                PstBackupLogger.Logger.Write(20026, "An error occurs while browsing for the destination folder\r\n" + ex.Message, PstBackupLogger.Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
-            }
-        }
-
-        /// <summary>
         /// Occurs when the user change the destination type (File System or Backup Server)
         /// </summary>
         /// <param name="sender"></param>
@@ -449,7 +420,6 @@ namespace SmartSingularity.PstBackupSettings
             if (rdBtnFileSystem.Checked) // Destination : File System
             {
                 txtBxDestination.Enabled = !_gpoSettings.IsFilesAndFoldersDestinationPathDefine;
-                btnBrowse.Enabled = !_gpoSettings.IsFilesAndFoldersDestinationPathDefine;
                 txtBxBackupServerName.Enabled = false;
                 nupBackupServerPort.Enabled = false;
                 chkBxCompressFile.Enabled = rdBtnMethodFull.Checked;
@@ -458,7 +428,6 @@ namespace SmartSingularity.PstBackupSettings
             else                        // Destination : Backup Server
             {
                 txtBxDestination.Enabled = false;
-                btnBrowse.Enabled = false;
                 chkBxCompressFile.Checked = false;
                 chkBxCompressFile.Enabled = false;
                 txtBxBackupServerName.Enabled = !_gpoSettings.IsFilesAndFoldersBackupServerDefine;

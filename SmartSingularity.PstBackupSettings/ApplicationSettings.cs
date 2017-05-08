@@ -95,7 +95,9 @@ namespace SmartSingularity.PstBackupSettings
         {
             _readSettingsFrom = readSettingsFrom;
             Logger.IsLogActivated = true;
+#if(DEBUG)
             Logger.MinimalSeverity = Logger.MessageSeverity.Debug;
+#endif
             IsBackupAgentDontBackupThroughtWanDefine = false;
 
             IsEventLogSeverityDefine = false;
