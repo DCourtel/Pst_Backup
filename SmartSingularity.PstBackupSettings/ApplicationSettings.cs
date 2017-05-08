@@ -210,6 +210,10 @@ namespace SmartSingularity.PstBackupSettings
             return registryEntries;
         }
 
+        /// <summary>
+        /// Replaces the settings in this object by these provided if they are define
+        /// </summary>
+        /// <param name="gpoSettings">Settings that will replaces those contains in this object</param>
         public void OverrideLocalSettingsWithGPOSettings(ApplicationSettings gpoSettings)
         {
 
@@ -255,6 +259,9 @@ namespace SmartSingularity.PstBackupSettings
                 ScheduleDayOfMonth = gpoSettings.ScheduleDayOfMonth;
         }
 
+        /// <summary>
+        /// Save these settings in the Windows registry
+        /// </summary>
         public void SaveLocalSettings()
         {
             try
@@ -307,6 +314,21 @@ namespace SmartSingularity.PstBackupSettings
                 return defaultValue;
             else
                 return candidateValue;
+        }
+
+        /// <summary>
+        /// Checks that folder destination or backup server is well define
+        /// </summary>
+        /// <returns>Returns true if the settings are correctly defined, false otherwise</returns>
+        public bool IsDestinationProperlyDefine()
+        {
+            if ((FilesAndFoldersDestinationType == BackupDestinationType.FileSystem && String.IsNullOrWhiteSpace(FilesAndFoldersDestinationPath)) ||
+                (FilesAndFoldersDestinationType == BackupDestinationType.BackupServer && String.IsNullOrWhiteSpace(FilesAndFoldersBackupServer)))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         #endregion public Methods 

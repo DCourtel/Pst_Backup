@@ -40,12 +40,15 @@ namespace SmartSingularity.PstBackupAgent
             try
             {
                 Logger.Write(16, "Starting backup session", Logger.MessageSeverity.Information);
-                _bckEngine = CoreBackupEngine.GetBackupEngine(_localSettings);
-                _bckEngine.OnBackupFinished += BckEngine_OnBackupFinished;
-                _bckEngine.OnBackupProgress += BckEngine_OnBackupProgress;
 
-                List<PSTRegistryEntry> allPstFiles = ApplicationSettings.GetPstRegistryEntries();
-                Logger.Write(17, "Found " + allPstFiles.Count + " Pst file(s) registered in Outlook.", Logger.MessageSeverity.Information);
+                if (_localSettings.IsDestinationProperlyDefine())
+                {
+                    _bckEngine = CoreBackupEngine.GetBackupEngine(_localSettings);
+                    _bckEngine.OnBackupFinished += BckEngine_OnBackupFinished;
+                    _bckEngine.OnBackupProgress += BckEngine_OnBackupProgress;
+
+                    List<PSTRegistryEntry> allPstFiles = ApplicationSettings.GetPstRegistryEntries();
+                    Logger.Write(17, "Found " + allPstFiles.Count + " Pst file(s) registered in Outlook.", Logger.MessageSeverity.Information);
 #if (DEBUG)
                 System.Random rnd = new Random(DateTime.Now.Millisecond);
                 for (int i = 0; i < allPstFiles.Count; i++)
@@ -53,14 +56,20 @@ namespace SmartSingularity.PstBackupAgent
                     allPstFiles[i].LastSuccessfulBackup = DateTime.Now.Subtract(new TimeSpan(rnd.Next(72, 300), 0, 0, 0));
                 }
 #endif
-                (_bckEngine as CoreBackupEngine).SelectPstFilesToSave(allPstFiles, out pstFilesToSave, out pstFilesToNotSave);
-                pstFilesToSave.Sort();
-                DisplayFileList(pstFilesToSave);
-                if (pstFilesToSave.Count > 0)
+                    (_bckEngine as CoreBackupEngine).SelectPstFilesToSave(allPstFiles, out pstFilesToSave, out pstFilesToNotSave);
+                    pstFilesToSave.Sort();
+                    DisplayFileList(pstFilesToSave);
+                    if (pstFilesToSave.Count > 0)
+                    {
+                        SetMaximumOverAllProgressBar(pstFilesToSave.Count);
+                        LaunchBackup(pstFilesToSave[0]);
+                        this.ShowDialog();
+                    }
+                }
+                else
                 {
-                    SetMaximumOverAllProgressBar(pstFilesToSave.Count);
-                    LaunchBackup(pstFilesToSave[0]);
-                    this.ShowDialog();
+                    Logger.Write(10007, "Destination not correctly define. Review application's settings", Logger.MessageSeverity.Warning, System.Diagnostics.EventLogEntryType.Warning);
+                    MessageBox.Show(_resMan.GetString("DestinationNotCorrectlyDefine"));
                 }
             }
             catch (Exception ex)

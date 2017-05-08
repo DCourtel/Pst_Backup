@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Win32;
 using SUT = SmartSingularity.PstBackupSettings.ApplicationSettings;
-
 namespace UnitTest_PstBackupSettings
 {
     public class ApplicationSettings
@@ -444,6 +443,100 @@ namespace UnitTest_PstBackupSettings
                 Assert.AreEqual(@"E:\Pst Backup\Pst Files\archive2010.pst", pstFiles[2].SourcePath,true );
                 Assert.AreEqual(@"HKEY_CURRENT_USER\Software\PST Backup\PST Files\2", pstFiles[2].RegistryPath,true);
                 Assert.AreEqual(new DateTime(2017, 04, 15, 17, 22, 12), pstFiles[2].LastSuccessfulBackup);
+            }
+        }
+
+        [TestClass]
+        public class IsDestinationDefine_Should
+        {
+            [TestMethod]
+            public void RetunsTrue_WhenFolderDestinationIsWellDefine()
+            {
+                // Arrange
+                SUT appSettings;
+
+                // Act
+                appSettings = new SUT(SUT.SourceSettings.Local);
+                appSettings.FilesAndFoldersDestinationType = SUT.BackupDestinationType.FileSystem;
+                appSettings.FilesAndFoldersDestinationPath = @"\\192.168.0.250\PST Files\Courtel\MyComputer";
+
+                // Assert
+                Assert.IsTrue(appSettings.IsDestinationProperlyDefine());
+            }
+
+            [TestMethod]
+            public void RetunsFalse_WhenFolderDestinationIsNotDefine()
+            {
+                // Arrange
+                SUT appSettings;
+
+                // Act
+                appSettings = new SUT(SUT.SourceSettings.Local);
+                appSettings.FilesAndFoldersDestinationType = SUT.BackupDestinationType.FileSystem;
+                appSettings.FilesAndFoldersDestinationPath = String.Empty;
+
+                // Assert
+                Assert.IsFalse(appSettings.IsDestinationProperlyDefine());
+            }
+
+            [TestMethod]
+            public void RetunsFalse_WhenFolderDestinationIsWhitespaced()
+            {
+                // Arrange
+                SUT appSettings;
+
+                // Act
+                appSettings = new SUT(SUT.SourceSettings.Local);
+                appSettings.FilesAndFoldersDestinationType = SUT.BackupDestinationType.FileSystem;
+                appSettings.FilesAndFoldersDestinationPath = "   ";
+
+                // Assert
+                Assert.IsFalse(appSettings.IsDestinationProperlyDefine());
+            }
+
+            [TestMethod]
+            public void RetunsTrue_WhenBackupServerIsDefine()
+            {
+                // Arrange
+                SUT appSettings;
+
+                // Act
+                appSettings = new SUT(SUT.SourceSettings.Local);
+                appSettings.FilesAndFoldersDestinationType = SUT.BackupDestinationType.BackupServer;
+                appSettings.FilesAndFoldersBackupServer = "192.168.0.250";
+
+                // Assert
+                Assert.IsTrue(appSettings.IsDestinationProperlyDefine());
+            }
+
+            [TestMethod]
+            public void RetunsFalse_WhenBackupServerIsNotDefine()
+            {
+                // Arrange
+                SUT appSettings;
+
+                // Act
+                appSettings = new SUT(SUT.SourceSettings.Local);
+                appSettings.FilesAndFoldersDestinationType = SUT.BackupDestinationType.BackupServer;
+                appSettings.FilesAndFoldersBackupServer = String.Empty;
+
+                // Assert
+                Assert.IsFalse(appSettings.IsDestinationProperlyDefine());
+            }
+
+            [TestMethod]
+            public void RetunsFalse_WhenBackupServerIsWhitespaced()
+            {
+                // Arrange
+                SUT appSettings;
+
+                // Act
+                appSettings = new SUT(SUT.SourceSettings.Local);
+                appSettings.FilesAndFoldersDestinationType = SUT.BackupDestinationType.BackupServer;
+                appSettings.FilesAndFoldersBackupServer = "  ";
+
+                // Assert
+                Assert.IsFalse(appSettings.IsDestinationProperlyDefine());
             }
         }
     }

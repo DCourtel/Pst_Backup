@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DestinationNotCorrectlyDefine" xml:space="preserve">
+    <value>Pst Backup cannot save your archives because the destination is not correctly set. Review application's settings.</value>
+  </data>
   <data name="ErrorWhileTryingToBackupFiles" xml:space="preserve">
     <value>An error occurs while trying to backup your PST files.</value>
   </data>
