@@ -22,21 +22,21 @@ namespace SmartSingularity.PstBackupAddin
 
         private void ThisAddIn_Quit()
         {
-            Logger.Write(30001, "Outlook is closing.", Logger.MessageSeverity.Debug);
-            UpdateRegistryEntries();
+            try
+            {
+                Logger.Write(30001, "Outlook is closing.", Logger.MessageSeverity.Debug);
+                UpdateRegistryEntries();
 
-            System.IO.FileInfo currentAssembly = new System.IO.FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            string currentPath = currentAssembly.DirectoryName;
+                System.IO.FileInfo currentAssembly = new System.IO.FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                string currentPath = currentAssembly.DirectoryName;
 
 #if (DEBUG)
             string bckAgentPath = @"C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\SmartSingularity.PstBackupAgent\bin\Debug\SmartSingularity.PstBackupAgent.exe";
 #else
 
-            string bckAgentPath = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Pst Backup", "SmartSingularity.PstBackupAgent.exe");
-            Logger.Write(30000, "Launching Backup-Agent at " + bckAgentPath, Logger.MessageSeverity.Debug);
+                string bckAgentPath = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Pst Backup", "SmartSingularity.PstBackupAgent.exe");
+                Logger.Write(30000, "Launching Backup-Agent at " + bckAgentPath, Logger.MessageSeverity.Debug);
 #endif
-            try
-            {
                 System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(bckAgentPath));
             }
             catch (Exception ex) { Logger.Write(20000, "Unable to start Backup-Agent." + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error); }

@@ -43,7 +43,6 @@
             this.rdBtnFileSystem = new System.Windows.Forms.RadioButton();
             this.txtBxBackupServerName = new System.Windows.Forms.TextBox();
             this.txtBxDestination = new System.Windows.Forms.TextBox();
-            this.btnBrowse = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.grpBxSchedule = new System.Windows.Forms.GroupBox();
             this.cmbBxWeekly = new System.Windows.Forms.ComboBox();
@@ -103,11 +102,11 @@
             // 
             // tabFilesAndFolders
             // 
+            resources.ApplyResources(this.tabFilesAndFolders, "tabFilesAndFolders");
             this.tabFilesAndFolders.Controls.Add(this.chkBxCompressFile);
             this.tabFilesAndFolders.Controls.Add(this.chkLstBxPstFiles);
             this.tabFilesAndFolders.Controls.Add(this.label1);
             this.tabFilesAndFolders.Controls.Add(this.grpBxBackupDestination);
-            resources.ApplyResources(this.tabFilesAndFolders, "tabFilesAndFolders");
             this.tabFilesAndFolders.Name = "tabFilesAndFolders";
             this.tabFilesAndFolders.UseVisualStyleBackColor = true;
             // 
@@ -140,7 +139,6 @@
             this.grpBxBackupDestination.Controls.Add(this.rdBtnFileSystem);
             this.grpBxBackupDestination.Controls.Add(this.txtBxBackupServerName);
             this.grpBxBackupDestination.Controls.Add(this.txtBxDestination);
-            this.grpBxBackupDestination.Controls.Add(this.btnBrowse);
             this.grpBxBackupDestination.Name = "grpBxBackupDestination";
             this.grpBxBackupDestination.TabStop = false;
             // 
@@ -207,17 +205,10 @@
             this.txtBxDestination.Name = "txtBxDestination";
             this.txtBxDestination.TextChanged += new System.EventHandler(this.txtBxDestination_TextChanged);
             // 
-            // btnBrowse
-            // 
-            resources.ApplyResources(this.btnBrowse, "btnBrowse");
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.grpBxSchedule);
             resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.Controls.Add(this.grpBxSchedule);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
@@ -236,20 +227,20 @@
             // 
             // cmbBxWeekly
             // 
-            this.cmbBxWeekly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cmbBxWeekly, "cmbBxWeekly");
+            this.cmbBxWeekly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBxWeekly.FormattingEnabled = true;
             this.cmbBxWeekly.Name = "cmbBxWeekly";
             // 
             // cmbBxEvery
             // 
+            resources.ApplyResources(this.cmbBxEvery, "cmbBxEvery");
             this.cmbBxEvery.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBxEvery.FormattingEnabled = true;
             this.cmbBxEvery.Items.AddRange(new object[] {
             resources.GetString("cmbBxEvery.Items"),
             resources.GetString("cmbBxEvery.Items1"),
             resources.GetString("cmbBxEvery.Items2")});
-            resources.ApplyResources(this.cmbBxEvery, "cmbBxEvery");
             this.cmbBxEvery.Name = "cmbBxEvery";
             this.cmbBxEvery.SelectedIndexChanged += new System.EventHandler(this.cmbBxEvery_SelectedIndexChanged);
             // 
@@ -318,10 +309,10 @@
             // 
             // tabEventLog
             // 
+            resources.ApplyResources(this.tabEventLog, "tabEventLog");
             this.tabEventLog.Controls.Add(this.label3);
             this.tabEventLog.Controls.Add(this.cmbBxEventLogSeverity);
             this.tabEventLog.Controls.Add(this.chkBxEventLog);
-            resources.ApplyResources(this.tabEventLog, "tabEventLog");
             this.tabEventLog.Name = "tabEventLog";
             this.tabEventLog.UseVisualStyleBackColor = true;
             // 
@@ -353,13 +344,13 @@
             // 
             // tabReporting
             // 
+            resources.ApplyResources(this.tabReporting, "tabReporting");
             this.tabReporting.Controls.Add(this.nupReportingServerPort);
             this.tabReporting.Controls.Add(this.txtBxReportingServerName);
             this.tabReporting.Controls.Add(this.label6);
             this.tabReporting.Controls.Add(this.label5);
             this.tabReporting.Controls.Add(this.chkBxReporting);
             this.tabReporting.Controls.Add(this.label4);
-            resources.ApplyResources(this.tabReporting, "tabReporting");
             this.tabReporting.Name = "tabReporting";
             this.tabReporting.UseVisualStyleBackColor = true;
             // 
@@ -413,11 +404,11 @@
             // 
             // tabBackupAgent
             // 
+            resources.ApplyResources(this.tabBackupAgent, "tabBackupAgent");
             this.tabBackupAgent.Controls.Add(this.grpBxBackupMethod);
             this.tabBackupAgent.Controls.Add(this.txtBxAdditionalSubnets);
             this.tabBackupAgent.Controls.Add(this.label7);
             this.tabBackupAgent.Controls.Add(this.chkBxDontBackupOverWan);
-            resources.ApplyResources(this.tabBackupAgent, "tabBackupAgent");
             this.tabBackupAgent.Name = "tabBackupAgent";
             this.tabBackupAgent.UseVisualStyleBackColor = true;
             // 
@@ -535,7 +526,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabFilesAndFolders;
         private System.Windows.Forms.CheckBox chkBxCompressFile;
-        private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.TextBox txtBxDestination;
         private System.Windows.Forms.CheckedListBox chkLstBxPstFiles;
         private System.Windows.Forms.Label label1;
