@@ -84,12 +84,12 @@ namespace SmartSingularity.PstBackupEngine
                     Scheduler.IsPstFileNeedtoBeSaved(pstFile.LastSuccessfulBackup, _appSettings) &&
                     !Network.IsWanLink(_appSettings.FilesAndFoldersDestinationPath, _appSettings.BackupAgentAdditionalSubnets))
                 {
-                    Logger.Write(20, pstFile + "\r\n have been added to the list of files to be save", Logger.MessageSeverity.Information);
+                    Logger.Write(20, pstFile + "\r\n have been added to the list of files to save", Logger.MessageSeverity.Information);
                     pstFilesToSave.Add(pstFile);
                 }
                 else
                 {
-                    Logger.Write(21, pstFile + "\r\n have been added to the list of files to be not save", Logger.MessageSeverity.Information);
+                    Logger.Write(21, pstFile + "\r\n have been added to the list of files to not save", Logger.MessageSeverity.Information);
                     pstFilesToNotSave.Add(pstFile);
                 }
             }

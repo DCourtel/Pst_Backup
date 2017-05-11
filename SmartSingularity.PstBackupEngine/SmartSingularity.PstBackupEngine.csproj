@@ -62,7 +62,7 @@
   <ItemGroup>
     <Compile Include="BackupFinishedEventArgs.cs" />
     <Compile Include="BackupProgressEventArgs.cs" />
-    <Compile Include="BackupResult.cs" />
+    <Compile Include="BackupResultInfo.cs" />
     <Compile Include="CoreBackupEngine.cs" />
     <Compile Include="Scheduler.cs" />
     <Compile Include="DifferentialBackupEngine.cs" />

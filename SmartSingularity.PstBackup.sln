@@ -60,6 +60,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegisterOutlookAddin", "Reg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSingularity.PstBackupExceptions", "SmartSingularity.PstBackupExceptions\SmartSingularity.PstBackupExceptions.csproj", "{67FB22A2-623C-4CAC-A55E-034A896EB22B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSingularity.PstBackupReportServer", "SmartSingularity.PstBackupReportServer\SmartSingularity.PstBackupReportServer.csproj", "{1F08865B-0DB8-491A-92F4-9E2B364D0406}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -311,6 +313,18 @@ Global
 		{67FB22A2-623C-4CAC-A55E-034A896EB22B}.Release|x64.Build.0 = Release|x64
 		{67FB22A2-623C-4CAC-A55E-034A896EB22B}.Release|x86.ActiveCfg = Release|x86
 		{67FB22A2-623C-4CAC-A55E-034A896EB22B}.Release|x86.Build.0 = Release|x86
+		{1F08865B-0DB8-491A-92F4-9E2B364D0406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F08865B-0DB8-491A-92F4-9E2B364D0406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F08865B-0DB8-491A-92F4-9E2B364D0406}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1F08865B-0DB8-491A-92F4-9E2B364D0406}.Debug|x64.Build.0 = Debug|Any CPU
+		{1F08865B-0DB8-491A-92F4-9E2B364D0406}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1F08865B-0DB8-491A-92F4-9E2B364D0406}.Debug|x86.Build.0 = Debug|Any CPU
+		{1F08865B-0DB8-491A-92F4-9E2B364D0406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F08865B-0DB8-491A-92F4-9E2B364D0406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F08865B-0DB8-491A-92F4-9E2B364D0406}.Release|x64.ActiveCfg = Release|Any CPU
+		{1F08865B-0DB8-491A-92F4-9E2B364D0406}.Release|x64.Build.0 = Release|Any CPU
+		{1F08865B-0DB8-491A-92F4-9E2B364D0406}.Release|x86.ActiveCfg = Release|Any CPU
+		{1F08865B-0DB8-491A-92F4-9E2B364D0406}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
