@@ -1,7 +1,7 @@
 # Pst_Backup
 Automatically backup your PST files at closing
 
-#Project Description 
+### Project Description 
 
 This project aims to create an add-in that integrates with Outlook 2010, 2013 and 2016 to automatically save PST files (Replaces Microsoft PfBackup).
 
@@ -12,7 +12,7 @@ Update (WSUS or GPO).
 Set / Manage (GPO or registry).
 In addition, it should be transparent to users and make life easier for administrators.
 
-## Features :  
+### Features :  
 * Backup to a shared folder on a file server or a NAS  
 * Support personnalizing NTFS permissions on the remote folder (When the folder is created the first time)  
 * Support for Full or Differential backup  
