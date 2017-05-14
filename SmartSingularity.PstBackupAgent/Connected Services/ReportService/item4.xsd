@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupEngine" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupEngine" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="BackupResultInfo.BackupResult">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotStarted" />
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="Failed" />
+      <xs:enumeration value="Canceled" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="BackupResultInfo.BackupResult" nillable="true" type="tns:BackupResultInfo.BackupResult" />
+</xs:schema>

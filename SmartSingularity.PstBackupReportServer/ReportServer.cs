@@ -15,7 +15,7 @@ namespace SmartSingularity.PstBackupReportServer
         /// <param name="backupSession">Informations on the backup session</param>
         public void RegisterBackupResult(PstFile pstFile, BackupSession backupSession)
         {
-            throw new NotImplementedException();
+            //ToDo: Implement this method
         }
 
         /// <summary>
@@ -24,7 +24,6 @@ namespace SmartSingularity.PstBackupReportServer
         /// <param name="client">All informations on the client computer</param>
         public void RegisterClient(Client client)
         {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -33,7 +32,7 @@ namespace SmartSingularity.PstBackupReportServer
         /// <param name="pstFiles">A list of all PST files</param>
         public void RegisterPstFiles(List<PstFile> pstFiles)
         {
-            throw new NotImplementedException();
+            //ToDo: Implement this method   
         }
     }
 }

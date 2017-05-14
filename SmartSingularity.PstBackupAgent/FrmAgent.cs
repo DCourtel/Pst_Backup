@@ -23,6 +23,7 @@ namespace SmartSingularity.PstBackupAgent
         private System.Threading.Thread _backupThread;
         private CoreBackupEngine _bckEngine;
         private int _currentFileIndex = 0;
+        private ReportService.ReportServerClient proxy;
         private System.Resources.ResourceManager _resMan = new System.Resources.ResourceManager("SmartSingularity.PstBackupAgent.Localization.Resources", typeof(FrmAgent).Assembly);
 
         public FrmAgent()
@@ -31,9 +32,37 @@ namespace SmartSingularity.PstBackupAgent
             SetLogo();
             _localSettings.OverrideLocalSettingsWithGPOSettings(_gpoSettings);
             txtBxDestination.Text = _localSettings.FilesAndFoldersDestinationPath;
+            try
+            {
+                proxy = new ReportService.ReportServerClient("BasicHttpBinding_IReportServer");
+            }
+            catch (Exception ex)
+            {
+                Logger.Write(20027, "An error occurs while instanciating the client proxy. Report server will be unreachable\r\n" + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
+            }
+            RegisterClient();
         }
 
         #region (Methods)
+
+        private void RegisterClient()
+        {
+            try
+            {
+                ReportService.Client client = new ReportService.Client()
+                {
+                    Id = _localSettings.ClientID,
+                    ComputerName = System.Net.Dns.GetHostEntry("").HostName,
+                    Username = String.Concat(Environment.UserName, ".", Environment.UserDomainName),
+                    Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version
+                };
+                proxy.RegisterClient(client);
+            }
+            catch (Exception ex)
+            {
+                Logger.Write(20028, "An error occurs while trying to register/update client on report server\r\n" + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
+            }
+        }
 
         public void Backup()
         {
@@ -50,11 +79,11 @@ namespace SmartSingularity.PstBackupAgent
                     List<PSTRegistryEntry> allPstFiles = ApplicationSettings.GetPstRegistryEntries();
                     Logger.Write(17, "Found " + allPstFiles.Count + " Pst file(s) registered in Outlook.", Logger.MessageSeverity.Information);
 #if (DEBUG)
-                System.Random rnd = new Random(DateTime.Now.Millisecond);
-                for (int i = 0; i < allPstFiles.Count; i++)
-                {
-                    allPstFiles[i].LastSuccessfulBackup = DateTime.Now.Subtract(new TimeSpan(rnd.Next(72, 300), 0, 0, 0));
-                }
+                    System.Random rnd = new Random(DateTime.Now.Millisecond);
+                    for (int i = 0; i < allPstFiles.Count; i++)
+                    {
+                        allPstFiles[i].LastSuccessfulBackup = DateTime.Now.Subtract(new TimeSpan(rnd.Next(72, 300), 0, 0, 0));
+                    }
 #endif
                     (_bckEngine as CoreBackupEngine).SelectPstFilesToSave(allPstFiles, out pstFilesToSave, out pstFilesToNotSave);
                     pstFilesToSave.Sort();
@@ -175,9 +204,10 @@ namespace SmartSingularity.PstBackupAgent
                 btnCancel.Enabled = false;
                 btnCancel.Refresh();
                 _backupThread.Join(3000);
-                Close();
+                proxy.Close();
             }
             catch (Exception) { }
+            Close();
         }
 
         private void BckEngine_OnBackupProgress(object sender, BackupProgressEventArgs e)
@@ -207,7 +237,14 @@ namespace SmartSingularity.PstBackupAgent
                     catch (Exception) { }
                 }
                 Action closeApp = () =>
-                { Close(); };
+                {
+                    try
+                    {
+                        proxy.Close();
+                    }
+                    catch (Exception) { }
+                    Close();
+                };
                 if (this.InvokeRequired)
                     this.Invoke(closeApp);
                 else
