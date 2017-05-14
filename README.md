@@ -1,5 +1,7 @@
 
+![Pst Bakcup Logo](SmartSingularity.PstBackupAgent/Logo.png)
 # Pst_Backup
+
 Automatically backup your PST files at closing
 ___
 ### Project Description 
