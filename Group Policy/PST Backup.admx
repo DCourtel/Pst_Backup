@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions xmlns:xsd="http://www.microsoft.com/GroupPolicy/PolicyDefinitions/PolicyDefinitions.xsd"
+                   xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions/PolicyDefinitions.xsd"
+                   revision="1.0"
+                   schemaVersion="1.0" >
+  <policyNamespaces>
+    <target prefix="PstBackup" namespace="SmartSingularity.Policies.PstBackup" />
+    <using prefix="windows" namespace="Microsoft.Policies.Windows" />
+  </policyNamespaces>
+  <resources minRequiredRevision="1.0" />
+  <categories>
+    <category name="PstBackup" displayName="$(string.CAT_PstBackup)" />
+    <category name="BackupAgent" displayName="$(string.CAT_BackupAgent)">
+      <parentCategory ref="PstBackup" />
+    </category>
+    <category name="EventLog" displayName="$(string.CAT_EventLog)">
+      <parentCategory ref="PstBackup" />
+    </category>
+    <category name="FilesAndFolders" displayName="$(string.CAT_FilesAndFolders)">
+      <parentCategory ref="PstBackup" />
+    </category>
+    <category name="Reporting" displayName="$(string.CAT_Reporting)">
+      <parentCategory ref="PstBackup" />
+    </category>
+    <category name="Schedule" displayName="$(string.CAT_Schedule)">
+      <parentCategory ref="PstBackup" />
+    </category>
+  </categories>
+  <policies>
+    <!-- WAN Settings -->
+    <policy name="WanSettings" class="User"
+            displayName="$(string.WanSettings)"
+            explainText="$(string.WanSettings_Help)"
+            presentation="$(presentation.WanSettings)"
+            key="Software\Policies\PST Backup\Settings\Backup Agent"
+            valueName="DontBackupThroughWan">
+      <parentCategory ref="BackupAgent" />
+      <supportedOn ref="windows:SUPPORTED_WindowsVista" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+      <elements>
+        <text id="TXT_AdditionalSubnets"
+              key="Software\Policies\PST Backup\Settings\Backup Agent"
+              valueName="AdditionalSubnets"
+              required="false" />
+      </elements>
+    </policy>
+    
+    <!-- Backup Method -->
+    <policy name="BackupMethod" class="User"
+            displayName="$(string.BackupMethod)"
+            explainText="$(string.BackupMethod_Help)"
+            presentation="$(presentation.BackupMethod)"
+            key="Software\Policies\PST Backup\Settings\Backup Agent">
+      <parentCategory ref="BackupAgent" />
+      <supportedOn ref="windows:SUPPORTED_WindowsVista" />
+      <elements>
+        <enum id="Enum_BackupMethod" valueName="BackupMethod">
+          <item displayName="$(string.BackupMethodFull)">
+            <value>
+              <decimal value="0" />
+            </value>
+          </item>
+          <item displayName="$(string.BackupMethodDifferential)">
+            <value>
+              <decimal value="1" />
+            </value>
+          </item>
+        </enum>
+      </elements>
+    </policy>
+    
+    <!-- Set Exclusive NTFS Permissions -->
+    <policy name="SetExclusiveNTFSPermissions" class="User"
+            displayName="$(string.SetExclusiveNTFSPermissions)"
+            explainText="$(string.SetExclusiveNTFSPermissions_Help)"
+            presentation="$(presentation.SetExclusiveNTFSPermissions)"
+            key="Software\Policies\PST Backup\Settings\Backup Agent"
+            valueName="SetExclusiveNTFSPermissions">
+      <parentCategory ref="BackupAgent" />
+      <supportedOn ref="windows:SUPPORTED_WindowsVista" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+      <elements>
+        <text id="TXT_AdditionalNTFSFullcontrol" 
+              key="Software\Policies\PST Backup\Settings\Backup Agent" 
+              valueName="AdditionalNTFSFullcontrol" 
+              required="false" />
+        <text id="TXT_AdditionalNTFSReadWrite" 
+              key="Software\Policies\PST Backup\Settings\Backup Agent" 
+              valueName="AdditionalNTFSReadWrite" 
+              required="false" />        
+      </elements>
+    </policy>
+    
+    <!-- Event Log -->
+    <policy name="LogEvent" class="User"
+            displayName="$(string.LogEvent)"
+            explainText="$(string.LogEvent_Help)"
+            presentation="$(presentation.EventLog)"
+            key="Software\Policies\PST Backup\Settings\Event Log"
+            valueName="LogEvent">
+      <parentCategory ref="EventLog" />
+      <supportedOn ref="windows:SUPPORTED_WindowsVista" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+      <elements>
+        <enum id="Enum_LogEvent" valueName="Severity">
+          <item displayName="$(string.SeverityDebug)">
+            <value>
+              <decimal value="0" />
+            </value>
+          </item>
+          <item displayName="$(string.SeverityInformation)">
+            <value>
+              <decimal value="1" />
+            </value>
+          </item>
+          <item displayName="$(string.SeverityWarning)">
+            <value>
+              <decimal value="2" />
+            </value>
+          </item>
+          <item displayName="$(string.SeverityError)">
+            <value>
+              <decimal value="3" />
+            </value>
+          </item>
+        </enum>
+      </elements>
+    </policy>
+    
+    <!-- Reporting -->
+    <policy name="Reporting" class="User"
+            displayName="$(string.Reporting)"
+            explainText="$(string.Reporting_Help)"
+            presentation="$(presentation.Reporting)"
+            key="Software\Policies\PST Backup\Settings\Reporting"
+            valueName="Report">
+      <parentCategory ref="Reporting" />
+      <supportedOn ref="windows:SUPPORTED_WindowsVista" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+      <elements>
+        <text id="TXT_ReportServer" valueName="Server" minValue="1" maxValue="65535" required="true" />
+        <decimal id="DEC_ReportPort" valueName="Port" minValue="1" maxValue="65535" required="true" />
+      </elements>
+    </policy>
+    
+  </policies>
+
+</policyDefinitions>

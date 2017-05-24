@@ -63,10 +63,19 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSingularity.PstBackupReportServer", "SmartSingularity.PstBackupReportServer\SmartSingularity.PstBackupReportServer.csproj", "{1F08865B-0DB8-491A-92F4-9E2B364D0406}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Group Policy", "Group Policy", "{D5144D3D-86B3-4C42-8AA0-AD4EA452074D}"
+	ProjectSection(SolutionItems) = preProject
+		Group Policy\PST Backup.admx = Group Policy\PST Backup.admx
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "en-US", "en-US", "{A0A138AA-7247-4531-A796-F294E3002065}"
+	ProjectSection(SolutionItems) = preProject
+		Group Policy\en-US\PST Backup.adml = Group Policy\en-US\PST Backup.adml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fr-FR", "fr-FR", "{103176C8-02EC-4266-AFEE-E641781E4EE5}"
+	ProjectSection(SolutionItems) = preProject
+		Group Policy\fr-FR\PST Backup.adml = Group Policy\fr-FR\PST Backup.adml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

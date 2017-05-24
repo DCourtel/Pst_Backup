@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                           revision="1.0"
+                           schemaVersion="1.0"
+                           xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions">
+  <displayName>
+  </displayName>
+  <description>
+  </description>
+  <resources>
+    <stringTable>
+      <string id="CAT_PstBackup">Pst Backup</string>
+      <string id="CAT_BackupAgent">Backup Agent</string>
+      <string id="CAT_EventLog">Event Log</string>
+      <string id="CAT_FilesAndFolders">Files and Folders</string>
+      <string id="CAT_Reporting">Reporting</string>
+      <string id="CAT_Schedule">Schedule</string>
+      
+      <!-- WAN Settings -->
+      <string id="WanSettings">WAN Settings</string>
+      <string id="WanSettings_Help">Prevent to backup throw WAN</string>
+      <string id="TXT_AdditionalSubnets">Additional subnets for backup (Ex. 192.168.10.0/24;192.168.20.0/24)</string>
+
+      <!-- Backup Method -->
+      <string id="BackupMethod">Méthode de sauvegarde à utiliser</string>
+      <string id="BackupMethod_Help">
+        Ce paramètre de stratégie vous permet de définir la méthode de sauvegarde utilisé par PST Backup.
+
+        Si vous activez ce paramètre de stratégie, vous pourrez choisir si PST Backup réalise une sauvegarde complète à chaque fois ou s'il réalise une sauvegarde différentielle.
+
+        Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront choisir la méthode utilisée.
+      </string>
+      <string id="BackupMethodFull">Complète</string>
+      <string id="BackupMethodDifferential">Différentielle</string>
+
+      <!-- Set Exclusive NTFS Permissions -->
+      <string id="SetExclusiveNTFSPermissions">Définir des autorisations NTFS exclusives sur le dossier de destination.</string>
+      <string id="SetExclusiveNTFSPermissions_Help">
+        Ce paramètre de stratégie vous permet de couper l'héritage et de positionner des droits NTFS exclusif, en Lecture/Écriture, pour l'utilisateur sur le dossier de destination.
+
+        Si vous activez ce paramètre de stratégie, lors de la sauvegarde, si le dossier de destination n'existe pas, il sera créé sans tenir compte de l'héritage des droits NTFS. L'utilisateur aura les droits en Lecture/Écriture. Le compte "NT AUTHORITY\SYSTEM" aura les droits en Contrôle Total.
+        Vous pourrez préciser des noms de compte pour lesquels mettre des droits en Lecture/Écriture ou Contrôle Total.
+        Si le dossier existait déjà avant l’application de cette politique de stratégie de groupe, aucune modification n’est apportée au dossier.
+
+        - Les comptes se référant au même domaine que celui de l'utilisateur, peuvent être donnés aux formats suivant : Nom d'utilisateur ou Domaine\Nom d'utilisateur ou Nom d'utilisateur@domaine.local.
+        - Les comptes se référant à un autre domaine que celui de l'utilisateur, doivent être donnés au format suivant : nom d'utilisateur@domaine.local.
+        - Les comptes se référant à un NAS supportant les DACL Windows, doivent être donnés au format suivant : Nom du NAS\Nom de l'utilisateur.
+
+        Si vous désactivez ce paramètre de stratégie ou ne le configurez pas, lors de la sauvegarde, si le dossier de destination n'existe pas, il sera créé en conservant l'héritage des droits NTFS.
+      </string>
+
+      <!-- Log Event -->
+      <string id="LogEvent">Inscrire dans le journal d'évènements de Windows les évènements dont la gravité est supérieur à celle défini ici.</string>
+      <string id="LogEvent_Help">
+        Ce paramètre de stratégie vous permet de déterminer si les évènements sont inscrits dans le journal d'évènements de Windows.
+
+        Si vous activez ce paramètre de stratégie, les évènements dont la gravité est supérieure ou égal à celle défini ici, seront inscrits.
+
+        Si vous désactivez ce paramètre de stratégie, aucun évènement ne sera inscrit.
+
+        Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
+      </string>
+      <string id="SeverityDebug">Debug</string>
+      <string id="SeverityInformation">Information</string>
+      <string id="SeverityWarning">Avertissement</string>
+      <string id="SeverityError">Erreur</string>
+
+      <!-- Reporting -->
+      <string id="Reporting">Envoyer les rapports d'activités</string>
+      <string id="Reporting_Help">
+        Ce paramètre de stratégie vous permet de définir si PST backup doit envoyer des rapports d'activités.
+
+        Si vous activez ce paramètre de stratégie, des rapports d'activités seront envoyé au serveur.
+
+        Si vous désactivez ce paramètre de stratégie, aucun rapport ne sera envoyé.
+
+        Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
+      </string>
+      
+      
+    </stringTable>
+    <presentationTable>
+      <!-- WAN Settings -->
+      <presentation id="WanSettings">
+        <textBox refId="TXT_AdditionalSubnets">
+          <label>Additional subnets for backup (Ex. 192.168.10.0/24;192.168.20.0/24)</label>
+        </textBox>
+      </presentation>
+
+      <!-- Backup Method -->
+      <presentation id ="BackupMethod">
+        <dropdownList refId="Enum_BackupMethod" defaultItem="0" noSort="true">Méthode de sauvegarde : </dropdownList>
+      </presentation>
+
+      <!-- Set Exclusive NTFS Permissions -->
+      <presentation id="SetExclusiveNTFSPermissions">
+        <textBox refId="TXT_AdditionalNTFSFullcontrol">
+          <label>Ajouter les droits en Contrôle Total pour ces comptes (par exemple : admins du domaine;Service Informatique@Domaine.local;Domaine\Admin des sauvegardes) : </label>
+        </textBox>
+        <textBox refId="TXT_AdditionalNTFSReadWrite">
+          <label>Ajouter les droits en Lecture/Écriture pour ces comptes : </label>
+        </textBox>
+      </presentation>
+
+      <!-- Log Event -->
+      <presentation id="EventLog">
+        <dropdownList refId="Enum_LogEvent" defaultItem="1" noSort="true">Sévérité de l'évènement : </dropdownList>
+      </presentation>
+
+      <!-- Reportig -->
+      <presentation id="Reporting">
+        <textBox refId="TXT_ReportServer">
+          <label>Serveur distant : </label>
+        </textBox>
+        <decimalTextBox refId="DEC_ReportPort">Port : </decimalTextBox>
+      </presentation>
+    </presentationTable>
+  </resources>
+
+</policyDefinitionResources>
