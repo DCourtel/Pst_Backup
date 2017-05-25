@@ -250,37 +250,37 @@
           </item>
         </enum>
         <enum id="Enum_DayOfWeek" valueName="DayOfWeek">
-          <item displayName="$(string.Monday)">
+          <item displayName="$(string.Sunday)">
             <value>
               <decimal value="0" />
             </value>
           </item>
-          <item displayName="$(string.Thuesday)">
+          <item displayName="$(string.Monday)">
             <value>
               <decimal value="1" />
             </value>
           </item>
-          <item displayName="$(string.Wednesday)">
+          <item displayName="$(string.Thuesday)">
             <value>
               <decimal value="2" />
             </value>
           </item>
-          <item displayName="$(string.Thursday)">
+          <item displayName="$(string.Wednesday)">
             <value>
               <decimal value="3" />
             </value>
           </item>
-          <item displayName="$(string.Friday)">
+          <item displayName="$(string.Thursday)">
             <value>
               <decimal value="4" />
             </value>
           </item>
-          <item displayName="$(string.Saturday)">
+          <item displayName="$(string.Friday)">
             <value>
               <decimal value="5" />
             </value>
           </item>
-          <item displayName="$(string.Sunday)">
+          <item displayName="$(string.Saturday)">
             <value>
               <decimal value="6" />
             </value>

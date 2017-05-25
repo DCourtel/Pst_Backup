@@ -58,7 +58,7 @@ namespace UnitTest_PstBackupAddin
                 pstFiles = SUT.GetPstFileList();
 
                 // Assert
-                Assert.AreEqual(5, pstFiles.Count);
+                Assert.AreEqual(6, pstFiles.Count);
 
                 Assert.IsTrue(pstFiles.Contains(@"E:\Pst Backup\Pst Files\Archive2009.pst".ToLower()));
                 Assert.IsTrue(pstFiles.Contains(@"E:\Pst Backup\Pst Files\archive2010.pst".ToLower()));

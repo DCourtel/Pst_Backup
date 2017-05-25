@@ -117,21 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="tabFilesAndFolders.Text" xml:space="preserve">
-    <value>Fichiers et Dossiers</value>
-  </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Planification</value>
-  </data>
-  <data name="tabEventLog.Text" xml:space="preserve">
-    <value>Journalisation</value>
-  </data>
-  <data name="tabReporting.Text" xml:space="preserve">
-    <value>Rapport</value>
-  </data>
-  <data name="tabBackupAgent.Text" xml:space="preserve">
-    <value>Agent de sauvegarde</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkBxCompressFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 249</value>
@@ -199,8 +184,8 @@
   <data name="txtBxDestination.Size" type="System.Drawing.Size, System.Drawing">
     <value>382, 20</value>
   </data>
-  <data name="grpBxSchedule.Text" xml:space="preserve">
-    <value>Sauvegarde </value>
+  <data name="tabFilesAndFolders.Text" xml:space="preserve">
+    <value>Fichiers et Dossiers</value>
   </data>
   <data name="cmbBxWeekly.Location" type="System.Drawing.Point, System.Drawing">
     <value>123, 78</value>
@@ -241,6 +226,12 @@
   <data name="rdBtnEvery.Text" xml:space="preserve">
     <value>Tous les </value>
   </data>
+  <data name="grpBxSchedule.Text" xml:space="preserve">
+    <value>Sauvegarde </value>
+  </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Planification</value>
+  </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Pst Backup peut écrire des évènements dans le journal d'évènement de Windows.
 Ces évènements peuvent être de simples informations, comme 'Démarrage", "Sauvegarde du fichier".
@@ -258,6 +249,9 @@ Ou des erreurs tels que "Impossible de lire le fichier PST", " Impossible d'écr
   </data>
   <data name="chkBxEventLog.Text" xml:space="preserve">
     <value>Enregistrer les évènements pour lesquelles la sévérité est supérieur ou égal à : </value>
+  </data>
+  <data name="tabEventLog.Text" xml:space="preserve">
+    <value>Journalisation</value>
   </data>
   <data name="nupReportingServerPort.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 104</value>
@@ -292,8 +286,8 @@ Ou des erreurs tels que "Impossible de lire le fichier PST", " Impossible d'écr
   <data name="label4.Text" xml:space="preserve">
     <value>Pst Backup peut envoyer des évènements à un serveur distant. De tel sorte que ce serveur puisse générer des rapports.</value>
   </data>
-  <data name="grpBxBackupMethod.Text" xml:space="preserve">
-    <value>Méthode de sauvegarde </value>
+  <data name="tabReporting.Text" xml:space="preserve">
+    <value>Rapport</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
     <value>Plus rapide mais moins sûre lorsqu'utilisée avec un système de fichiers. Recommandée lorsque la sauvegarde cible un serveur de sauvegarde.</value>
@@ -313,6 +307,9 @@ Ou des erreurs tels que "Impossible de lire le fichier PST", " Impossible d'écr
   <data name="rdBtnMethodFull.Text" xml:space="preserve">
     <value>Toujours une sauvegarde complète</value>
   </data>
+  <data name="grpBxBackupMethod.Text" xml:space="preserve">
+    <value>Méthode de sauvegarde </value>
+  </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>488, 13</value>
   </data>
@@ -324,6 +321,9 @@ Ou des erreurs tels que "Impossible de lire le fichier PST", " Impossible d'écr
   </data>
   <data name="chkBxDontBackupOverWan.Text" xml:space="preserve">
     <value>Ne pas sauvegarder si la destination n'est pas sur le même sous-réseau que l'ordinateur.</value>
+  </data>
+  <data name="tabBackupAgent.Text" xml:space="preserve">
+    <value>Agent de sauvegarde</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Annuler</value>

@@ -222,15 +222,12 @@ namespace UnitTest_PstBackupSettings
                 appSettings = new SUT(SUT.SourceSettings.GPO);
 
                 // Assert
-                Assert.AreEqual(appSettings.FilesAndFoldersAdditionalNTFSFullcontrol, @"ad\Courtel");
-                Assert.AreEqual(appSettings.FilesAndFoldersAdditionalNTFSReadWrite, "%userLogin%");
                 Assert.AreEqual(appSettings.BackupAgentAdditionalSubnets, "192.168.10.0/24;192.168.20.0/24");
                 Assert.IsTrue(appSettings.IsBackupAgentAdditionalSubnetsDefine);
                 Assert.AreEqual(appSettings.BackupAgentBackupMethod, SUT.BackupMethod.Differential);
                 Assert.IsTrue(appSettings.IsBackupAgentBackupMethodDefine);                
                 Assert.IsTrue(appSettings.BackupAgentDontBackupThroughtWan);
                 Assert.IsTrue(appSettings.IsBackupAgentDontBackupThroughtWanDefine);
-                Assert.IsTrue(appSettings.FilesAndFoldersSetExclusiveNTFSPermissions);
             }
 
             [TestMethod]
@@ -263,6 +260,9 @@ namespace UnitTest_PstBackupSettings
                 appSettings = new SUT(SUT.SourceSettings.GPO);
 
                 // Assert
+                Assert.IsTrue(appSettings.FilesAndFoldersSetExclusiveNTFSPermissions);
+                Assert.AreEqual(appSettings.FilesAndFoldersAdditionalNTFSFullcontrol, @"ad\Courtel");
+                Assert.AreEqual(appSettings.FilesAndFoldersAdditionalNTFSReadWrite, "%userLogin%");
                 Assert.IsTrue(appSettings.FilesAndFoldersCompressFiles);
                 Assert.IsTrue(appSettings.IsFilesAndFoldersCompressFilesDefine);
                 Assert.AreEqual(appSettings.FilesAndFoldersDestinationType, SUT.BackupDestinationType.BackupServer);

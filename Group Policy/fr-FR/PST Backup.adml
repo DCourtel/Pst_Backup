@@ -16,11 +16,10 @@
       <string id="CAT_FilesAndFolders">Fichiers et dossiers</string>
       <string id="CAT_Reporting">Rapports</string>
       <string id="CAT_Schedule">Plannification</string>
-      
+
       <!-- WAN Settings -->
       <string id="WanSettings">Ne pas sauvegarder au travers d'un lien WAN</string>
-      <string id="WanSettings_Help">
-        Ce paramètre de stratégie vous permet d'empêcher PST Backup de sauvegarder les archives au travers d'un lien lent (Lien WAN par exemple).
+      <string id="WanSettings_Help">Ce paramètre de stratégie vous permet d'empêcher PST Backup de sauvegarder les archives au travers d'un lien lent (Lien WAN par exemple).
 
         Si vous activez ce paramètre de stratégie, les archives ne seront pas copiées si l'adresse IPV4 de destination n'est pas dans le même sous-réseau que l'adresse IPV4 local. Vous pouvez également spécifier des sous-réseaux supplémentaires autorisés pour la sauvegarde. Si l'ordinateur se trouve dans l'un des sous-réseaux spécifiés, la sauvegarde peut se faire.
 
@@ -32,12 +31,11 @@
 
       <!-- Backup Method -->
       <string id="BackupMethod">Méthode de sauvegarde à utiliser</string>
-      <string id="BackupMethod_Help">
-        Ce paramètre de stratégie vous permet de définir la méthode de sauvegarde utilisé par PST Backup.
+      <string id="BackupMethod_Help">Ce paramètre de stratégie vous permet de définir la méthode de sauvegarde utilisé par PST Backup.
 
         Si vous activez ce paramètre de stratégie, vous pourrez choisir si PST Backup réalise une sauvegarde complète à chaque fois ou s'il réalise une sauvegarde différentielle.
 
-        Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront choisir la méthode utilisée.
+        Si vous désactivez ou ne configurez pas ce paramètre de stratégie, les utilisateurs pourront choisir la méthode utilisée.
       </string>
       <string id="BackupMethodFull">Complète</string>
       <string id="BackupMethodDifferential">Différentielle</string>
@@ -56,7 +54,7 @@
 
         Si vous désactivez ce paramètre de stratégie ou ne le configurez pas, lors de la sauvegarde, si le dossier de destination n'existe pas, il sera créé en conservant l'héritage des droits NTFS.
       </string>
-      
+
       <!-- Log Event -->
       <string id="LogEvent">Inscrire dans le journal d'évènements de Windows les évènements dont la gravité est supérieur à celle défini ici.</string>
       <string id="LogEvent_Help">Ce paramètre de stratégie vous permet de déterminer si les évènements sont inscrits dans le journal d'évènements de Windows.
@@ -71,44 +69,56 @@
       <string id="SeverityInformation">Information</string>
       <string id="SeverityWarning">Avertissement</string>
       <string id="SeverityError">Erreur</string>
-      
+
       <!-- Reporting -->
       <string id="Reporting">Envoyer les rapports d'activités</string>
-      <string id="Reporting_Help">Ce paramètre de stratégie vous permet de définir si PST backup doit envoyer des rapports d'activités.
+      <string id="Reporting_Help">Ce paramètre de stratégie vous permet de définir si PST backup doit envoyer des rapports d'activités à un serveur dédié.
 
         Si vous activez ce paramètre de stratégie, des rapports d'activités seront envoyé au serveur.
+        Vous devrez alors indiquer l'adresse IP ou le nom du serveur, ainsi que le port sur lequel le serveur écoute.
 
         Si vous désactivez ce paramètre de stratégie, aucun rapport ne sera envoyé.
 
         Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
       </string>
-      
+
       <!-- Compress Files -->
       <string id="CompressFiles">Compresser les fichiers PST lors de la sauvegarde.</string>
       <string id="CompressFiles_Help">Ce paramètre de stratégie vous permet de définir si les fichiers PST doivent être compressés lors de la sauvegarde.
 
         Si vous activez ce paramètre de stratégie, les fichiers PST seront compressés lors de la sauvegarde.
+        La compression n'est possible que dans le cas d'une sauvegarde Complète. Ce paramètre est ignoré dans le cas d'une sauvegarde différentielle.
 
         Si vous désactivez ce paramètre de stratégie, les fichiers PST ne seront pas compressés lors de la sauvegarde.
 
         Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
       </string>
-      
+
       <!-- Files And Folders -->
-      <string id="DestinationType">Type de destination pour les sauvegardes.</string>
-      <string id="DestinationType_Help">Définissez le type de destination pour les sauvegardes.</string>
+      <string id="DestinationType">Destination pour les sauvegardes.</string>
+      <string id="DestinationType_Help">Ce paramètre de stratégie vous permet de déterminer l'emplacement où seront envoyé les sauvegardes.
+
+        Si vous activez ce paramètre de stratégie, vous pourrez préciser si les sauvegardes se font vers en dossier ou vers un serveur de sauvegarde dédié.
+        Choisissez le type de destination dans la liste déroulante.
+        Si vous choisissez «Système de Fichiers» en tant que destination, vous devez indiquer le répertoire de destination au format UNC. 
+        Les variables %ComputerName% et %UserLogin% sont automatiquement résoluent par les postes clients.
+        Si vous choisissez «Serveur de Sauvegarde» en tant que destination, vous devez indiquer l'adresse IP ou le nom du serveur de sauvegarde dédié ainsi que le port sur lequel il écoute.
+        
+        Si vous désactivez ou ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
+      </string>
       <string id="DestinationTypeFileSystem">Système de Fichiers</string>
       <string id="DestinationTypeBackupServer">Serveur de Sauvegarde</string>
-              
+
       <!-- Schedule -->
       <string id="Schedule">Planification de la sauvegarde</string>
-      <string id="Schedule_Help">Ce paramètre de stratégie vous permet de définir la politique de sauvegarde.
+      <string id="Schedule_Help">Ce paramètre de stratégie vous permet de définir la planification de sauvegarde.
 
-        Si vous activez ce paramètre de stratégie, la politique de sauvegarde indiquée sera appliquée.
+        Si vous activez ce paramètre de stratégie, la politique de sauvegarde indiqué par la liste déroulante sera appliquée.
+        Si vous choisissez la politique «Tous les…», définissez l'interval entre deux sauvegardes et l'unité de l'interval. Par exemple, Tous les 8 Jours.
+        Si vous choisissez la politique «Hebdomadaire», définissez le jour de la semaine. Par exemple, le Vendredi.
+        Si vous choisissez la politique «Mensuelle», définissez le jour du mois. Par exemple, le 15.
 
-        Si vous désactivez ce paramètre de stratégie, la politique de sauvegarde par défaut sera appliqué.
-
-        Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
+        Si vous désactivez ou ne configurez pas ce paramètre de stratégie, la politique de sauvegarde par défaut sera appliqué et les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
       </string>
       <string id="PolicyEveryX">Tous les…</string>
       <string id="Weekly">Hebdomadaire</string>
@@ -123,10 +133,10 @@
       <string id="Friday">Vendredi</string>
       <string id="Saturday">Samedi</string>
       <string id="Sunday">Dimanche</string>
-      
-      
-      
     </stringTable>
+    
+    
+    
     <presentationTable>
       <!-- WAN Settings -->
       <presentation id="WanSettings">
@@ -139,7 +149,7 @@
       <presentation id ="BackupMethod">
         <dropdownList refId="Enum_BackupMethod" defaultItem="0" noSort="true">Méthode de sauvegarde : </dropdownList>
       </presentation>
-      
+
       <!-- Set Exclusive NTFS Permissions -->
       <presentation id="SetExclusiveNTFSPermissions">
         <textBox refId="TXT_AdditionalNTFSFullcontrol">
@@ -149,20 +159,20 @@
           <label>Ajouter les droits en Lecture/Écriture pour ces comptes : </label>
         </textBox>
       </presentation>
-      
+
       <!-- Log Event -->
       <presentation id="EventLog">
         <dropdownList refId="Enum_LogEvent" defaultItem="1" noSort="true">Sévérité de l'évènement : </dropdownList>
       </presentation>
-      
-      <!-- Reportig -->
+
+      <!-- Reporting -->
       <presentation id="Reporting">
         <textBox refId="TXT_ReportServer">
           <label>Serveur distant : </label>
         </textBox>
         <decimalTextBox refId="DEC_ReportPort">Port : </decimalTextBox>
       </presentation>
-      
+
       <!-- Files And Folders -->
       <presentation id="DestinationType">
         <dropdownList refId="Enum_DestinationType" defaultItem="0" noSort="true">Type de destination : </dropdownList>
@@ -174,14 +184,14 @@
         </textBox>
         <decimalTextBox refId="DEC_BackupPort">Port : </decimalTextBox>
       </presentation>
-      
+
       <!-- Schedule -->
       <presentation id="Schedule">
         <dropdownList refId="Enum_Policy" defaultItem="0" noSort="true">Politique de sauvegarde : </dropdownList>
         <decimalTextBox refId="DEC_Interval">Interval entre deux sauvegardes : </decimalTextBox>
         <dropdownList refId="Enum_Unit" defaultItem="0" noSort="true">Unité de l'interval : </dropdownList>
         <dropdownList refId="Enum_DayOfWeek" defaultItem="0" noSort="true">Jour de la semaine : </dropdownList>
-        <decimalTextBox refId="DEC_DayOfMonth">Jour du mois : </decimalTextBox>        
+        <decimalTextBox refId="DEC_DayOfMonth">Jour du mois : </decimalTextBox>
       </presentation>
     </presentationTable>
   </resources>

@@ -16,114 +16,129 @@
       <string id="CAT_FilesAndFolders">Files and Folders</string>
       <string id="CAT_Reporting">Reporting</string>
       <string id="CAT_Schedule">Schedule</string>
-      
-      <!-- WAN Settings -->
-      <string id="WanSettings">WAN Settings</string>
-      <string id="WanSettings_Help">Prevent to backup throught WAN</string>
+
+      <!-- WAN Settings -->
+      <string id="WanSettings">Do not backup through a WAN link.</string>
+      <string id="WanSettings_Help">This policy setting allows you to prevent PST Backup to save files through a slow link (WAN Link for example).
+
+        If you enable this policy setting, the archive will not be copied if the IPv4 destination address is not in the same subnet as the local IPv4 address. 
+        You can also specify additional subnets for backup. If the computer is in one of the specified subnets, the backup can be done.
+
+        If you disable this policy setting, files will be copied even if the link is slow.
+
+        If you do not configure this policy setting, users can modify this setting themselves locally on their computer.
+      </string>
       <string id="TXT_AdditionalSubnets">Additional subnets for backup (Ex. 192.168.10.0/24;192.168.20.0/24)</string>
 
       <!-- Backup Method -->
-      <string id="BackupMethod">Méthode de sauvegarde à utiliser</string>
-      <string id="BackupMethod_Help">
-        Ce paramètre de stratégie vous permet de définir la méthode de sauvegarde utilisé par PST Backup.
+      <string id="BackupMethod">Backup method to use.</string>
+      <string id="BackupMethod_Help">This policy setting allows you to define which backup is used.
+      
+        if you enable this policy setting, you can choose if PST Backup make a Full backup each time or if it performs a Differential backup.
 
-        Si vous activez ce paramètre de stratégie, vous pourrez choisir si PST Backup réalise une sauvegarde complète à chaque fois ou s'il réalise une sauvegarde différentielle.
-
-        Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront choisir la méthode utilisée.
+        if you disable or do not configure this policy setting, users can modify this settings themselves locally on their computer.
       </string>
-      <string id="BackupMethodFull">Complète</string>
-      <string id="BackupMethodDifferential">Différentielle</string>
+      <string id="BackupMethodFull">Full</string>
+      <string id="BackupMethodDifferential">Differential</string>
 
       <!-- Set Exclusive NTFS Permissions -->
-      <string id="SetExclusiveNTFSPermissions">Définir des autorisations NTFS exclusives sur le dossier de destination.</string>
-      <string id="SetExclusiveNTFSPermissions_Help">
-        Ce paramètre de stratégie vous permet de couper l'héritage et de positionner des droits NTFS exclusif, en Lecture/Écriture, pour l'utilisateur sur le dossier de destination.
+      <string id="SetExclusiveNTFSPermissions">Define exclusive NTFS permissions on the destination folder.</string>
+      <string id="SetExclusiveNTFSPermissions_Help">This policy setting allows you to cut inheritance and position exclusive NTFS Read/Write permission for the user on the destination folder.
 
-        Si vous activez ce paramètre de stratégie, lors de la sauvegarde, si le dossier de destination n'existe pas, il sera créé sans tenir compte de l'héritage des droits NTFS. L'utilisateur aura les droits en Lecture/Écriture. Le compte "NT AUTHORITY\SYSTEM" aura les droits en Contrôle Total.
-        Vous pourrez préciser des noms de compte pour lesquels mettre des droits en Lecture/Écriture ou Contrôle Total.
-        Si le dossier existait déjà avant l’application de cette politique de stratégie de groupe, aucune modification n’est apportée au dossier.
+        If you enable this policy setting, when saving, if the destination folder does not exists, it will be created regardless of the NTFS permissions inheritance. 
+        The current user will have the Read/Write permission. The account "NT AUTHORITY\SYSTEM" will have Full Control rights.
+        You can specify account names for which set Read/Write or Full Control rights.
+        If the folder already existed before the implementation of this policy strategy group, no changes are made to the folder.
 
-        - Les comptes se référant au même domaine que celui de l'utilisateur, peuvent être donnés aux formats suivant : Nom d'utilisateur ou Domaine\Nom d'utilisateur ou Nom d'utilisateur@domaine.local.
-        - Les comptes se référant à un autre domaine que celui de l'utilisateur, doivent être donnés au format suivant : nom d'utilisateur@domaine.local.
-        - Les comptes se référant à un NAS supportant les DACL Windows, doivent être donnés au format suivant : Nom du NAS\Nom de l'utilisateur.
+        - Accounts referring to the same domain as the user can be given to the following formats : User Name or Domain\User Name or User Name@domain.local.
+        - Accounts referring to a domain other than that of the user, must be given in the following format : User Name@domain.local.
+        - Accounts referring to a NAS that supports Windows DACL must be given in the following format : NAS Name\User Name.
 
-        Si vous désactivez ce paramètre de stratégie ou ne le configurez pas, lors de la sauvegarde, si le dossier de destination n'existe pas, il sera créé en conservant l'héritage des droits NTFS.
+        If you disable this policy setting or do not configure it, during the backup, if the destination folder does not exists, it will be created keeping the NTFS permissions inheritance.
       </string>
 
       <!-- Log Event -->
-      <string id="LogEvent">Inscrire dans le journal d'évènements de Windows les évènements dont la gravité est supérieur à celle défini ici.</string>
-      <string id="LogEvent_Help">
-        Ce paramètre de stratégie vous permet de déterminer si les évènements sont inscrits dans le journal d'évènements de Windows.
+      <string id="LogEvent">Write in the Windows event log, events whose gravity is greater or equal than that defined here.</string>
+      <string id="LogEvent_Help">This policy setting allows you to determine whether the events are recorded in the event log of Windows.
 
-        Si vous activez ce paramètre de stratégie, les évènements dont la gravité est supérieure ou égal à celle défini ici, seront inscrits.
+        If you enable this policy setting, the events whose severity is greater than or equal to that defined herein, shall be recorded.
 
-        Si vous désactivez ce paramètre de stratégie, aucun évènement ne sera inscrit.
+        If you disable this policy setting, no event will be recorded.
 
-        Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
+        If you do not configure this policy setting, users can modify this setting themselves locally on their computer.
       </string>
       <string id="SeverityDebug">Debug</string>
       <string id="SeverityInformation">Information</string>
-      <string id="SeverityWarning">Avertissement</string>
-      <string id="SeverityError">Erreur</string>
+      <string id="SeverityWarning">Warning</string>
+      <string id="SeverityError">Error</string>
 
       <!-- Reporting -->
-      <string id="Reporting">Envoyer les rapports d'activités</string>
-      <string id="Reporting_Help">
-        Ce paramètre de stratégie vous permet de définir si PST backup doit envoyer des rapports d'activités.
+      <string id="Reporting">Send activity reports.</string>
+      <string id="Reporting_Help">This policy setting allows you to specify whether PST Backup must send activity reports.
 
-        Si vous activez ce paramètre de stratégie, des rapports d'activités seront envoyé au serveur.
+        If you enable this policy setting, reports will be sent to the server.
 
-        Si vous désactivez ce paramètre de stratégie, aucun rapport ne sera envoyé.
+        If you disable this policy setting, no report will be sent.
 
-        Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
+        If you do not configure this policy setting, users can modify this setting themselves locally on their computer.
       </string>
 
       <!-- Compress Files -->
-      <string id="CompressFiles">Compresser les fichiers PST lors de la sauvegarde.</string>
-      <string id="CompressFiles_Help">Ce paramètre de stratégie vous permet de définir si les fichiers PST doivent être compressés lors de la sauvegarde.
+      <string id="CompressFiles">Compress PST files during the backup.</string>
+      <string id="CompressFiles_Help">This policy setting allows you to define if PST files must be compressed during the backup.
 
-        Si vous activez ce paramètre de stratégie, les fichiers PST seront compressés lors de la sauvegarde.
+        If you enable this policy setting, PST files will be compressed during the backup.
+        Compression is available only in case of a Full Backup. This setting will be ignored in case of a differential Backup.
 
-        Si vous désactivez ce paramètre de stratégie, les fichiers PST ne seront pas compressés lors de la sauvegarde.
+        If you disable this policy setting, PST files will not be compressed during the backup.
 
-        Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
+        If you do not configure this policy setting, users can modify this setting themselves locally on their computer.
       </string>
 
       <!-- Files And Folders -->
-      <string id="DestinationType">Type de destination pour les sauvegardes.</string>
-      <string id="DestinationType_Help">Définissez le type de destination pour les sauvegardes.</string>
-      <string id="DestinationTypeFileSystem">System de Fichiers</string>
-      <string id="DestinationTypeBackupServer">Serveur de Sauvegarde</string>
+      <string id="DestinationType">Backup destination.</string>
+      <string id="DestinationType_Help">This policy setting allows you to specify the place where backups will be sent.
+
+        If you enable this policy setting, you will be able to choose if backups are sent to a folder or to a dedicated Backup Server.
+        Choose the type of destination in the dropdown list.
+        If you choose «File System» as the destination, you must provide the path to the folder as an UNC path.
+        %ComputerName% and %UserLogin% variables are automatically resolved by clients computers.
+
+        If you choose «Backup Server» as the destination,you must provide the IP address or the name of the dedicated Backup Server as well as the port.
+
+        If you disable or do not configure this policy setting, users can modify this setting themselves locally on their computer.
+      </string>
+      <string id="DestinationTypeFileSystem">File System</string>
+      <string id="DestinationTypeBackupServer">Backup Server</string>
 
       <!-- Schedule -->
-      <string id="Schedule">Planification de la sauvegarde</string>
-      <string id="Schedule_Help">
-        Ce paramètre de stratégie vous permet de définir la politique de sauvegarde.
+      <string id="Schedule">Backup schedule.</string>
+      <string id="Schedule_Help">This policy setting allows you to specify the schedule for the backup.
+        If you enable this policy setting, the backup policy you have choose in the dropdown list will apply.
 
-        Si vous activez ce paramètre de stratégie, la politique de sauvegarde indiquée sera appliquée.
+        If you choose the «Every…» policy, define interval between two backups and the unit of the interval. For example, Every 8 Days.
+        If you choose the «Weekly» policy, define the day of the week. For example, Friday.
+        If you choose the «Monthly» policy, define the day of the month. For example, the 15.
 
-        Si vous désactivez ce paramètre de stratégie, la politique de sauvegarde par défaut sera appliqué.
-
-        Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
+        If you disable or do not configure this policy setting, the default backup policy will be applied and users can modify this setting themselves locally on their computer.
       </string>
-      <string id="PolicyEveryX">Tous les…</string>
-      <string id="Weekly">Hebdomadaire</string>
-      <string id="Monthly">Mensuelle</string>
-      <string id="UnitDays">Jours</string>
-      <string id="UnitWeeks">Semaines</string>
-      <string id="UnitMonths">Mois</string>
-      <string id="Monday">Lundi</string>
-      <string id="Thuesday">Mardi</string>
-      <string id="Wednesday">Mercredi</string>
-      <string id="Thursday">Jeudi</string>
-      <string id="Friday">Vendredi</string>
-      <string id="Saturday">Samedi</string>
-      <string id="Sunday">Dimanche</string>
-
-
-
-
+      <string id="PolicyEveryX">Every…</string>
+      <string id="Weekly">Weekly</string>
+      <string id="Monthly">Monthly</string>
+      <string id="UnitDays">Days</string>
+      <string id="UnitWeeks">Weeks</string>
+      <string id="UnitMonths">Months</string>
+      <string id="Monday">Monday</string>
+      <string id="Thuesday">Thuesday</string>
+      <string id="Wednesday">Wednesday</string>
+      <string id="Thursday">Thursday</string>
+      <string id="Friday">Friday</string>
+      <string id="Saturday">Saturday</string>
+      <string id="Sunday">Sunday</string>
     </stringTable>
+
+
+
     <presentationTable>
       <!-- WAN Settings -->
       <presentation id="WanSettings">
@@ -134,53 +149,52 @@
 
       <!-- Backup Method -->
       <presentation id ="BackupMethod">
-        <dropdownList refId="Enum_BackupMethod" defaultItem="0" noSort="true">Méthode de sauvegarde : </dropdownList>
+        <dropdownList refId="Enum_BackupMethod" defaultItem="0" noSort="true">Backup Method:</dropdownList>
       </presentation>
 
       <!-- Set Exclusive NTFS Permissions -->
       <presentation id="SetExclusiveNTFSPermissions">
         <textBox refId="TXT_AdditionalNTFSFullcontrol">
-          <label>Ajouter les droits en Contrôle Total pour ces comptes (par exemple : admins du domaine;Service Informatique@Domaine.local;Domaine\Admin des sauvegardes) : </label>
+          <label>Add Full Control rights to these accounts (eg : domain admins;IT Service@Domain.local;Domain\Backup admins): </label>
         </textBox>
         <textBox refId="TXT_AdditionalNTFSReadWrite">
-          <label>Ajouter les droits en Lecture/Écriture pour ces comptes : </label>
+          <label>Add Read/Write rights for these accounts:</label>
         </textBox>
       </presentation>
 
       <!-- Log Event -->
       <presentation id="EventLog">
-        <dropdownList refId="Enum_LogEvent" defaultItem="1" noSort="true">Sévérité de l'évènement : </dropdownList>
+        <dropdownList refId="Enum_LogEvent" defaultItem="1" noSort="true">Severity of the event:</dropdownList>
       </presentation>
 
-      <!-- Reportig -->
+      <!-- Reporting -->
       <presentation id="Reporting">
         <textBox refId="TXT_ReportServer">
-          <label>Serveur distant : </label>
+          <label>Server: </label>
         </textBox>
-        <decimalTextBox refId="DEC_ReportPort">Port : </decimalTextBox>
+        <decimalTextBox refId="DEC_ReportPort">Port: </decimalTextBox>
       </presentation>
 
       <!-- Files And Folders -->
       <presentation id="DestinationType">
-        <dropdownList refId="Enum_DestinationType" defaultItem="0" noSort="true">Type de destination : </dropdownList>
+        <dropdownList refId="Enum_DestinationType" defaultItem="0" noSort="true">Destination Type:</dropdownList>
         <textBox refId="TXT_DestinationPath">
-          <label>Dossier de sauvegarde : </label>
+          <label>Backup Folder: </label>
         </textBox>
         <textBox refId="TXT_BackupServer">
-          <label>Serveur de Sauvegarde : </label>
+          <label>Backup Server: </label>
         </textBox>
-        <decimalTextBox refId="DEC_BackupPort">Port : </decimalTextBox>
+        <decimalTextBox refId="DEC_BackupPort">Port: </decimalTextBox>
       </presentation>
 
       <!-- Schedule -->
       <presentation id="Schedule">
-        <dropdownList refId="Enum_Policy" defaultItem="0" noSort="true">Politique de sauvegarde : </dropdownList>
-        <decimalTextBox refId="DEC_Interval">Interval entre deux sauvegardes : </decimalTextBox>
-        <dropdownList refId="Enum_Unit" defaultItem="0" noSort="true">Unité de l'interval : </dropdownList>
-        <dropdownList refId="Enum_DayOfWeek" defaultItem="0" noSort="true">Jour de la semaine : </dropdownList>
-        <decimalTextBox refId="DEC_DayOfMonth">Jour du mois : </decimalTextBox>
+        <dropdownList refId="Enum_Policy" defaultItem="0" noSort="true">Backup Policy:</dropdownList>
+        <decimalTextBox refId="DEC_Interval">Interval between two backups: </decimalTextBox>
+        <dropdownList refId="Enum_Unit" defaultItem="0" noSort="true">Interval unit:</dropdownList>
+        <dropdownList refId="Enum_DayOfWeek" defaultItem="0" noSort="true">Day of week:</dropdownList>
+        <decimalTextBox refId="DEC_DayOfMonth">Day of month:</decimalTextBox>
       </presentation>
     </presentationTable>
   </resources>
-
 </policyDefinitionResources>

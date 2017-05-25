@@ -289,7 +289,7 @@ namespace UnitTest_BackupUseCases
             [TestMethod]
             public void FinishBackup_WhenDbContainsPartialHashes()
             {
-                // Pst File is registered is Db but the hash table does not contains all hashes for the backup file
+                // Pst File is registered in Db but the hash table does not contains all hashes for the backup file
                 // Arrange
                 DeleteDb();
                 CopyPartialFile();

@@ -113,7 +113,7 @@ namespace SmartSingularity.PstBackupSettings
             switch (_readSettingsFrom)
             {
                 case SourceSettings.GPO:
-                    _baseKey = @"Software\Policies\PST Backup";
+                    _baseKey = @"Software\Policies\PST Backup";
                     break;
                 case SourceSettings.Local:
                     _baseKey = @"Software\PST Backup";
