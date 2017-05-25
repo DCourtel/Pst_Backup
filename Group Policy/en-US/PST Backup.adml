@@ -19,7 +19,7 @@
       
       <!-- WAN Settings -->
       <string id="WanSettings">WAN Settings</string>
-      <string id="WanSettings_Help">Prevent to backup throw WAN</string>
+      <string id="WanSettings_Help">Prevent to backup throught WAN</string>
       <string id="TXT_AdditionalSubnets">Additional subnets for backup (Ex. 192.168.10.0/24;192.168.20.0/24)</string>
 
       <!-- Backup Method -->
@@ -77,8 +77,52 @@
 
         Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
       </string>
-      
-      
+
+      <!-- Compress Files -->
+      <string id="CompressFiles">Compresser les fichiers PST lors de la sauvegarde.</string>
+      <string id="CompressFiles_Help">Ce paramètre de stratégie vous permet de définir si les fichiers PST doivent être compressés lors de la sauvegarde.
+
+        Si vous activez ce paramètre de stratégie, les fichiers PST seront compressés lors de la sauvegarde.
+
+        Si vous désactivez ce paramètre de stratégie, les fichiers PST ne seront pas compressés lors de la sauvegarde.
+
+        Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
+      </string>
+
+      <!-- Files And Folders -->
+      <string id="DestinationType">Type de destination pour les sauvegardes.</string>
+      <string id="DestinationType_Help">Définissez le type de destination pour les sauvegardes.</string>
+      <string id="DestinationTypeFileSystem">System de Fichiers</string>
+      <string id="DestinationTypeBackupServer">Serveur de Sauvegarde</string>
+
+      <!-- Schedule -->
+      <string id="Schedule">Planification de la sauvegarde</string>
+      <string id="Schedule_Help">
+        Ce paramètre de stratégie vous permet de définir la politique de sauvegarde.
+
+        Si vous activez ce paramètre de stratégie, la politique de sauvegarde indiquée sera appliquée.
+
+        Si vous désactivez ce paramètre de stratégie, la politique de sauvegarde par défaut sera appliqué.
+
+        Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
+      </string>
+      <string id="PolicyEveryX">Tous les…</string>
+      <string id="Weekly">Hebdomadaire</string>
+      <string id="Monthly">Mensuelle</string>
+      <string id="UnitDays">Jours</string>
+      <string id="UnitWeeks">Semaines</string>
+      <string id="UnitMonths">Mois</string>
+      <string id="Monday">Lundi</string>
+      <string id="Thuesday">Mardi</string>
+      <string id="Wednesday">Mercredi</string>
+      <string id="Thursday">Jeudi</string>
+      <string id="Friday">Vendredi</string>
+      <string id="Saturday">Samedi</string>
+      <string id="Sunday">Dimanche</string>
+
+
+
+
     </stringTable>
     <presentationTable>
       <!-- WAN Settings -->
@@ -114,6 +158,27 @@
           <label>Serveur distant : </label>
         </textBox>
         <decimalTextBox refId="DEC_ReportPort">Port : </decimalTextBox>
+      </presentation>
+
+      <!-- Files And Folders -->
+      <presentation id="DestinationType">
+        <dropdownList refId="Enum_DestinationType" defaultItem="0" noSort="true">Type de destination : </dropdownList>
+        <textBox refId="TXT_DestinationPath">
+          <label>Dossier de sauvegarde : </label>
+        </textBox>
+        <textBox refId="TXT_BackupServer">
+          <label>Serveur de Sauvegarde : </label>
+        </textBox>
+        <decimalTextBox refId="DEC_BackupPort">Port : </decimalTextBox>
+      </presentation>
+
+      <!-- Schedule -->
+      <presentation id="Schedule">
+        <dropdownList refId="Enum_Policy" defaultItem="0" noSort="true">Politique de sauvegarde : </dropdownList>
+        <decimalTextBox refId="DEC_Interval">Interval entre deux sauvegardes : </decimalTextBox>
+        <dropdownList refId="Enum_Unit" defaultItem="0" noSort="true">Unité de l'interval : </dropdownList>
+        <dropdownList refId="Enum_DayOfWeek" defaultItem="0" noSort="true">Jour de la semaine : </dropdownList>
+        <decimalTextBox refId="DEC_DayOfMonth">Jour du mois : </decimalTextBox>
       </presentation>
     </presentationTable>
   </resources>

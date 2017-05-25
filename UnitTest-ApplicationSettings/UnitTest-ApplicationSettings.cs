@@ -222,15 +222,15 @@ namespace UnitTest_PstBackupSettings
                 appSettings = new SUT(SUT.SourceSettings.GPO);
 
                 // Assert
-                Assert.AreEqual(appSettings.BackupAgentAdditionalNTFSFullcontrol, @"ad\Courtel");
-                Assert.AreEqual(appSettings.BackupAgentAdditionalNTFSReadWrite, "%userLogin%");
+                Assert.AreEqual(appSettings.FilesAndFoldersAdditionalNTFSFullcontrol, @"ad\Courtel");
+                Assert.AreEqual(appSettings.FilesAndFoldersAdditionalNTFSReadWrite, "%userLogin%");
                 Assert.AreEqual(appSettings.BackupAgentAdditionalSubnets, "192.168.10.0/24;192.168.20.0/24");
                 Assert.IsTrue(appSettings.IsBackupAgentAdditionalSubnetsDefine);
                 Assert.AreEqual(appSettings.BackupAgentBackupMethod, SUT.BackupMethod.Differential);
                 Assert.IsTrue(appSettings.IsBackupAgentBackupMethodDefine);                
                 Assert.IsTrue(appSettings.BackupAgentDontBackupThroughtWan);
                 Assert.IsTrue(appSettings.IsBackupAgentDontBackupThroughtWanDefine);
-                Assert.IsTrue(appSettings.BackupAgentSetExclusiveNTFSPermissions);
+                Assert.IsTrue(appSettings.FilesAndFoldersSetExclusiveNTFSPermissions);
             }
 
             [TestMethod]

@@ -42,7 +42,7 @@ namespace SmartSingularity.PstBackupEngine
             if (appSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.FileSystem && !Directory.Exists(FileSystem.ExpandDestinationFolder(appSettings.FilesAndFoldersDestinationPath)))
             {
                 Logger.Write(30010, "Creating backup folder\r\n" + appSettings.FilesAndFoldersDestinationPath, Logger.MessageSeverity.Debug);
-                FileSystem.CreateDestinationFolder(appSettings.FilesAndFoldersDestinationPath, appSettings.BackupAgentSetExclusiveNTFSPermissions, appSettings.BackupAgentAdditionalNTFSFullcontrol, appSettings.BackupAgentAdditionalNTFSReadWrite);
+                FileSystem.CreateDestinationFolder(appSettings.FilesAndFoldersDestinationPath, appSettings.FilesAndFoldersSetExclusiveNTFSPermissions, appSettings.FilesAndFoldersAdditionalNTFSFullcontrol, appSettings.FilesAndFoldersAdditionalNTFSReadWrite);
             }
         }
 

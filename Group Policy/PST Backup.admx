@@ -49,7 +49,7 @@
               required="false" />
       </elements>
     </policy>
-    
+
     <!-- Backup Method -->
     <policy name="BackupMethod" class="User"
             displayName="$(string.BackupMethod)"
@@ -73,15 +73,15 @@
         </enum>
       </elements>
     </policy>
-    
+
     <!-- Set Exclusive NTFS Permissions -->
     <policy name="SetExclusiveNTFSPermissions" class="User"
             displayName="$(string.SetExclusiveNTFSPermissions)"
             explainText="$(string.SetExclusiveNTFSPermissions_Help)"
             presentation="$(presentation.SetExclusiveNTFSPermissions)"
-            key="Software\Policies\PST Backup\Settings\Backup Agent"
+            key="Software\Policies\PST Backup\Settings\Files And Folders"
             valueName="SetExclusiveNTFSPermissions">
-      <parentCategory ref="BackupAgent" />
+      <parentCategory ref="FilesAndFolders" />
       <supportedOn ref="windows:SUPPORTED_WindowsVista" />
       <enabledValue>
         <decimal value="1" />
@@ -90,17 +90,15 @@
         <decimal value="0" />
       </disabledValue>
       <elements>
-        <text id="TXT_AdditionalNTFSFullcontrol" 
-              key="Software\Policies\PST Backup\Settings\Backup Agent" 
-              valueName="AdditionalNTFSFullcontrol" 
+        <text id="TXT_AdditionalNTFSFullcontrol"
+              valueName="AdditionalNTFSFullcontrol"
               required="false" />
-        <text id="TXT_AdditionalNTFSReadWrite" 
-              key="Software\Policies\PST Backup\Settings\Backup Agent" 
-              valueName="AdditionalNTFSReadWrite" 
-              required="false" />        
+        <text id="TXT_AdditionalNTFSReadWrite"
+              valueName="AdditionalNTFSReadWrite"
+              required="false" />
       </elements>
     </policy>
-    
+
     <!-- Event Log -->
     <policy name="LogEvent" class="User"
             displayName="$(string.LogEvent)"
@@ -141,7 +139,7 @@
         </enum>
       </elements>
     </policy>
-    
+
     <!-- Reporting -->
     <policy name="Reporting" class="User"
             displayName="$(string.Reporting)"
@@ -158,11 +156,142 @@
         <decimal value="0" />
       </disabledValue>
       <elements>
-        <text id="TXT_ReportServer" valueName="Server" minValue="1" maxValue="65535" required="true" />
+        <text id="TXT_ReportServer" valueName="Server" required="true" />
         <decimal id="DEC_ReportPort" valueName="Port" minValue="1" maxValue="65535" required="true" />
       </elements>
     </policy>
-    
+
+    <!-- Files And Folders - Compress Files -->
+    <policy name="CompressFiles" class="User"
+            displayName="$(string.CompressFiles)"
+            explainText="$(string.CompressFiles_Help)"
+            key="Software\Policies\PST Backup\Settings\Files And Folders"
+            valueName="CompressFiles">
+      <parentCategory ref="FilesAndFolders" />
+      <supportedOn ref="windows:SUPPORTED_WindowsVista" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
+
+    <!-- Files And Folders -->
+    <policy name="DestinationType" class="User"
+            displayName="$(string.DestinationType)"
+            explainText="$(string.DestinationType_Help)"
+            presentation="$(presentation.DestinationType)"
+            key="Software\Policies\PST Backup\Settings\Files And Folders">
+      <parentCategory ref="FilesAndFolders" />
+      <supportedOn ref="windows:SUPPORTED_WindowsVista" />
+      <elements>
+        <enum id="Enum_DestinationType" valueName="DestinationType">
+          <item displayName="$(string.DestinationTypeFileSystem)">
+            <value>
+              <decimal value="0" />
+            </value>
+          </item>
+          <item displayName="$(string.DestinationTypeBackupServer)">
+            <value>
+              <decimal value="1" />
+            </value>
+          </item>
+        </enum>
+        <text id="TXT_DestinationPath" valueName="DestinationPath"  required="false" />
+        <text id="TXT_BackupServer" valueName="BackupServer"  required="false" />
+        <decimal id="DEC_BackupPort" valueName="BackupPort" minValue="1" maxValue="65535" required="true" />
+      </elements>
+
+    </policy>
+
+    <!-- Schedule -->
+    <policy name="Schedule" class="User"
+            displayName="$(string.Schedule)"
+            explainText="$(string.Schedule_Help)"
+            presentation="$(presentation.Schedule)"
+            key="Software\Policies\PST Backup\Settings\Schedule">
+      <parentCategory ref="Schedule" />
+      <supportedOn ref="windows:SUPPORTED_WindowsVista" />
+      <elements>
+        <enum id="Enum_Policy" valueName="Policy">
+          <item displayName="$(string.PolicyEveryX)">
+            <value>
+              <decimal value="0" />
+            </value>
+          </item>
+          <item displayName="$(string.Weekly)">
+            <value>
+              <decimal value="1" />
+            </value>
+          </item>
+          <item displayName="$(string.Monthly)">
+            <value>
+              <decimal value="2" />
+            </value>
+          </item>
+        </enum>
+        <decimal id="DEC_Interval" valueName="Interval" minValue="1" maxValue="365" required="false" />
+        <enum id="Enum_Unit" valueName="Unit">
+          <item displayName="$(string.UnitDays)">
+            <value>
+              <decimal value="0" />
+            </value>
+          </item>
+          <item displayName="$(string.UnitWeeks)">
+            <value>
+              <decimal value="1" />
+            </value>
+          </item>
+          <item displayName="$(string.UnitMonths)">
+            <value>
+              <decimal value="2" />
+            </value>
+          </item>
+        </enum>
+        <enum id="Enum_DayOfWeek" valueName="DayOfWeek">
+          <item displayName="$(string.Monday)">
+            <value>
+              <decimal value="0" />
+            </value>
+          </item>
+          <item displayName="$(string.Thuesday)">
+            <value>
+              <decimal value="1" />
+            </value>
+          </item>
+          <item displayName="$(string.Wednesday)">
+            <value>
+              <decimal value="2" />
+            </value>
+          </item>
+          <item displayName="$(string.Thursday)">
+            <value>
+              <decimal value="3" />
+            </value>
+          </item>
+          <item displayName="$(string.Friday)">
+            <value>
+              <decimal value="4" />
+            </value>
+          </item>
+          <item displayName="$(string.Saturday)">
+            <value>
+              <decimal value="5" />
+            </value>
+          </item>
+          <item displayName="$(string.Sunday)">
+            <value>
+              <decimal value="6" />
+            </value>
+          </item>
+        </enum>
+        <decimal id="DEC_DayOfMonth" valueName="DayOfMonth" minValue="1" maxValue="31" required="false" />
+      </elements>
+    </policy>
+
+
+
   </policies>
 
 </policyDefinitions>

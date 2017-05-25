@@ -129,9 +129,9 @@ namespace SmartSingularity.PstBackupSettings
         public bool BackupAgentDontBackupThroughtWan { get { return _bckAgtDontBackupThroughtWan; } set { _bckAgtDontBackupThroughtWan = value; } }
         public string BackupAgentAdditionalSubnets { get { return _bckAgtAdditionalSubnets; } set { _bckAgtAdditionalSubnets = value; } }
         public BackupMethod BackupAgentBackupMethod { get { return _bckAgtBackupMethod; } set { _bckAgtBackupMethod = value; } }
-        public bool BackupAgentSetExclusiveNTFSPermissions { get { return _bckAgtSetExclusiveNTFSPermissions; } set { _bckAgtSetExclusiveNTFSPermissions = value; } }
-        public string BackupAgentAdditionalNTFSFullcontrol { get { return _bckAgtAdditionalNTFSFullcontrol; } set { _bckAgtAdditionalNTFSFullcontrol = value; } }
-        public string BackupAgentAdditionalNTFSReadWrite { get { return _bckAgtAdditionalNTFSReadWrite; } set { _bckAgtAdditionalNTFSReadWrite = value; } }
+        public bool FilesAndFoldersSetExclusiveNTFSPermissions { get { return _bckAgtSetExclusiveNTFSPermissions; } set { _bckAgtSetExclusiveNTFSPermissions = value; } }
+        public string FilesAndFoldersAdditionalNTFSFullcontrol { get { return _bckAgtAdditionalNTFSFullcontrol; } set { _bckAgtAdditionalNTFSFullcontrol = value; } }
+        public string FilesAndFoldersAdditionalNTFSReadWrite { get { return _bckAgtAdditionalNTFSReadWrite; } set { _bckAgtAdditionalNTFSReadWrite = value; } }
 
         public bool EventLogActivated { get { return _eventLogActivated; } set { _eventLogActivated = value; } }
         public Logger.MessageSeverity EventLogSeverity { get { return _eventLogseverity; } set { _eventLogseverity = value; } }
@@ -485,30 +485,6 @@ namespace SmartSingularity.PstBackupSettings
                         IsBackupAgentBackupMethodDefine = _readSettingsFrom == SourceSettings.GPO;
                     }
 
-                    data = bckAgtKey.GetValue("SetExclusiveNTFSPermissions", null);
-                    if (data == null)
-                        BackupAgentSetExclusiveNTFSPermissions = false;
-                    else
-                    {
-                        BackupAgentSetExclusiveNTFSPermissions = ((int)data) == 1;
-                    }
-
-                    data = bckAgtKey.GetValue("AdditionalNTFSFullcontrol", null);
-                    if (data == null)
-                        BackupAgentAdditionalNTFSFullcontrol = String.Empty;
-                    else
-                    {
-                        BackupAgentAdditionalNTFSFullcontrol = data.ToString();
-                    }
-
-                    data = bckAgtKey.GetValue("AdditionalNTFSReadWrite", null);
-                    if (data == null)
-                        BackupAgentAdditionalNTFSReadWrite = String.Empty;
-                    else
-                    {
-                        BackupAgentAdditionalNTFSReadWrite = data.ToString();
-                    }
-
                     bckAgtKey.Close();
                 }
             }
@@ -611,6 +587,30 @@ namespace SmartSingularity.PstBackupSettings
                     {
                         FilesAndFoldersBackupPort = (int)data;
                         IsFilesAndFoldersBackupPortDefine = _readSettingsFrom == SourceSettings.GPO;
+                    }
+
+                    data = filesAndFoldersKey.GetValue("SetExclusiveNTFSPermissions", null);
+                    if (data == null)
+                        FilesAndFoldersSetExclusiveNTFSPermissions = false;
+                    else
+                    {
+                        FilesAndFoldersSetExclusiveNTFSPermissions = ((int)data) == 1;
+                    }
+
+                    data = filesAndFoldersKey.GetValue("AdditionalNTFSFullcontrol", null);
+                    if (data == null)
+                        FilesAndFoldersAdditionalNTFSFullcontrol = String.Empty;
+                    else
+                    {
+                        FilesAndFoldersAdditionalNTFSFullcontrol = data.ToString();
+                    }
+
+                    data = filesAndFoldersKey.GetValue("AdditionalNTFSReadWrite", null);
+                    if (data == null)
+                        FilesAndFoldersAdditionalNTFSReadWrite = String.Empty;
+                    else
+                    {
+                        FilesAndFoldersAdditionalNTFSReadWrite = data.ToString();
                     }
 
                     filesAndFoldersKey.Close();
