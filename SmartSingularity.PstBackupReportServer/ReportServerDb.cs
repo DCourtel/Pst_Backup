@@ -4,18 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using SmartSingularity.PstBackupReportServer;
-using Logger = SmartSingularity.PstBackupLogger.Logger;
 
-namespace SmartSingularity.PstBackupReportServerDb
+namespace SmartSingularity.PstBackupReportServer
 {
-    public class PstBackupReportServerDb
+    public class ReportServerDb
     {
         private string _dbPath = String.Empty;
         private SqlConnection _dbConnection = null;
         private SqlCommand _sqlCommand = null;
 
-        public PstBackupReportServerDb(string dbPath)
+        public ReportServerDb(string dbPath)
         {
             this._dbPath = dbPath;
         }
@@ -36,18 +34,19 @@ namespace SmartSingularity.PstBackupReportServerDb
         /// </summary>
         public void Disconnect()
         {
-            if (_sqlCommand != null)
+            try
             {
-                _sqlCommand.Dispose();
-            }
-            if (_dbConnection != null)
-            {
-                if (_dbConnection.State != System.Data.ConnectionState.Closed)
+                if (_sqlCommand != null)
+                {
+                    _sqlCommand.Dispose();
+                }
+                if (_dbConnection != null && _dbConnection.State != System.Data.ConnectionState.Closed)
                 {
                     _dbConnection.Close();
                     _dbConnection.Dispose();
                 }
             }
+            catch (Exception) { }
         }
 
         /// <summary>
@@ -143,7 +142,5 @@ namespace SmartSingularity.PstBackupReportServerDb
 
             _sqlCommand.ExecuteNonQuery();
         }
-
-
     }
 }

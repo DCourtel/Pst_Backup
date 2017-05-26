@@ -3,11 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Logger = SmartSingularity.PstBackupLogger.Logger;
 
 namespace SmartSingularity.PstBackupReportServer
 {
-    public class ReportServer : IReportServer
+    public class ReportServer : IReportServer, IDisposable
     {
+        private ReportServerDb _reportServerDb;
+
+        public ReportServer(string dbPath)
+        {
+            _reportServerDb = new ReportServerDb(dbPath);
+            _reportServerDb.Connect();
+        }
+
+        public void Dispose()
+        {
+            try
+            {
+                _reportServerDb.Disconnect();
+            }
+            catch (Exception) { }
+        }
+
         /// <summary>
         /// Register the result of a backup of a PST file into the database
         /// </summary>
@@ -24,7 +42,8 @@ namespace SmartSingularity.PstBackupReportServer
         /// <param name="client">All informations on the client computer</param>
         public void RegisterClient(Client client)
         {
-            //ToDo: Implement this method
+            Logger.Write(30020, $"Registering the client {client.ComputerName}\\{client.Username}", Logger.MessageSeverity.Debug);
+            _reportServerDb.RegisterClient(client);
         }
 
         /// <summary>

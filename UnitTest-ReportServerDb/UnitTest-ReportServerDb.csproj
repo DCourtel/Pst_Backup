@@ -56,10 +56,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SmartSingularity.PstBackupReportServerDb\SmartSingularity.PstBackupReportServerDb.csproj">
-      <Project>{66f1de17-27b9-493d-b44e-9003a9c97048}</Project>
-      <Name>SmartSingularity.PstBackupReportServerDb</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SmartSingularity.PstBackupReportServer\SmartSingularity.PstBackupReportServer.csproj">
       <Project>{1f08865b-0db8-491a-92f4-9e2b364d0406}</Project>
       <Name>SmartSingularity.PstBackupReportServer</Name>

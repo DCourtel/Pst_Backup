@@ -48,6 +48,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="IReportServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportServerDb.cs" />
     <Compile Include="PstFile.cs" />
     <Compile Include="ReportServer.cs" />
   </ItemGroup>
@@ -58,6 +59,10 @@
     <ProjectReference Include="..\SmartSingularity.PstBackupEngine\SmartSingularity.PstBackupEngine.csproj">
       <Project>{b3175d98-927b-4566-8bb7-f915d1a17664}</Project>
       <Name>SmartSingularity.PstBackupEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartSingularity.PstBackupLogger\SmartSingularity.PstBackupLogger.csproj">
+      <Project>{9abbf07f-0d27-4f25-bac9-c68728c43876}</Project>
+      <Name>SmartSingularity.PstBackupLogger</Name>
     </ProjectReference>
     <ProjectReference Include="..\SmartSingularity.PstBackupSettings\SmartSingularity.PstBackupSettings.csproj">
       <Project>{8f64d51c-1790-4648-b451-8c546c50d18f}</Project>

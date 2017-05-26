@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartSingularity.PstBackupReportServer;
-using SUT = SmartSingularity.PstBackupReportServerDb.PstBackupReportServerDb;
+using SUT = SmartSingularity.PstBackupReportServer.ReportServerDb;
 
 namespace UnitTest_ReportServerDb
 {
