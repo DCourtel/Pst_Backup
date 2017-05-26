@@ -42,7 +42,7 @@ namespace SmartSingularity.PstBackupReportServer
         /// <param name="client">All informations on the client computer</param>
         public void RegisterClient(Client client)
         {
-            Logger.Write(30020, $"Registering the client {client.ComputerName}\\{client.Username}", Logger.MessageSeverity.Debug);
+            Logger.Write(30020, $"Registering the client {client.ComputerName}\\{client.Username} [{client.Version.ToString()}]", Logger.MessageSeverity.Debug);
             _reportServerDb.RegisterClient(client);
         }
 

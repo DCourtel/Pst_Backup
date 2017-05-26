@@ -16,6 +16,16 @@ namespace SmartSingularity.PstBackupReportServer
         public ReportServerDb(string dbPath)
         {
             this._dbPath = dbPath;
+            _dbConnection = new SqlConnection($"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PstBackup;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;AttachDbFileName = {_dbPath};");
+            _sqlCommand = new SqlCommand(String.Empty, _dbConnection);
+        }
+
+        /// <summary>
+        /// Gets the state of the connection
+        /// </summary>
+        public System.Data.ConnectionState ConnectionState
+        {
+            get { return _dbConnection.State; }
         }
 
         /// <summary>
@@ -23,9 +33,8 @@ namespace SmartSingularity.PstBackupReportServer
         /// </summary>
         public void Connect()
         {
-            Disconnect();
-            _dbConnection = new SqlConnection($"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PstBackup;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;AttachDbFileName = {_dbPath};");
-            _sqlCommand = new SqlCommand(String.Empty, _dbConnection);
+            if (ConnectionState == System.Data.ConnectionState.Open)
+                Disconnect();
             _dbConnection.Open();
         }
 
