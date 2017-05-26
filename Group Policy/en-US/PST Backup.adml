@@ -22,7 +22,7 @@
       <string id="WanSettings_Help">This policy setting allows you to prevent PST Backup to save files through a slow link (WAN Link for example).
 
         If you enable this policy setting, the archive will not be copied if the IPv4 destination address is not in the same subnet as the local IPv4 address. 
-        You can also specify additional subnets for backup. If the computer is in one of the specified subnets, the backup can be done.
+        You can also specify additional subnets for backup. If the computer is in one of the specified subnets, the backup will occurs.
 
         If you disable this policy setting, files will be copied even if the link is slow.
 
@@ -34,16 +34,16 @@
       <string id="BackupMethod">Backup method to use.</string>
       <string id="BackupMethod_Help">This policy setting allows you to define which backup is used.
       
-        if you enable this policy setting, you can choose if PST Backup make a Full backup each time or if it performs a Differential backup.
+        If you enable this policy setting, you can choose if PST Backup makes a Full backup each time or if it performs a Differential backup.
 
-        if you disable or do not configure this policy setting, users can modify this settings themselves locally on their computer.
+        If you disable or do not configure this policy setting, users can modify this setting themselves locally on their computer.
       </string>
       <string id="BackupMethodFull">Full</string>
       <string id="BackupMethodDifferential">Differential</string>
 
       <!-- Set Exclusive NTFS Permissions -->
       <string id="SetExclusiveNTFSPermissions">Define exclusive NTFS permissions on the destination folder.</string>
-      <string id="SetExclusiveNTFSPermissions_Help">This policy setting allows you to cut inheritance and position exclusive NTFS Read/Write permission for the user on the destination folder.
+      <string id="SetExclusiveNTFSPermissions_Help">This policy setting allows you to cut inheritance and set exclusive NTFS Read/Write permission for the current user on the destination folder.
 
         If you enable this policy setting, when saving, if the destination folder does not exists, it will be created regardless of the NTFS permissions inheritance. 
         The current user will have the Read/Write permission. The account "NT AUTHORITY\SYSTEM" will have Full Control rights.
@@ -102,7 +102,7 @@
         If you enable this policy setting, you will be able to choose if backups are sent to a folder or to a dedicated Backup Server.
         Choose the type of destination in the dropdown list.
         If you choose «File System» as the destination, you must provide the path to the folder as an UNC path.
-        %ComputerName% and %UserLogin% variables are automatically resolved by clients computers.
+        %ComputerName% and %UserLogin% variables are automatically resolved by clients.
 
         If you choose «Backup Server» as the destination,you must provide the IP address or the name of the dedicated Backup Server as well as the port.
 
@@ -155,7 +155,7 @@
       <!-- Set Exclusive NTFS Permissions -->
       <presentation id="SetExclusiveNTFSPermissions">
         <textBox refId="TXT_AdditionalNTFSFullcontrol">
-          <label>Add Full Control rights to these accounts (eg : domain admins;IT Service@Domain.local;Domain\Backup admins): </label>
+          <label>Add Full Control rights for these accounts (eg : domain admins;IT Service@Domain.local;Domain\Backup admins): </label>
         </textBox>
         <textBox refId="TXT_AdditionalNTFSReadWrite">
           <label>Add Read/Write rights for these accounts:</label>

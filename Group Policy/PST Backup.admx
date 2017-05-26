@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<policyDefinitions xmlns:xsd="http://www.microsoft.com/GroupPolicy/PolicyDefinitions/PolicyDefinitions.xsd"
-                   xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions/PolicyDefinitions.xsd"
-                   revision="1.0"
-                   schemaVersion="1.0" >
+<policyDefinitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                   revision="1.0" 
+                   schemaVersion="1.0" 
+                   xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions" >
   <policyNamespaces>
     <target prefix="PstBackup" namespace="SmartSingularity.Policies.PstBackup" />
     <using prefix="windows" namespace="Microsoft.Policies.Windows" />
@@ -289,8 +290,6 @@
         <decimal id="DEC_DayOfMonth" valueName="DayOfMonth" minValue="1" maxValue="31" required="false" />
       </elements>
     </policy>
-
-
 
   </policies>
 
