@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 namespace SmartSingularity.PstBackupReportServer
 {
     [DataContract]
-    public class Client
+    public class Client:IEquatable<Client>
     {
         /// <summary>
         /// Gets or Sets the unique ID of the client
@@ -39,5 +39,13 @@ namespace SmartSingularity.PstBackupReportServer
         /// </summary>
         [DataMember]
         public DateTime LastContactDate { get; set; }
+
+        public bool Equals(Client other)
+        {
+            return String.Compare(this.Id, other.Id, true) == 0 &&
+                this.Version.Equals(other.Version) &&
+                String.Compare(this.ComputerName, other.ComputerName, true) == 0 &&
+                String.Compare(this.Username, other.Username, true) == 0;
+        }
     }
 }
