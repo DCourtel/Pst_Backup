@@ -24,6 +24,7 @@ namespace SmartSingularity.PstBackupReportServer
         /// <param name="client">All informations on the client computer</param>
         public void RegisterClient(Client client)
         {
+            //ToDo: Implement this method
         }
 
         /// <summary>

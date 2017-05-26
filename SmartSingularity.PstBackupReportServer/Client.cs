@@ -33,5 +33,11 @@ namespace SmartSingularity.PstBackupReportServer
         /// </summary>
         [DataMember]
         public string Username { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the Date Time of the last contact
+        /// </summary>
+        [DataMember]
+        public DateTime LastContactDate { get; set; }
     }
 }
