@@ -51,7 +51,7 @@ namespace SmartSingularity.PstBackupAgent
             {
                 ReportService.Client client = new ReportService.Client()
                 {
-                    Id = _localSettings.ClientID,
+                    Id = _localSettings.ClientId,
                     ComputerName = System.Net.Dns.GetHostEntry("").HostName,
                     Username = String.Concat(Environment.UserName, ".", Environment.UserDomainName),
                     Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version
@@ -62,6 +62,33 @@ namespace SmartSingularity.PstBackupAgent
             {
                 Logger.Write(20028, "An error occurs while trying to register/update client on report server\r\n" + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
             }
+        }
+
+        private void RegisterPstFiles(List<PSTRegistryEntry> pstFilesToRegister, string clientId)
+        {
+            foreach (PSTRegistryEntry regEntry in pstFilesToRegister)
+            {
+                try
+                {
+                    ReportService.PstFile pstFile = GetPstFile(regEntry);
+                    proxy.RegisterPstFile(clientId, pstFile);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Write(20029, "An error occurs while trying to register a PstFile\r\n" + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
+                }
+            }
+        }
+
+        private ReportService.PstFile GetPstFile(PSTRegistryEntry regEntry)
+        {
+            ReportService.PstFile pstFile = new ReportService.PstFile()
+            {
+                LocaPath = regEntry.SourcePath,
+                IsSetToBackup = regEntry.ToBackup,
+                Size = new System.IO.FileInfo(regEntry.SourcePath).Length
+            };
+            return pstFile;
         }
 
         public void Backup()
@@ -86,6 +113,9 @@ namespace SmartSingularity.PstBackupAgent
                     }
 #endif
                     (_bckEngine as CoreBackupEngine).SelectPstFilesToSave(allPstFiles, out pstFilesToSave, out pstFilesToNotSave);
+
+                    RegisterPstFiles(pstFilesToSave, _localSettings.ClientId);
+                    RegisterPstFiles(pstFilesToNotSave, _localSettings.ClientId);
                     pstFilesToSave.Sort();
                     DisplayFileList(pstFilesToSave);
                     if (pstFilesToSave.Count > 0)

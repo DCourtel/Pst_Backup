@@ -11,6 +11,12 @@ namespace SmartSingularity.PstBackupReportServer
     {
         private ReportServerDb _reportServerDb;
 
+        public ReportServer()
+        {
+            _reportServerDb = new ReportServerDb(@"E:\Pst Backup\Test Files\ReportServerDb\Test-PstBackup.mdf");
+            _reportServerDb.Connect();
+        }
+
         public ReportServer(string dbPath)
         {
             _reportServerDb = new ReportServerDb(dbPath);
@@ -47,12 +53,14 @@ namespace SmartSingularity.PstBackupReportServer
         }
 
         /// <summary>
-        /// Register, in the database, all informations on PST files mounted in Outlook
+        /// Register, in the database, all informations on the PST file mounted in Outlook
         /// </summary>
-        /// <param name="pstFiles">A list of all PST files</param>
-        public void RegisterPstFiles(List<PstFile> pstFiles)
+        /// <param name="pstFile">A PST file</param>
+        /// <param name="backupSession">Informations on the backup session</param>
+        public void RegisterPstFile(string clientId, PstFile pstFile)
         {
-            //ToDo: Implement this method   
+            Logger.Write(30021, $"Registering the PST file {pstFile.LocaPath}", Logger.MessageSeverity.Debug);
+            _reportServerDb.RegisterPstFile(clientId, pstFile);
         }
     }
 }

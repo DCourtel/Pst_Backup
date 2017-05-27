@@ -16,11 +16,11 @@
   <wsdl:message name="IReportServer_RegisterClient_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegisterClientResponse" />
   </wsdl:message>
-  <wsdl:message name="IReportServer_RegisterPstFiles_InputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterPstFiles" />
+  <wsdl:message name="IReportServer_RegisterPstFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterPstFile" />
   </wsdl:message>
-  <wsdl:message name="IReportServer_RegisterPstFiles_OutputMessage">
-    <wsdl:part name="parameters" element="tns:RegisterPstFilesResponse" />
+  <wsdl:message name="IReportServer_RegisterPstFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterPstFileResponse" />
   </wsdl:message>
   <wsdl:message name="IReportServer_RegisterBackupResult_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterBackupResult" />
@@ -33,9 +33,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IReportServer/RegisterClient" message="tns:IReportServer_RegisterClient_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IReportServer/RegisterClientResponse" message="tns:IReportServer_RegisterClient_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="RegisterPstFiles">
-      <wsdl:input wsaw:Action="http://tempuri.org/IReportServer/RegisterPstFiles" message="tns:IReportServer_RegisterPstFiles_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IReportServer/RegisterPstFilesResponse" message="tns:IReportServer_RegisterPstFiles_OutputMessage" />
+    <wsdl:operation name="RegisterPstFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReportServer/RegisterPstFile" message="tns:IReportServer_RegisterPstFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReportServer/RegisterPstFileResponse" message="tns:IReportServer_RegisterPstFile_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RegisterBackupResult">
       <wsdl:input wsaw:Action="http://tempuri.org/IReportServer/RegisterBackupResult" message="tns:IReportServer_RegisterBackupResult_InputMessage" />
@@ -53,8 +53,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="RegisterPstFiles">
-      <soap:operation soapAction="http://tempuri.org/IReportServer/RegisterPstFiles" style="document" />
+    <wsdl:operation name="RegisterPstFile">
+      <soap:operation soapAction="http://tempuri.org/IReportServer/RegisterPstFile" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

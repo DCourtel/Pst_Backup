@@ -124,7 +124,7 @@ namespace SmartSingularity.PstBackupSettings
 
         #region intenal properties
 
-        public string ClientID { get { return _clientID; } set { _clientID = value; } }
+        public string ClientId { get { return _clientID; } set { _clientID = value; } }
 
         public bool BackupAgentDontBackupThroughtWan { get { return _bckAgtDontBackupThroughtWan; } set { _bckAgtDontBackupThroughtWan = value; } }
         public string BackupAgentAdditionalSubnets { get { return _bckAgtAdditionalSubnets; } set { _bckAgtAdditionalSubnets = value; } }
@@ -366,7 +366,7 @@ namespace SmartSingularity.PstBackupSettings
                     baseKey = CreateBaseKey();
                 if (baseKey != null)
                 {
-                    ClientID = (_readSettingsFrom == SourceSettings.Local) ? GetClientID(baseKey) : String.Empty;
+                    ClientId = (_readSettingsFrom == SourceSettings.Local) ? GetClientID(baseKey) : String.Empty;
 
                     RegistryKey settingsKey;
                     settingsKey = baseKey.OpenSubKey("Settings", _readSettingsFrom == SourceSettings.Local);

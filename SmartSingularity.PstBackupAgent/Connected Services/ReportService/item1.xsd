@@ -7,26 +7,17 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ComputerName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastContactDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="Version" nillable="true" type="q1:Version" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Client" nillable="true" type="tns:Client" />
-  <xs:complexType name="ArrayOfPstFile">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="PstFile" nillable="true" type="tns:PstFile" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPstFile" nillable="true" type="tns:ArrayOfPstFile" />
   <xs:complexType name="PstFile">
     <xs:sequence>
-      <xs:element minOccurs="0" name="ChunksSent" type="xs:int" />
-      <xs:element minOccurs="0" name="CompressedSize" type="xs:long" />
-      <xs:element minOccurs="0" name="IsCompressed" type="xs:boolean" />
-      <xs:element minOccurs="0" name="IsScheduled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSetToBackup" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastSuccessfulBackup" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="LocaPath" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NeedBackup" type="xs:boolean" />
-      <xs:element minOccurs="0" name="RemotePath" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Size" type="xs:long" />
     </xs:sequence>
   </xs:complexType>
@@ -34,10 +25,15 @@
   <xs:complexType name="BackupSession">
     <xs:sequence>
       <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupSettings" minOccurs="0" name="BackupMethod" type="q2:ApplicationSettings.BackupMethod" />
+      <xs:element minOccurs="0" name="ChunkCount" type="xs:int" />
+      <xs:element minOccurs="0" name="CompressedSize" type="xs:long" />
       <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupSettings" minOccurs="0" name="DestinationType" type="q3:ApplicationSettings.BackupDestinationType" />
       <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupEngine" minOccurs="0" name="ErrorCode" type="q4:BackupResultInfo.BackupResult" />
       <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
-      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupEngine" minOccurs="0" name="Result" type="q4:BackupResultInfo.BackupResult" />
+      <xs:element minOccurs="0" name="IsCompressed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSchedule" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RemotePath" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>

@@ -129,7 +129,7 @@ namespace SmartSingularity.PstBackupReportServer
 
         private void RegisterNewClient(Client client)
         {
-            DateTime justNow = DateTime.Now.ToUniversalTime();
+            DateTime justNow = DateTime.UtcNow;
 
             _sqlCommand.CommandText = $"INSERT INTO tbClients VALUES ('{client.Id}'," +
                 $"'{client.Version.ToString()}'," +
@@ -149,6 +149,78 @@ namespace SmartSingularity.PstBackupReportServer
                 $"LastContactDate='{client.LastContactDate.ToString("yyyyMMdd HH:mm:ss")}' " +
                 $"WHERE ClientID LIKE '{client.Id}';";
 
+            _sqlCommand.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Insert the PST file into the database if the PST file do not already exists, otherwise, update informations
+        /// </summary>
+        /// <param name="clientId">Unique ID of the client that own the PST file.</param>
+        /// <param name="pstFile">Informations on the PST file.</param>
+        /// <param name="bckSession">Informations on the backup session.</param>
+        public void RegisterPstFile(string clientId, PstFile pstFile)
+        {
+            if (IsPstFileExists(clientId, pstFile.LocaPath))
+                UpdatePstFileInfo(clientId, pstFile);
+            else
+                RegisterNewPstFile(clientId, pstFile);
+        }
+
+        /// <summary>
+        /// Checks whether or not the PST file is registered in the database.
+        /// </summary>
+        /// <param name="clientId">Unique ID of the client that own the PST file.</param>
+        /// <param name="localPath">Path to the PST file on the client computer.</param>
+        /// <returns>Returns true if the PST file have been found in the database.</returns>
+        public bool IsPstFileExists(string clientId, string localPath)
+        {
+            bool result = false;
+            _sqlCommand.CommandText = $"SELECT * FROM tbPstFiles WHERE ClientID LIKE '{clientId}' AND LocalPath LIKE '{localPath}';";
+
+            using (SqlDataReader reader = _sqlCommand.ExecuteReader())
+            {
+                result = reader.HasRows;
+            }
+
+            return result;
+        }
+        
+        /// <summary>
+        /// Retrieves the unique Id of a PST file from the clientId and the localPath.
+        /// </summary>
+        /// <param name="clientId">Unique Id of the client that own the PST file.</param>
+        /// <param name="localPath">Path to the PST file on the client computer.</param>
+        /// <returns></returns>
+        public string GetPstFileId(string clientId, string localPath)
+        {
+            _sqlCommand.CommandText = $"SELECT * FROM tbPstFiles WHERE ClientId LIKE '{clientId}' AND LocalPath LIKE '{localPath}';";
+            string pstFileId = String.Empty;
+
+            using (SqlDataReader reader = _sqlCommand.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    if (reader.Read())
+                    {
+                        pstFileId = reader.GetString(2);
+                    }
+                }
+            }
+
+            return pstFileId;
+        }
+
+        private void RegisterNewPstFile(string clientId, PstFile pstFile)
+        {
+            _sqlCommand.CommandText = $"INSERT INTO tbPstFiles VALUES ('{clientId}','{pstFile.LocaPath}',{Guid.NewGuid()},{(pstFile.IsSetToBackup?'1':'0')},'{pstFile.Size}',{DBNull.Value});";
+            _sqlCommand.ExecuteNonQuery();
+        }
+
+        private void UpdatePstFileInfo(string clientId, PstFile pstFile)
+        {
+            string pstFileId = GetPstFileId(clientId, pstFile.LocaPath);
+
+            _sqlCommand.CommandText = $"UPDATE tbPstFiles SET IsSetToBackup={(pstFile.IsSetToBackup ? '1' : '0')},Size='{pstFile.Size}';";
             _sqlCommand.ExecuteNonQuery();
         }
     }

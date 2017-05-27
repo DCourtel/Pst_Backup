@@ -29,6 +29,9 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         private string IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime LastContactDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UsernameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -66,6 +69,19 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
                 if ((object.ReferenceEquals(this.IdField, value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime LastContactDate {
+            get {
+                return this.LastContactDateField;
+            }
+            set {
+                if ((this.LastContactDateField.Equals(value) != true)) {
+                    this.LastContactDateField = value;
+                    this.RaisePropertyChanged("LastContactDate");
                 }
             }
         }
@@ -116,25 +132,13 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ChunksSentField;
+        private bool IsSetToBackupField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long CompressedSizeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsCompressedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsScheduledField;
+        private System.Nullable<System.DateTime> LastSuccessfulBackupField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LocaPathField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool NeedBackupField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RemotePathField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long SizeField;
@@ -150,53 +154,27 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ChunksSent {
+        public bool IsSetToBackup {
             get {
-                return this.ChunksSentField;
+                return this.IsSetToBackupField;
             }
             set {
-                if ((this.ChunksSentField.Equals(value) != true)) {
-                    this.ChunksSentField = value;
-                    this.RaisePropertyChanged("ChunksSent");
+                if ((this.IsSetToBackupField.Equals(value) != true)) {
+                    this.IsSetToBackupField = value;
+                    this.RaisePropertyChanged("IsSetToBackup");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public long CompressedSize {
+        public System.Nullable<System.DateTime> LastSuccessfulBackup {
             get {
-                return this.CompressedSizeField;
+                return this.LastSuccessfulBackupField;
             }
             set {
-                if ((this.CompressedSizeField.Equals(value) != true)) {
-                    this.CompressedSizeField = value;
-                    this.RaisePropertyChanged("CompressedSize");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsCompressed {
-            get {
-                return this.IsCompressedField;
-            }
-            set {
-                if ((this.IsCompressedField.Equals(value) != true)) {
-                    this.IsCompressedField = value;
-                    this.RaisePropertyChanged("IsCompressed");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsScheduled {
-            get {
-                return this.IsScheduledField;
-            }
-            set {
-                if ((this.IsScheduledField.Equals(value) != true)) {
-                    this.IsScheduledField = value;
-                    this.RaisePropertyChanged("IsScheduled");
+                if ((this.LastSuccessfulBackupField.Equals(value) != true)) {
+                    this.LastSuccessfulBackupField = value;
+                    this.RaisePropertyChanged("LastSuccessfulBackup");
                 }
             }
         }
@@ -210,32 +188,6 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
                 if ((object.ReferenceEquals(this.LocaPathField, value) != true)) {
                     this.LocaPathField = value;
                     this.RaisePropertyChanged("LocaPath");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool NeedBackup {
-            get {
-                return this.NeedBackupField;
-            }
-            set {
-                if ((this.NeedBackupField.Equals(value) != true)) {
-                    this.NeedBackupField = value;
-                    this.RaisePropertyChanged("NeedBackup");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RemotePath {
-            get {
-                return this.RemotePathField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RemotePathField, value) != true)) {
-                    this.RemotePathField = value;
-                    this.RaisePropertyChanged("RemotePath");
                 }
             }
         }
@@ -276,16 +228,31 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         private SmartSingularity.PstBackupSettings.ApplicationSettings.BackupMethod BackupMethodField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ChunkCountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long CompressedSizeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private SmartSingularity.PstBackupSettings.ApplicationSettings.BackupDestinationType DestinationTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime EndTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SmartSingularity.PstBackupEngine.BackupResultInfo.BackupResult ErrorCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ErrorMessageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SmartSingularity.PstBackupEngine.BackupResultInfo.BackupResult ResultField;
+        private bool IsCompressedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsScheduleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RemotePathField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime StartTimeField;
@@ -309,6 +276,32 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
                 if ((this.BackupMethodField.Equals(value) != true)) {
                     this.BackupMethodField = value;
                     this.RaisePropertyChanged("BackupMethod");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ChunkCount {
+            get {
+                return this.ChunkCountField;
+            }
+            set {
+                if ((this.ChunkCountField.Equals(value) != true)) {
+                    this.ChunkCountField = value;
+                    this.RaisePropertyChanged("ChunkCount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long CompressedSize {
+            get {
+                return this.CompressedSizeField;
+            }
+            set {
+                if ((this.CompressedSizeField.Equals(value) != true)) {
+                    this.CompressedSizeField = value;
+                    this.RaisePropertyChanged("CompressedSize");
                 }
             }
         }
@@ -340,6 +333,19 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public SmartSingularity.PstBackupEngine.BackupResultInfo.BackupResult ErrorCode {
+            get {
+                return this.ErrorCodeField;
+            }
+            set {
+                if ((this.ErrorCodeField.Equals(value) != true)) {
+                    this.ErrorCodeField = value;
+                    this.RaisePropertyChanged("ErrorCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string ErrorMessage {
             get {
                 return this.ErrorMessageField;
@@ -353,14 +359,40 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SmartSingularity.PstBackupEngine.BackupResultInfo.BackupResult Result {
+        public bool IsCompressed {
             get {
-                return this.ResultField;
+                return this.IsCompressedField;
             }
             set {
-                if ((this.ResultField.Equals(value) != true)) {
-                    this.ResultField = value;
-                    this.RaisePropertyChanged("Result");
+                if ((this.IsCompressedField.Equals(value) != true)) {
+                    this.IsCompressedField = value;
+                    this.RaisePropertyChanged("IsCompressed");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSchedule {
+            get {
+                return this.IsScheduleField;
+            }
+            set {
+                if ((this.IsScheduleField.Equals(value) != true)) {
+                    this.IsScheduleField = value;
+                    this.RaisePropertyChanged("IsSchedule");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RemotePath {
+            get {
+                return this.RemotePathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RemotePathField, value) != true)) {
+                    this.RemotePathField = value;
+                    this.RaisePropertyChanged("RemotePath");
                 }
             }
         }
@@ -398,11 +430,11 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportServer/RegisterClient", ReplyAction="http://tempuri.org/IReportServer/RegisterClientResponse")]
         System.Threading.Tasks.Task RegisterClientAsync(SmartSingularity.PstBackupAgent.ReportService.Client client);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportServer/RegisterPstFiles", ReplyAction="http://tempuri.org/IReportServer/RegisterPstFilesResponse")]
-        void RegisterPstFiles(SmartSingularity.PstBackupAgent.ReportService.PstFile[] pstFiles);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportServer/RegisterPstFile", ReplyAction="http://tempuri.org/IReportServer/RegisterPstFileResponse")]
+        void RegisterPstFile(string clientId, SmartSingularity.PstBackupAgent.ReportService.PstFile pstFile);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportServer/RegisterPstFiles", ReplyAction="http://tempuri.org/IReportServer/RegisterPstFilesResponse")]
-        System.Threading.Tasks.Task RegisterPstFilesAsync(SmartSingularity.PstBackupAgent.ReportService.PstFile[] pstFiles);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportServer/RegisterPstFile", ReplyAction="http://tempuri.org/IReportServer/RegisterPstFileResponse")]
+        System.Threading.Tasks.Task RegisterPstFileAsync(string clientId, SmartSingularity.PstBackupAgent.ReportService.PstFile pstFile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportServer/RegisterBackupResult", ReplyAction="http://tempuri.org/IReportServer/RegisterBackupResultResponse")]
         void RegisterBackupResult(SmartSingularity.PstBackupAgent.ReportService.PstFile pstFile, SmartSingularity.PstBackupAgent.ReportService.BackupSession backupSession);
@@ -446,12 +478,12 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
             return base.Channel.RegisterClientAsync(client);
         }
         
-        public void RegisterPstFiles(SmartSingularity.PstBackupAgent.ReportService.PstFile[] pstFiles) {
-            base.Channel.RegisterPstFiles(pstFiles);
+        public void RegisterPstFile(string clientId, SmartSingularity.PstBackupAgent.ReportService.PstFile pstFile) {
+            base.Channel.RegisterPstFile(clientId, pstFile);
         }
         
-        public System.Threading.Tasks.Task RegisterPstFilesAsync(SmartSingularity.PstBackupAgent.ReportService.PstFile[] pstFiles) {
-            return base.Channel.RegisterPstFilesAsync(pstFiles);
+        public System.Threading.Tasks.Task RegisterPstFileAsync(string clientId, SmartSingularity.PstBackupAgent.ReportService.PstFile pstFile) {
+            return base.Channel.RegisterPstFileAsync(clientId, pstFile);
         }
         
         public void RegisterBackupResult(SmartSingularity.PstBackupAgent.ReportService.PstFile pstFile, SmartSingularity.PstBackupAgent.ReportService.BackupSession backupSession) {

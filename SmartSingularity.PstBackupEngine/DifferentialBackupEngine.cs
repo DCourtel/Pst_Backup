@@ -60,7 +60,7 @@ namespace SmartSingularity.PstBackupEngine
                     int fileId = CheckPrerequisitesForSmbBackup(pstFileToSave.SourcePath);
                     string backupFile = _clientDb.GetBackupFilePath(pstFileToSave.SourcePath);
                     List<string> remoteChunks = _clientDb.GetHashes(fileId);
-                    backupResult.SentChunks = SynchonizeLocalAndRemoteFile(fileId, pstFileToSave.SourcePath, backupFile, remoteChunks);
+                    backupResult.ChunkCount = SynchonizeLocalAndRemoteFile(fileId, pstFileToSave.SourcePath, backupFile, remoteChunks);
 
                     string backupFileNewName = FileSystem.GetNewName(backupFile);
                     FileSystem.RenameFile(backupFile, backupFileNewName);

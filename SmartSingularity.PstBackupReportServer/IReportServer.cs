@@ -14,7 +14,7 @@ namespace SmartSingularity.PstBackupReportServer
         void RegisterClient(Client client);
 
         [OperationContract]
-        void RegisterPstFiles(List<PstFile> pstFiles);
+        void RegisterPstFile(string clientId, PstFile pstFile);
 
         [OperationContract]
         void RegisterBackupResult(PstFile pstFile, BackupSession backupSession);

@@ -13,8 +13,9 @@ namespace SmartSingularity.PstBackupEngine
         {
             NotStarted,
             Success,
+            Canceled,
             Failed,
-            Canceled
+            Postponed
         }
 
         public BackupResultInfo(PSTRegistryEntry pstFile)
@@ -22,7 +23,7 @@ namespace SmartSingularity.PstBackupEngine
             System.IO.FileInfo fileToSave = new System.IO.FileInfo(pstFile.SourcePath);
             LocalPath = fileToSave.FullName;
             FileSize = fileToSave.Length;
-            SentChunks = 0;
+            ChunkCount = 0;
             BackupStartTime = DateTime.UtcNow;
             Result = BackupResult.NotStarted;
             ErrorMessage = "An unknown error occurs.";
@@ -58,7 +59,7 @@ namespace SmartSingularity.PstBackupEngine
         /// <summary>
         /// Gets or Sets the number of chunks that have been sent to the remote destination in case of a differential backup
         /// </summary>
-        public int SentChunks { get; set; }
+        public int ChunkCount { get; set; }
 
         /// <summary>
         /// Gets or Sets if the PST file have been compressed during the backup
