@@ -8,13 +8,19 @@ using System.Runtime.Serialization;
 namespace SmartSingularity.PstBackupReportServer
 {
     [DataContract]
-    public class PstFile
+    public class PstFile:IEquatable<PstFile>
     {
         /// <summary>
         /// Gets or Sets the full path to the PST file on the client computer
         /// </summary>
         [DataMember]
-        public string LocaPath { get; set; }
+        public string LocalPath { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the unique Id of the file.
+        /// </summary>
+        [DataMember]
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Gets or Sets if the PST file is set to be backup
@@ -33,5 +39,14 @@ namespace SmartSingularity.PstBackupReportServer
         /// </summary>
         [DataMember]
         public DateTime? LastSuccessfulBackup {get; set;}
+
+        public bool Equals(PstFile other)
+        {
+            return (String.Compare(this.LocalPath, other.LocalPath, false)==0 && 
+                this.Id.Equals(other.Id) && 
+                this.IsSetToBackup == other.IsSetToBackup && 
+                this.Size == other.Size &&
+                this.LastSuccessfulBackup == other.LastSuccessfulBackup);
+        }
     }
 }

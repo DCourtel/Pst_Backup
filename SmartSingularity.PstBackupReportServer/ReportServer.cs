@@ -59,7 +59,7 @@ namespace SmartSingularity.PstBackupReportServer
         /// <param name="backupSession">Informations on the backup session</param>
         public void RegisterPstFile(string clientId, PstFile pstFile)
         {
-            Logger.Write(30021, $"Registering the PST file {pstFile.LocaPath}", Logger.MessageSeverity.Debug);
+            Logger.Write(30021, $"Registering the PST file {pstFile.LocalPath}", Logger.MessageSeverity.Debug);
             _reportServerDb.RegisterPstFile(clientId, pstFile);
         }
     }

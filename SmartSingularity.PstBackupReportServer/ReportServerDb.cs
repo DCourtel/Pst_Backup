@@ -76,7 +76,7 @@ namespace SmartSingularity.PstBackupReportServer
         /// <param name="client">Client to delete.</param>
         public void DeleteClient(Client client)
         {
-            _sqlCommand.CommandText = $"DELETE FROM tbClients WHERE ClientID LIKE '{client.Id}';";
+            _sqlCommand.CommandText = $"DELETE FROM tbClients WHERE Id LIKE '{client.Id}';";
 
             _sqlCommand.ExecuteNonQuery();
         }
@@ -89,7 +89,7 @@ namespace SmartSingularity.PstBackupReportServer
         public bool IsClientExists(Client client)
         {
             bool result = false;
-            _sqlCommand.CommandText = $"SELECT * FROM tbClients WHERE ClientId LIKE '{client.Id}';";
+            _sqlCommand.CommandText = $"SELECT * FROM tbClients WHERE Id LIKE '{client.Id}';";
 
             using (SqlDataReader reader = _sqlCommand.ExecuteReader())
             {
@@ -106,7 +106,7 @@ namespace SmartSingularity.PstBackupReportServer
         /// <returns>Returns an instance of the client.</returns>
         public Client GetClient(string clientId)
         {
-            _sqlCommand.CommandText = $"SELECT * FROM tbClients WHERE ClientId LIKE '{clientId}';";
+            _sqlCommand.CommandText = $"SELECT * FROM tbClients WHERE Id LIKE '{clientId}';";
             Client client = new Client();
 
             using (SqlDataReader reader = _sqlCommand.ExecuteReader())
@@ -143,11 +143,11 @@ namespace SmartSingularity.PstBackupReportServer
         private void UpdateClientInfo(Client client)
         {
             _sqlCommand.CommandText = $"UPDATE tbClients SET " +
-                $"ClientVersion='{client.Version.ToString()}', " +
+                $"Version='{client.Version.ToString()}', " +
                 $"ComputerName='{client.ComputerName}', " +
                 $"UserName='{client.Username}', " +
                 $"LastContactDate='{client.LastContactDate.ToString("yyyyMMdd HH:mm:ss")}' " +
-                $"WHERE ClientID LIKE '{client.Id}';";
+                $"WHERE Id LIKE '{client.Id}';";
 
             _sqlCommand.ExecuteNonQuery();
         }
@@ -160,7 +160,7 @@ namespace SmartSingularity.PstBackupReportServer
         /// <param name="bckSession">Informations on the backup session.</param>
         public void RegisterPstFile(string clientId, PstFile pstFile)
         {
-            if (IsPstFileExists(clientId, pstFile.LocaPath))
+            if (IsPstFileExists(clientId, pstFile.LocalPath))
                 UpdatePstFileInfo(clientId, pstFile);
             else
                 RegisterNewPstFile(clientId, pstFile);
@@ -184,17 +184,18 @@ namespace SmartSingularity.PstBackupReportServer
 
             return result;
         }
-        
+
         /// <summary>
-        /// Retrieves the unique Id of a PST file from the clientId and the localPath.
+        /// Retrieves informations on a PST file from the clientId and the localPath.
         /// </summary>
-        /// <param name="clientId">Unique Id of the client that own the PST file.</param>
-        /// <param name="localPath">Path to the PST file on the client computer.</param>
+        /// <param name="clientId"></param>
+        /// <param name="localPath"></param>
         /// <returns></returns>
-        public string GetPstFileId(string clientId, string localPath)
+        public PstFile GetPstFile(string clientId, string localPath)
         {
+            PstFile pstFile = new PstFile();
+
             _sqlCommand.CommandText = $"SELECT * FROM tbPstFiles WHERE ClientId LIKE '{clientId}' AND LocalPath LIKE '{localPath}';";
-            string pstFileId = String.Empty;
 
             using (SqlDataReader reader = _sqlCommand.ExecuteReader())
             {
@@ -202,25 +203,30 @@ namespace SmartSingularity.PstBackupReportServer
                 {
                     if (reader.Read())
                     {
-                        pstFileId = reader.GetString(2);
+                        pstFile.LocalPath = reader.GetString(1);
+                        pstFile.Id = reader.GetGuid(2);
+                        pstFile.IsSetToBackup = reader.GetBoolean(3);
+                        pstFile.Size = reader.GetInt64(4);
+                        object lastSuccessfulBackup = reader[5];
+                        pstFile.LastSuccessfulBackup = (lastSuccessfulBackup == System.DBNull.Value) ? (DateTime?)null : Convert.ToDateTime(lastSuccessfulBackup);
                     }
                 }
             }
-
-            return pstFileId;
+            return pstFile;
         }
 
         private void RegisterNewPstFile(string clientId, PstFile pstFile)
         {
-            _sqlCommand.CommandText = $"INSERT INTO tbPstFiles VALUES ('{clientId}','{pstFile.LocaPath}',{Guid.NewGuid()},{(pstFile.IsSetToBackup?'1':'0')},'{pstFile.Size}',{DBNull.Value});";
+            _sqlCommand.CommandText = $"INSERT INTO tbPstFiles VALUES ('{clientId}','{pstFile.LocalPath}','{Guid.NewGuid()}',{(pstFile.IsSetToBackup ? '1' : '0')},'{pstFile.Size}',null);";
             _sqlCommand.ExecuteNonQuery();
         }
 
         private void UpdatePstFileInfo(string clientId, PstFile pstFile)
         {
-            string pstFileId = GetPstFileId(clientId, pstFile.LocaPath);
-
-            _sqlCommand.CommandText = $"UPDATE tbPstFiles SET IsSetToBackup={(pstFile.IsSetToBackup ? '1' : '0')},Size='{pstFile.Size}';";
+            string lastSuccessfulBackup = pstFile.LastSuccessfulBackup.HasValue ? "'" + pstFile.LastSuccessfulBackup.Value.ToString("yyyyMMdd HH:mm:ss") + "'":"null";
+            _sqlCommand.CommandText = $"UPDATE tbPstFiles SET IsSetToBackup={(pstFile.IsSetToBackup ? '1' : '0')}," +
+                $"Size='{pstFile.Size}'," +
+                $"LastSuccessfulBackup={lastSuccessfulBackup};";
             _sqlCommand.ExecuteNonQuery();
         }
     }

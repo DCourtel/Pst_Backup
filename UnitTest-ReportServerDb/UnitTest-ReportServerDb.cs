@@ -139,5 +139,114 @@ namespace UnitTest_ReportServerDb
                 Assert.IsTrue(sut.IsClientExists(clientToKeep2));
             }
         }
+
+        [TestClass]
+        public class RegisterPstFile_Should
+        {
+            [TestMethod]
+            public void RegisterThePstFile_WhenPstFileDoNotExists()
+            {
+                // Arrange
+                SUT sut = new SUT(_dbPath);
+                sut.Connect();
+                string clientId = Guid.NewGuid().ToString();
+                PstFile pstFileToRegister = new PstFile()
+                {
+                    LocalPath = @"C:\Pst Files\Courtel\Archive1.pst",
+                    IsSetToBackup = true,
+                    Size = 57_345_786
+                };
+
+                // Act
+                Assert.IsFalse(sut.IsPstFileExists(clientId, pstFileToRegister.LocalPath));
+                sut.RegisterPstFile(clientId, pstFileToRegister);
+
+                // Assert
+                Assert.IsTrue(sut.IsPstFileExists(clientId, pstFileToRegister.LocalPath));
+            }
+
+            [TestMethod]
+            public void RegisterRightInformationsFromPstFile_WhenPstFileDoNotExists()
+            {
+                // Arrange
+                SUT sut = new SUT(_dbPath);
+                sut.Connect();
+                string clientId = Guid.NewGuid().ToString();
+                PstFile pstFileToRegister = new PstFile()
+                {
+                    LocalPath = @"C:\Pst Files\Courtel\Archive1.pst",
+                    IsSetToBackup = true,
+                    Size = 57_345_786,
+                    LastSuccessfulBackup = null
+                };
+
+                // Act
+                Assert.IsFalse(sut.IsPstFileExists(clientId, pstFileToRegister.LocalPath));
+                sut.RegisterPstFile(clientId, pstFileToRegister);
+                PstFile insertedPstFile = sut.GetPstFile(clientId, pstFileToRegister.LocalPath);
+
+                // Assert
+                Assert.AreEqual(pstFileToRegister.LocalPath, insertedPstFile.LocalPath, true);
+                Assert.AreEqual(pstFileToRegister.IsSetToBackup, insertedPstFile.IsSetToBackup);
+                Assert.AreEqual(pstFileToRegister.Size, insertedPstFile.Size);
+                Assert.AreEqual(pstFileToRegister.LastSuccessfulBackup, insertedPstFile.LastSuccessfulBackup);
+            }
+
+            [TestMethod]
+            public void UpdatePstFileInfo_WhenLastSuccessfulBackupChanged()
+            {
+                // Arrange
+                SUT sut = new SUT(_dbPath);
+                sut.Connect();
+                string clientId = Guid.NewGuid().ToString();
+                PstFile pstFileToRegister = new PstFile()
+                {
+                    LocalPath = @"C:\Pst Files\Courtel\Archive1.pst",
+                    IsSetToBackup = true,
+                    Size = 57_345_786,
+                    LastSuccessfulBackup = null
+                };
+
+                // Act
+                Assert.IsFalse(sut.IsPstFileExists(clientId, pstFileToRegister.LocalPath));
+                sut.RegisterPstFile(clientId, pstFileToRegister);
+                pstFileToRegister.LastSuccessfulBackup = DateTime.UtcNow;
+                sut.RegisterPstFile(clientId, pstFileToRegister);
+                PstFile updatedPstFile = sut.GetPstFile(clientId, pstFileToRegister.LocalPath);
+
+                // Assert
+                Assert.IsNotNull(updatedPstFile.LastSuccessfulBackup);
+                Assert.AreEqual(updatedPstFile.LastSuccessfulBackup.Value.Date, DateTime.UtcNow.Date);
+            }
+
+            [TestMethod]
+            public void UpdatePstFileInfo_WhenLastSuccessfulBackupChangedToNull()
+            {
+                // Arrange
+                SUT sut = new SUT(_dbPath);
+                sut.Connect();
+                string clientId = Guid.NewGuid().ToString();
+                PstFile pstFileToRegister = new PstFile()
+                {
+                    LocalPath = @"C:\Pst Files\Courtel\Archive1.pst",
+                    IsSetToBackup = true,
+                    Size = 57_345_786
+                };
+
+                // Act
+                Assert.IsFalse(sut.IsPstFileExists(clientId, pstFileToRegister.LocalPath));
+                sut.RegisterPstFile(clientId, pstFileToRegister);
+
+                pstFileToRegister.LastSuccessfulBackup = DateTime.UtcNow;
+                sut.RegisterPstFile(clientId, pstFileToRegister);
+                Assert.IsNotNull(sut.GetPstFile(clientId, pstFileToRegister.LocalPath).LastSuccessfulBackup);
+                pstFileToRegister.LastSuccessfulBackup = null;
+                sut.RegisterPstFile(clientId, pstFileToRegister);
+                PstFile updatedPstFile = sut.GetPstFile(clientId, pstFileToRegister.LocalPath);
+
+                // Assert
+                Assert.IsNull(updatedPstFile.LastSuccessfulBackup);
+            }
+        }
     }
 }
