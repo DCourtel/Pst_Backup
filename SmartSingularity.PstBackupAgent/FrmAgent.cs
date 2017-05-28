@@ -55,7 +55,7 @@ namespace SmartSingularity.PstBackupAgent
                     {
                         Id = _localSettings.ClientId,
                         ComputerName = System.Net.Dns.GetHostEntry("").HostName,
-                        Username = $"{Environment.UserDomainName}\\{Environment.UserName}",
+                        Username = $"{Environment.UserName}.{Environment.UserDomainName}",
                         Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version
                     };
                     proxy.RegisterClient(client);
