@@ -245,13 +245,60 @@ namespace SmartSingularity.PstBackupReportServer
 
         private void UpdatePstFileInfo(string clientId, PstFile pstFile)
         {
-            var _sqlCommand = new SqlCommand("UPDATE tbPstFiles SET IsSetToBackup=@isSetToBackup,Size=@size,LastSuccessfulBackup=@lastSuccessfulBackup;", _dbConnection);
+            var _sqlCommand = new SqlCommand("UPDATE tbPstFiles SET " +
+                "IsSetToBackup=@isSetToBackup," +
+                "Size=@size," +
+                "LastSuccessfulBackup=@lastSuccessfulBackup " +
+                "WHERE ClientId LIKE @clientId AND LocalPath LIKE @localPath;", _dbConnection);
             _sqlCommand.Parameters.AddWithValue("@isSetToBackup", pstFile.IsSetToBackup);
             _sqlCommand.Parameters.AddWithValue("@size", pstFile.Size);
             _sqlCommand.Parameters.AddWithValue("@lastSuccessfulBackup", ((object)pstFile.LastSuccessfulBackup?.ToString("yyyyMMdd HH:mm:ss") ?? DBNull.Value));
+            _sqlCommand.Parameters.AddWithValue("@clientId", clientId);
+            _sqlCommand.Parameters.AddWithValue("@localPath", pstFile.LocalPath);
+            _sqlCommand.ExecuteNonQuery();
+        }
+
+        private void UpdateBackupSuccessDate(string clientId, string fileId, DateTime backupDate)
+        {
+            var _sqlCommand = new SqlCommand($"UPDATE tbPstFiles SET " +
+                $"LastSuccessfulBackup={backupDate.ToString("yyyyMMdd HH:mm:ss")} " +
+                $"WHERE ClientId LIKE '{clientId}' AND fileId LIKE '{fileId}';", _dbConnection);
             _sqlCommand.ExecuteNonQuery();
         }
 
         #endregion Pst Files
+
+        #region BackupSession
+
+        /// <summary>
+        /// Log the result of the backup session in the database.
+        /// </summary>
+        /// <param name="clientId">Unique Id of the client that have perform the backup.</param>
+        /// <param name="bckSession">Informations on the backup.</param>
+        public void LogBackupResult(string clientId, BackupSession bckSession)
+        {
+            string fileId = GetPstFile(clientId, bckSession.LocalPath).Id.ToString();
+            var _sqlCommand = new SqlCommand($"INSERT INTO tbBackupSessions VALUES(" +
+                $"'{fileId}'," +
+                $"@remotePath," +
+                $"{bckSession.IsCompressed}," +
+                $"{bckSession.CompressedSize}," +
+                $"{bckSession.BackupMethod}," +
+                $"{bckSession.DestinationType}," +
+                $"{bckSession.IsSchedule}," +
+                $"{bckSession.StartTime.ToString("yyyyMMdd HH:mm:ss")}," +
+                $"{bckSession.EndTime.ToString("yyyyMMdd HH:mm:ss")}," +
+                $"{bckSession.ChunkCount}," +
+                $"{bckSession.ErrorCode}," +
+                $"'{bckSession.ErrorMessage}');", _dbConnection);
+            _sqlCommand.Parameters.AddWithValue("@remotePath", bckSession.RemotePath);
+            _sqlCommand.ExecuteNonQuery();
+
+            if (bckSession.ErrorCode == PstBackupEngine.BackupResultInfo.BackupResult.Success)
+                UpdateBackupSuccessDate(clientId, fileId, bckSession.EndTime);
+        }
+
+
+        #endregion BackupSession
     }
 }

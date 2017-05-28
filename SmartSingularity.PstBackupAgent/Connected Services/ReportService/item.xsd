@@ -29,8 +29,8 @@
   <xs:element name="RegisterBackupResult">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupReportServer" minOccurs="0" name="pstFile" nillable="true" type="q3:PstFile" />
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupReportServer" minOccurs="0" name="backupSession" nillable="true" type="q4:BackupSession" />
+        <xs:element minOccurs="0" name="clientId" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupReportServer" minOccurs="0" name="backupSession" nillable="true" type="q3:BackupSession" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

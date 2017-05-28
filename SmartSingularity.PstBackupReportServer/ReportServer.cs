@@ -35,11 +35,12 @@ namespace SmartSingularity.PstBackupReportServer
         /// <summary>
         /// Register the result of a backup of a PST file into the database
         /// </summary>
-        /// <param name="pstFile">All informations on the PST file that have been saved</param>
+        /// <param name="clientId">Unique Id of the client that own the PST file</param>
         /// <param name="backupSession">Informations on the backup session</param>
-        public void RegisterBackupResult(PstFile pstFile, BackupSession backupSession)
+        public void RegisterBackupResult(string clientId, BackupSession backupSession)
         {
-            //ToDo: Implement this method
+            Logger.Write(30022, $"Logging backup result for {backupSession.LocalPath}", Logger.MessageSeverity.Debug);
+            _reportServerDb.LogBackupResult(clientId, backupSession);                
         }
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace SmartSingularity.PstBackupReportServer
         /// <summary>
         /// Register, in the database, all informations on the PST file mounted in Outlook
         /// </summary>
-        /// <param name="pstFile">A PST file</param>
+        /// <param name="clientId">Unique Id of the client that own the PST file</param>
         /// <param name="backupSession">Informations on the backup session</param>
         public void RegisterPstFile(string clientId, PstFile pstFile)
         {

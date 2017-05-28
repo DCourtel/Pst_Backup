@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using SmartSingularity.PstBackupSettings;
 using SmartSingularity.PstBackupEngine;
 using Logger = SmartSingularity.PstBackupLogger.Logger;
-using SmartSingularity.PstBackupFileSystem;
 
 namespace SmartSingularity.PstBackupAgent
 {
@@ -83,6 +82,29 @@ namespace SmartSingularity.PstBackupAgent
                         Logger.Write(20029, "An error occurs while trying to register a PstFile\r\n" + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
                     }
                 }
+            }
+        }
+
+        private void ReportBackupSessionResult(BackupResultInfo bckResult, bool isSchedule)
+        {
+            if (_localSettings.ReportingReportToServer)
+            {
+                ReportService.BackupSession bckSession = new ReportService.BackupSession()
+                {
+                    LocalPath = bckResult.LocalPath,
+                    RemotePath = bckResult.RemotePath,
+                    BackupMethod = _localSettings.BackupAgentBackupMethod,
+                    ChunkCount = bckResult.ChunkCount,
+                    CompressedSize = bckResult.CompressedSize,
+                    DestinationType = _localSettings.FilesAndFoldersDestinationType,
+                    EndTime = bckResult.EndTime,
+                    ErrorCode = bckResult.ErrorCode,
+                    ErrorMessage = bckResult.ErrorMessage,
+                    IsCompressed = bckResult.IsCompressed,
+                    IsSchedule = isSchedule,
+                    StartTime = bckResult.StartTime
+                };
+                proxy.RegisterBackupResult(_localSettings.ClientId, bckSession); 
             }
         }
 
@@ -253,7 +275,7 @@ namespace SmartSingularity.PstBackupAgent
 
         private void BckEngine_OnBackupFinished(object sender, BackupFinishedEventArgs e)
         {
-            BackupResultInfo result = e.Result;
+            ReportBackupSessionResult(e.Result, true);
             UpdateUI(100);
             pstFilesToSave.RemoveAt(0);
             _currentFileIndex++;

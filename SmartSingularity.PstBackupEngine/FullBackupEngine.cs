@@ -34,7 +34,7 @@ namespace SmartSingularity.PstBackupEngine
                     // Backup to Server
 
                 }
-                backupResult.Result = BackupResultInfo.BackupResult.Success;
+                backupResult.ErrorCode = BackupResultInfo.BackupResult.Success;
                 backupResult.ErrorMessage = String.Empty;
                 pstFileToSave.LastSuccessfulBackup = DateTime.UtcNow;
             }
@@ -45,18 +45,18 @@ namespace SmartSingularity.PstBackupEngine
             catch (NotEnoughEstimatedDiskSpace ex)
             {
                 Logger.Write(10002, "Not enough estimated disk space on " + ex.Destination, Logger.MessageSeverity.Warning, System.Diagnostics.EventLogEntryType.Warning);
-                backupResult.Result = BackupResultInfo.BackupResult.Failed;
+                backupResult.ErrorCode = BackupResultInfo.BackupResult.Failed;
                 backupResult.ErrorMessage = "Not enough estimated disk space on " + ex.Destination;
             }
             catch (Exception ex)
             {
                 Logger.Write(20025, "An error occurs while saving a PST file with full method\r\n" + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
-                backupResult.Result = BackupResultInfo.BackupResult.Failed;
+                backupResult.ErrorCode = BackupResultInfo.BackupResult.Failed;
                 backupResult.ErrorMessage = ex.Message;
             }
             if (!base.IsCancelRequired)
             {
-                backupResult.BackupEndTime = DateTime.UtcNow;
+                backupResult.EndTime = DateTime.UtcNow;
                 pstFileToSave.Save();
                 BackupFinished(new BackupFinishedEventArgs(pstFileToSave, backupResult));
             }

@@ -24,8 +24,8 @@ namespace SmartSingularity.PstBackupEngine
             LocalPath = fileToSave.FullName;
             FileSize = fileToSave.Length;
             ChunkCount = 0;
-            BackupStartTime = DateTime.UtcNow;
-            Result = BackupResult.NotStarted;
+            StartTime = DateTime.UtcNow;
+            ErrorCode = BackupResult.NotStarted;
             ErrorMessage = "An unknown error occurs.";
         }
 
@@ -44,12 +44,12 @@ namespace SmartSingularity.PstBackupEngine
         /// <summary>
         /// Gets or Sets the UTC time when the backup start
         /// </summary>
-        public DateTime BackupStartTime { get; set; }   
+        public DateTime StartTime { get; set; }   
 
         /// <summary>
         /// Gets or Sets the UTC time when the backup ends
         /// </summary>
-        public DateTime BackupEndTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         /// <summary>
         /// Gets or Sets the size of the PST file
@@ -74,7 +74,7 @@ namespace SmartSingularity.PstBackupEngine
         /// <summary>
         /// Gets or Sets the result of the backup operation
         /// </summary>
-        public BackupResult Result { get; set; }
+        public BackupResult ErrorCode { get; set; }
 
         /// <summary>
         /// Gets or Sets the error message in case where the backup have failed

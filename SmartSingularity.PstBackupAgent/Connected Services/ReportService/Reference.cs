@@ -268,6 +268,9 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         private bool IsScheduleField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LocalPathField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RemotePathField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -401,6 +404,19 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LocalPath {
+            get {
+                return this.LocalPathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LocalPathField, value) != true)) {
+                    this.LocalPathField = value;
+                    this.RaisePropertyChanged("LocalPath");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string RemotePath {
             get {
                 return this.RemotePathField;
@@ -453,10 +469,10 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         System.Threading.Tasks.Task RegisterPstFileAsync(string clientId, SmartSingularity.PstBackupAgent.ReportService.PstFile pstFile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportServer/RegisterBackupResult", ReplyAction="http://tempuri.org/IReportServer/RegisterBackupResultResponse")]
-        void RegisterBackupResult(SmartSingularity.PstBackupAgent.ReportService.PstFile pstFile, SmartSingularity.PstBackupAgent.ReportService.BackupSession backupSession);
+        void RegisterBackupResult(string clientId, SmartSingularity.PstBackupAgent.ReportService.BackupSession backupSession);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportServer/RegisterBackupResult", ReplyAction="http://tempuri.org/IReportServer/RegisterBackupResultResponse")]
-        System.Threading.Tasks.Task RegisterBackupResultAsync(SmartSingularity.PstBackupAgent.ReportService.PstFile pstFile, SmartSingularity.PstBackupAgent.ReportService.BackupSession backupSession);
+        System.Threading.Tasks.Task RegisterBackupResultAsync(string clientId, SmartSingularity.PstBackupAgent.ReportService.BackupSession backupSession);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -502,12 +518,12 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
             return base.Channel.RegisterPstFileAsync(clientId, pstFile);
         }
         
-        public void RegisterBackupResult(SmartSingularity.PstBackupAgent.ReportService.PstFile pstFile, SmartSingularity.PstBackupAgent.ReportService.BackupSession backupSession) {
-            base.Channel.RegisterBackupResult(pstFile, backupSession);
+        public void RegisterBackupResult(string clientId, SmartSingularity.PstBackupAgent.ReportService.BackupSession backupSession) {
+            base.Channel.RegisterBackupResult(clientId, backupSession);
         }
         
-        public System.Threading.Tasks.Task RegisterBackupResultAsync(SmartSingularity.PstBackupAgent.ReportService.PstFile pstFile, SmartSingularity.PstBackupAgent.ReportService.BackupSession backupSession) {
-            return base.Channel.RegisterBackupResultAsync(pstFile, backupSession);
+        public System.Threading.Tasks.Task RegisterBackupResultAsync(string clientId, SmartSingularity.PstBackupAgent.ReportService.BackupSession backupSession) {
+            return base.Channel.RegisterBackupResultAsync(clientId, backupSession);
         }
     }
 }

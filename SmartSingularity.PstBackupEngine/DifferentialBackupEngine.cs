@@ -69,9 +69,9 @@ namespace SmartSingularity.PstBackupEngine
                     pstFileToSave.Save();
                     backupResult.RemotePath = backupFileNewName;
                     backupResult.CompressedSize = 0;
-                    backupResult.Result = BackupResultInfo.BackupResult.Failed;
+                    backupResult.ErrorCode = BackupResultInfo.BackupResult.Failed;
                     backupResult.ErrorMessage = String.Empty;
-                    backupResult.BackupEndTime = DateTime.UtcNow;
+                    backupResult.EndTime = DateTime.UtcNow;
                     Logger.Write(30012, pstFileToSave + " have been successfuly saved", Logger.MessageSeverity.Debug);
                 }
                 else

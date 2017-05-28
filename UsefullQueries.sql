@@ -1,4 +1,4 @@
-﻿USE [PstBackup]
+﻿USE [Test-PstBackup]
 GO
 
 /****** Objet : Table [dbo].[tbClients] Date du script : 28/05/2017 16:30:40 ******/

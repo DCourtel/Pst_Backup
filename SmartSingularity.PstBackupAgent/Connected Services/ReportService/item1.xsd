@@ -35,6 +35,7 @@
       <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsCompressed" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsSchedule" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LocalPath" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RemotePath" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
     </xs:sequence>

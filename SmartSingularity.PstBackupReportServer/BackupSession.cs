@@ -13,6 +13,12 @@ namespace SmartSingularity.PstBackupReportServer
     public class BackupSession
     {
         /// <summary>
+        /// Gets or Sets the full path to the PST file on the client computer
+        /// </summary>
+        [DataMember]
+        public string LocalPath { get; set; }
+
+        /// <summary>
         /// Gets or Sets the full path to the PST file once saved
         /// </summary>
         [DataMember]
