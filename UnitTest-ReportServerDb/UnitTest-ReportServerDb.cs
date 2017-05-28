@@ -48,15 +48,14 @@ namespace UnitTest_ReportServerDb
                     Id = Guid.NewGuid().ToString(),
                     Version = new Version("1.0.1705.26"),
                     Username = "Courtel",
-                    ComputerName = "Céos",
-                    LastContactDate = DateTime.Now.ToUniversalTime()
+                    ComputerName = "Céos"
                 };
 
                 // Act
                 Assert.IsFalse(sut.IsClientExists(clientToRegister));
                 sut.RegisterClient(clientToRegister);
                 clientToRegister.ComputerName = "newName";
-                clientToRegister.Username = "newUser";
+                clientToRegister.Username = "Domain\\newUser";
                 clientToRegister.Version = new Version("1.0.1709.12");
                 sut.RegisterClient(clientToRegister);
                 Client updatedClient = sut.GetClient(clientToRegister.Id);

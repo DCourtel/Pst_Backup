@@ -49,14 +49,17 @@ namespace SmartSingularity.PstBackupAgent
         {
             try
             {
-                ReportService.Client client = new ReportService.Client()
+                if (_localSettings.ReportingReportToServer)
                 {
-                    Id = _localSettings.ClientId,
-                    ComputerName = System.Net.Dns.GetHostEntry("").HostName,
-                    Username = String.Concat(Environment.UserName, ".", Environment.UserDomainName),
-                    Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version
-                };
-                proxy.RegisterClient(client);
+                    ReportService.Client client = new ReportService.Client()
+                    {
+                        Id = _localSettings.ClientId,
+                        ComputerName = System.Net.Dns.GetHostEntry("").HostName,
+                        Username = $"{Environment.UserDomainName}\\{Environment.UserName}",
+                        Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version
+                    };
+                    proxy.RegisterClient(client);
+                }
             }
             catch (Exception ex)
             {
@@ -66,16 +69,19 @@ namespace SmartSingularity.PstBackupAgent
 
         private void RegisterPstFiles(List<PSTRegistryEntry> pstFilesToRegister, string clientId)
         {
-            foreach (PSTRegistryEntry regEntry in pstFilesToRegister)
+            if (_localSettings.ReportingReportToServer)
             {
-                try
+                foreach (PSTRegistryEntry regEntry in pstFilesToRegister)
                 {
-                    ReportService.PstFile pstFile = GetPstFile(regEntry);
-                    proxy.RegisterPstFile(clientId, pstFile);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Write(20029, "An error occurs while trying to register a PstFile\r\n" + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
+                    try
+                    {
+                        ReportService.PstFile pstFile = GetPstFile(regEntry);
+                        proxy.RegisterPstFile(clientId, pstFile);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Write(20029, "An error occurs while trying to register a PstFile\r\n" + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
+                    }
                 }
             }
         }
@@ -84,7 +90,7 @@ namespace SmartSingularity.PstBackupAgent
         {
             ReportService.PstFile pstFile = new ReportService.PstFile()
             {
-                LocaPath = regEntry.SourcePath,
+                LocalPath = regEntry.SourcePath,
                 IsSetToBackup = regEntry.ToBackup,
                 Size = new System.IO.FileInfo(regEntry.SourcePath).Length
             };
@@ -281,7 +287,7 @@ namespace SmartSingularity.PstBackupAgent
                     closeApp();
             }
         }
-
-        #endregion (Events)
     }
+
+    #endregion (Events)
 }

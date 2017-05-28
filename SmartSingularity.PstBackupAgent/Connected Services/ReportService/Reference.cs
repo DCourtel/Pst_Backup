@@ -132,13 +132,16 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsSetToBackupField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.DateTime> LastSuccessfulBackupField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LocaPathField;
+        private string LocalPathField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long SizeField;
@@ -150,6 +153,19 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
             }
         }
         
@@ -180,14 +196,14 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LocaPath {
+        public string LocalPath {
             get {
-                return this.LocaPathField;
+                return this.LocalPathField;
             }
             set {
-                if ((object.ReferenceEquals(this.LocaPathField, value) != true)) {
-                    this.LocaPathField = value;
-                    this.RaisePropertyChanged("LocaPath");
+                if ((object.ReferenceEquals(this.LocalPathField, value) != true)) {
+                    this.LocalPathField = value;
+                    this.RaisePropertyChanged("LocalPath");
                 }
             }
         }

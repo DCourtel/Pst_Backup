@@ -146,16 +146,16 @@ namespace SmartSingularity.PstBackupReportServer
 
         private void UpdateClientInfo(Client client)
         {
+            DateTime justNow = DateTime.UtcNow;
             var _sqlCommand = new SqlCommand("UPDATE tbClients SET " +
                 "Version=@version, " +
                 "ComputerName=@computerName, " +
                 "UserName=@userName, " +
-                "LastContactDate=@lastContactDate " +
+                $"LastContactDate='{justNow.ToString("yyyyMMdd HH:mm:ss")}' " +
                 $"WHERE Id LIKE @clientId;", _dbConnection);
             _sqlCommand.Parameters.AddWithValue("@version", client.Version.ToString());
             _sqlCommand.Parameters.AddWithValue("@computerName", client.ComputerName);
             _sqlCommand.Parameters.AddWithValue(@"userName", client.Username);
-            _sqlCommand.Parameters.AddWithValue("@lastContactDate", client.LastContactDate.ToString("yyyyMMdd HH:mm:ss"));
             _sqlCommand.Parameters.AddWithValue("@clientId", client.Id);
 
             _sqlCommand.ExecuteNonQuery();
