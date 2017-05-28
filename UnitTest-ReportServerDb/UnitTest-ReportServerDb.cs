@@ -193,7 +193,7 @@ namespace UnitTest_ReportServerDb
             }
 
             [TestMethod]
-            public void UpdatePstFileInfo_WhenLastSuccessfulBackupChanged()
+            public void UpdatePstFileInfo_WhenLastSuccessfulBackupChange()
             {
                 // Arrange
                 SUT sut = new SUT(_dbPath);
@@ -220,7 +220,7 @@ namespace UnitTest_ReportServerDb
             }
 
             [TestMethod]
-            public void UpdatePstFileInfo_WhenLastSuccessfulBackupChangedToNull()
+            public void UpdatePstFileInfo_WhenLastSuccessfulBackupChangeToNull()
             {
                 // Arrange
                 SUT sut = new SUT(_dbPath);
