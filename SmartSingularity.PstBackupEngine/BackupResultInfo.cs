@@ -11,11 +11,11 @@ namespace SmartSingularity.PstBackupEngine
     {
         public enum BackupResult
         {
-            NotStarted,
-            Success,
-            Canceled,
-            Failed,
-            Postponed
+            NotStarted = -1,
+            Success = 0,
+            Canceled = 10,
+            Failed = 20,
+            Postponed = 30
         }
 
         public BackupResultInfo(PSTRegistryEntry pstFile)

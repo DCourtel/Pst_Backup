@@ -79,7 +79,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fr-FR", "fr-FR", "{103176C8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest-ReportServerDb", "UnitTest-ReportServerDb\UnitTest-ReportServerDb.csproj", "{074F34EF-7582-4946-8563-8B421C97B7EA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D051D1A4-DE1A-4473-9F17-0BCA8FDBA348}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql Queries", "Sql Queries", "{D051D1A4-DE1A-4473-9F17-0BCA8FDBA348}"
 	ProjectSection(SolutionItems) = preProject
 		UsefullQueries.sql = UsefullQueries.sql
 	EndProjectSection

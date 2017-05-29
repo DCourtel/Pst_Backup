@@ -104,7 +104,7 @@ namespace SmartSingularity.PstBackupAgent
                     IsSchedule = isSchedule,
                     StartTime = bckResult.StartTime
                 };
-                proxy.RegisterBackupResult(_localSettings.ClientId, bckSession); 
+                proxy.RegisterBackupResult(_localSettings.ClientId, bckSession);
             }
         }
 
@@ -262,6 +262,16 @@ namespace SmartSingularity.PstBackupAgent
                 _bckEngine.IsCancelRequired = true;
                 btnCancel.Enabled = false;
                 btnCancel.Refresh();
+                BackupResultInfo bckResult = new BackupResultInfo(pstFilesToSave[0]);
+                bckResult.EndTime = DateTime.UtcNow;
+                bckResult.RemotePath = String.Empty;
+                bckResult.ErrorCode = BackupResultInfo.BackupResult.Canceled;
+                bckResult.ErrorMessage = String.Empty;
+                try
+                {
+                    ReportBackupSessionResult(bckResult, true);
+                }
+                catch (Exception ex) { }
                 _backupThread.Join(3000);
                 proxy.Close();
             }
