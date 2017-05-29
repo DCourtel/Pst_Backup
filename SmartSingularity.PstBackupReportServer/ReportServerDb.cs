@@ -261,8 +261,10 @@ namespace SmartSingularity.PstBackupReportServer
         private void UpdateBackupSuccessDate(string clientId, string fileId, DateTime backupDate)
         {
             var _sqlCommand = new SqlCommand($"UPDATE tbPstFiles SET " +
-                $"LastSuccessfulBackup={backupDate.ToString("yyyyMMdd HH:mm:ss")} " +
-                $"WHERE ClientId LIKE '{clientId}' AND fileId LIKE '{fileId}';", _dbConnection);
+                $"LastSuccessfulBackup='{backupDate.ToString("yyyyMMdd HH:mm:ss")}' " +
+                $"WHERE ClientId LIKE @clientId AND fileId LIKE @fileId;", _dbConnection);
+            _sqlCommand.Parameters.AddWithValue("@clientId", clientId);
+            _sqlCommand.Parameters.AddWithValue("@fileId", fileId);
             _sqlCommand.ExecuteNonQuery();
         }
 
@@ -279,19 +281,31 @@ namespace SmartSingularity.PstBackupReportServer
         {
             string fileId = GetPstFile(clientId, bckSession.LocalPath).Id.ToString();
             var _sqlCommand = new SqlCommand($"INSERT INTO tbBackupSessions VALUES(" +
-                $"'{fileId}'," +
+                $"@fileId," +
                 $"@remotePath," +
-                $"{bckSession.IsCompressed}," +
-                $"{bckSession.CompressedSize}," +
-                $"{bckSession.BackupMethod}," +
-                $"{bckSession.DestinationType}," +
-                $"{bckSession.IsSchedule}," +
-                $"{bckSession.StartTime.ToString("yyyyMMdd HH:mm:ss")}," +
-                $"{bckSession.EndTime.ToString("yyyyMMdd HH:mm:ss")}," +
-                $"{bckSession.ChunkCount}," +
-                $"{bckSession.ErrorCode}," +
-                $"'{bckSession.ErrorMessage}');", _dbConnection);
+                $"@compressedSize," +
+                $"@isCompressed," +
+                $"@backupMethod," +
+                $"@destinationType," +
+                $"@isSchedule," +
+                $"@startTime," +
+                $"@endTime," +
+                $"@chunkCount," +
+                $"@errorCode," +
+                $"@errorMessage);", _dbConnection);
+            
+            _sqlCommand.Parameters.AddWithValue("@fileId", fileId);
             _sqlCommand.Parameters.AddWithValue("@remotePath", bckSession.RemotePath);
+            _sqlCommand.Parameters.AddWithValue("@isCompressed", bckSession.IsCompressed);
+            _sqlCommand.Parameters.AddWithValue("@compressedSize", bckSession.CompressedSize);
+            _sqlCommand.Parameters.AddWithValue("@backupMethod", bckSession.BackupMethod);
+            _sqlCommand.Parameters.AddWithValue("@destinationType", bckSession.DestinationType);
+            _sqlCommand.Parameters.AddWithValue("@isSchedule", bckSession.IsSchedule);
+            _sqlCommand.Parameters.AddWithValue("@startTime", bckSession.StartTime.ToString("yyyyMMdd HH:mm:ss"));
+            _sqlCommand.Parameters.AddWithValue("@endTime", bckSession.EndTime.ToString("yyyyMMdd HH:mm:ss"));
+            _sqlCommand.Parameters.AddWithValue("@chunkCount", bckSession.ChunkCount);
+            _sqlCommand.Parameters.AddWithValue("@errorCode", bckSession.ErrorCode);
+            _sqlCommand.Parameters.AddWithValue("@errorMessage", bckSession.ErrorMessage);
             _sqlCommand.ExecuteNonQuery();
 
             if (bckSession.ErrorCode == PstBackupEngine.BackupResultInfo.BackupResult.Success)

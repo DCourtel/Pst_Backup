@@ -113,6 +113,7 @@ namespace SmartSingularity.PstBackupAgent
             ReportService.PstFile pstFile = new ReportService.PstFile()
             {
                 LocalPath = regEntry.SourcePath,
+                LastSuccessfulBackup = regEntry.LastSuccessfulBackup,
                 IsSetToBackup = regEntry.ToBackup,
                 Size = new System.IO.FileInfo(regEntry.SourcePath).Length
             };
