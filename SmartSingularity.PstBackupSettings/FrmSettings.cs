@@ -143,7 +143,6 @@ namespace SmartSingularity.PstBackupSettings
                 txtBxAdditionalSubnets.Text = _localSettings.BackupAgentAdditionalSubnets;
             }
             catch (Exception) { }
-
         }
 
         /// <summary>
@@ -164,6 +163,11 @@ namespace SmartSingularity.PstBackupSettings
                 txtBxBackupServerName.Enabled = rdBtnBackupServer.Checked && !_gpoSettings.IsFilesAndFoldersBackupServerDefine;
                 nupBackupServerPort.Enabled = rdBtnBackupServer.Checked && !_gpoSettings.IsFilesAndFoldersBackupPortDefine;
                 chkBxCompressFile.Enabled = !_gpoSettings.IsFilesAndFoldersCompressFilesDefine && (_localSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.FileSystem) && (_localSettings.BackupAgentBackupMethod == ApplicationSettings.BackupMethod.Full);
+                if(_gpoSettings.FilesAndFoldersBackupAllPst)
+                {
+                    SelectAllPstFiles();
+                    chkLstBxPstFiles.Enabled = false;
+                }
             }
             catch (Exception) { }
 
@@ -213,7 +217,17 @@ namespace SmartSingularity.PstBackupSettings
                 txtBxAdditionalSubnets.Enabled = !_gpoSettings.IsBackupAgentAdditionalSubnetsDefine && chkBxDontBackupOverWan.Checked;
             }
             catch (Exception) { }
+        }
 
+        /// <summary>
+        /// Select all lines in the CheckListBox. Selecting all Pst files
+        /// </summary>
+        private void SelectAllPstFiles()
+        {
+            for (int i = 0; i < chkLstBxPstFiles.Items.Count; i++)
+            {
+                chkLstBxPstFiles.SetItemChecked(i, true);
+            }
         }
 
         /// <summary>

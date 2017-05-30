@@ -82,7 +82,7 @@
         Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
       </string>
 
-      <!-- Compress Files -->
+      <!-- Files And Folders - Compress Files -->
       <string id="CompressFiles">Compresser les fichiers PST lors de la sauvegarde.</string>
       <string id="CompressFiles_Help">Ce paramètre de stratégie vous permet de définir si les fichiers PST doivent être compressés lors de la sauvegarde.
 
@@ -94,7 +94,7 @@
         Si vous ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
       </string>
 
-      <!-- Files And Folders -->
+      <!-- Files And Folders - Destination Type -->
       <string id="DestinationType">Destination pour les sauvegardes.</string>
       <string id="DestinationType_Help">Ce paramètre de stratégie vous permet de déterminer l'emplacement où seront envoyé les sauvegardes.
 
@@ -108,6 +108,15 @@
       </string>
       <string id="DestinationTypeFileSystem">Système de Fichiers</string>
       <string id="DestinationTypeBackupServer">Serveur de Sauvegarde</string>
+      
+    <!-- Files And Folders - BackupAllPst -->
+      <string id="BackupAllPst">Sauvegarder tous les fichiers PST connecté à Outlook.</string>
+      <string id="BackupAllPst_Help">Ce paramètre de stratégie vous permet d'obliger Pst Backup à sauvegarder tous les fichiers PST d'Outlook.
+
+        Si vous activez ce paramètre de stratégie, les utilisateurs ne pourront pas déselectionner des fichiers PST dans l'interface de configuration.
+
+        Si vous désactivez ou ne configurez pas ce paramètre de stratégie, les utilisateurs pourront choisir quels fichiers Pst sauvegarder.
+      </string>
 
       <!-- Schedule -->
       <string id="Schedule">Planification de la sauvegarde</string>

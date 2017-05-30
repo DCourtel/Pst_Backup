@@ -60,9 +60,6 @@ namespace SmartSingularity.PstBackupSettings
         private bool _bckAgtDontBackupThroughtWan = true;
         private string _bckAgtAdditionalSubnets = String.Empty;
         private BackupMethod _bckAgtBackupMethod = BackupMethod.Full;
-        private bool _bckAgtSetExclusiveNTFSPermissions = false;
-        private string _bckAgtAdditionalNTFSFullcontrol = String.Empty;
-        private string _bckAgtAdditionalNTFSReadWrite = String.Empty;
 
         private bool _eventLogActivated = true;
         private Logger.MessageSeverity _eventLogseverity = Logger.MessageSeverity.Information;
@@ -72,6 +69,10 @@ namespace SmartSingularity.PstBackupSettings
         private string _filesAndFoldersDestinationPath = String.Empty;
         private string _filesAndFoldersBackupServer = String.Empty;
         private int _filesAndFoldersBackupPort = 443;
+        private bool _filesAndFoldersSetExclusiveNTFSPermissions = false;
+        private string _filesAndFoldersAdditionalNTFSFullcontrol = String.Empty;
+        private string _filesAndFoldersAdditionalNTFSReadWrite = String.Empty;
+        private bool _filesAndFoldersBackupAllPst = false;
 
         private bool _reportToServer = false;
         private string _reportingServer = String.Empty;
@@ -129,9 +130,6 @@ namespace SmartSingularity.PstBackupSettings
         public bool BackupAgentDontBackupThroughtWan { get { return _bckAgtDontBackupThroughtWan; } set { _bckAgtDontBackupThroughtWan = value; } }
         public string BackupAgentAdditionalSubnets { get { return _bckAgtAdditionalSubnets; } set { _bckAgtAdditionalSubnets = value; } }
         public BackupMethod BackupAgentBackupMethod { get { return _bckAgtBackupMethod; } set { _bckAgtBackupMethod = value; } }
-        public bool FilesAndFoldersSetExclusiveNTFSPermissions { get { return _bckAgtSetExclusiveNTFSPermissions; } set { _bckAgtSetExclusiveNTFSPermissions = value; } }
-        public string FilesAndFoldersAdditionalNTFSFullcontrol { get { return _bckAgtAdditionalNTFSFullcontrol; } set { _bckAgtAdditionalNTFSFullcontrol = value; } }
-        public string FilesAndFoldersAdditionalNTFSReadWrite { get { return _bckAgtAdditionalNTFSReadWrite; } set { _bckAgtAdditionalNTFSReadWrite = value; } }
 
         public bool EventLogActivated { get { return _eventLogActivated; } set { _eventLogActivated = value; } }
         public Logger.MessageSeverity EventLogSeverity { get { return _eventLogseverity; } set { _eventLogseverity = value; } }
@@ -141,6 +139,10 @@ namespace SmartSingularity.PstBackupSettings
         public string FilesAndFoldersDestinationPath { get { return _filesAndFoldersDestinationPath; } set { _filesAndFoldersDestinationPath = value; } }
         public string FilesAndFoldersBackupServer { get { return _filesAndFoldersBackupServer; } set { _filesAndFoldersBackupServer = value; } }
         public int FilesAndFoldersBackupPort { get { return _filesAndFoldersBackupPort; } set { _filesAndFoldersBackupPort = value; } }
+        public bool FilesAndFoldersSetExclusiveNTFSPermissions { get { return _filesAndFoldersSetExclusiveNTFSPermissions; } set { _filesAndFoldersSetExclusiveNTFSPermissions = value; } }
+        public string FilesAndFoldersAdditionalNTFSFullcontrol { get { return _filesAndFoldersAdditionalNTFSFullcontrol; } set { _filesAndFoldersAdditionalNTFSFullcontrol = value; } }
+        public string FilesAndFoldersAdditionalNTFSReadWrite { get { return _filesAndFoldersAdditionalNTFSReadWrite; } set { _filesAndFoldersAdditionalNTFSReadWrite = value; } }
+        public bool FilesAndFoldersBackupAllPst { get { return _filesAndFoldersBackupAllPst; } set { _filesAndFoldersBackupAllPst = value; } } 
 
         public bool ReportingReportToServer { get { return _reportToServer; } set { _reportToServer = value; } }
         public string ReportingServer { get { return _reportingServer; } set { _reportingServer = value; } }
@@ -239,6 +241,7 @@ namespace SmartSingularity.PstBackupSettings
                 FilesAndFoldersBackupServer = gpoSettings.FilesAndFoldersBackupServer;
             if (gpoSettings.IsFilesAndFoldersBackupPortDefine)
                 FilesAndFoldersBackupPort = gpoSettings.FilesAndFoldersBackupPort;
+            FilesAndFoldersBackupAllPst = gpoSettings.FilesAndFoldersBackupAllPst;
 
             if (gpoSettings.IsReportingDefine)
                 ReportingReportToServer = gpoSettings.ReportingReportToServer;
@@ -611,6 +614,14 @@ namespace SmartSingularity.PstBackupSettings
                     else
                     {
                         FilesAndFoldersAdditionalNTFSReadWrite = data.ToString();
+                    }
+
+                    data = filesAndFoldersKey.GetValue("BackupAllPst", null);
+                    if (data == null)
+                        FilesAndFoldersBackupAllPst = false;
+                    else
+                    {
+                        FilesAndFoldersBackupAllPst = ((int)data) == 1;
                     }
 
                     filesAndFoldersKey.Close();

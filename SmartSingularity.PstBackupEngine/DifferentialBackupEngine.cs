@@ -69,7 +69,7 @@ namespace SmartSingularity.PstBackupEngine
                     pstFileToSave.Save();
                     backupResult.RemotePath = backupFileNewName;
                     backupResult.CompressedSize = 0;
-                    backupResult.ErrorCode = BackupResultInfo.BackupResult.Failed;
+                    backupResult.ErrorCode = BackupResultInfo.BackupResult.Success;
                     backupResult.ErrorMessage = String.Empty;
                     backupResult.EndTime = DateTime.UtcNow;
                     Logger.Write(30012, pstFileToSave + " have been successfuly saved", Logger.MessageSeverity.Debug);
@@ -161,7 +161,7 @@ namespace SmartSingularity.PstBackupEngine
             int byteCount = 0;
             int index = 0;
             byte[] buffer = new byte[_chunkSize];
-            int sentChunks = 0;
+            int chunkSent = 0;
             string localHash = String.Empty;
             BackupProgressEventArgs progressEventArgs = new BackupProgressEventArgs(0);
             Logger.Write(30013, "Synchronizing " + localFile + " with " + remoteFile, Logger.MessageSeverity.Debug);
@@ -182,7 +182,7 @@ namespace SmartSingularity.PstBackupEngine
                                 {
                                     fileToWrite.Position = (long)index * _chunkSize;
                                     fileToWrite.Write(buffer, 0, byteCount);
-                                    sentChunks++;
+                                    chunkSent++;
                                     if (index >= remoteHashes.Count)
                                     {
                                         _clientDb.InsertHash(fileId, index, localHash);
@@ -202,8 +202,8 @@ namespace SmartSingularity.PstBackupEngine
                     }
                 }
             }
-            Logger.Write(30014, "Synchronizing finish. " + sentChunks + " chunk(s) have been sent to the remote destination", Logger.MessageSeverity.Debug);
-            return sentChunks;
+            Logger.Write(30014, "Synchronizing finish. " + chunkSent + " chunk(s) have been sent to the remote destination", Logger.MessageSeverity.Debug);
+            return chunkSent;
         }
 
         private string GetHash(byte[] data)

@@ -111,6 +111,15 @@
       <string id="DestinationTypeFileSystem">File System</string>
       <string id="DestinationTypeBackupServer">Backup Server</string>
 
+      <!-- Files And Folders - BackupAllPst -->
+      <string id="BackupAllPst">Backup all Pst files connected in Outlook.</string>
+      <string id="BackupAllPst_Help">This policy setting allows you to force Pst Backup to save all Pst files in Outlook.
+
+        If you enable this policy setting, users won't be able to unselect Pst files in the configuration form.
+
+        If you disable or do not configure this policy setting, users will be able to choose which Pst files to backup.
+      </string>
+
       <!-- Schedule -->
       <string id="Schedule">Backup schedule.</string>
       <string id="Schedule_Help">This policy setting allows you to specify the schedule for the backup.

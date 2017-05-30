@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<policyDefinitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-                   revision="1.0" 
-                   schemaVersion="1.0" 
+<policyDefinitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   revision="1.0"
+                   schemaVersion="1.0"
                    xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions" >
   <policyNamespaces>
     <target prefix="PstBackup" namespace="SmartSingularity.Policies.PstBackup" />
@@ -178,7 +178,7 @@
       </disabledValue>
     </policy>
 
-    <!-- Files And Folders -->
+    <!-- Files And Folders - Destination Type -->
     <policy name="DestinationType" class="User"
             displayName="$(string.DestinationType)"
             explainText="$(string.DestinationType_Help)"
@@ -203,7 +203,22 @@
         <text id="TXT_BackupServer" valueName="BackupServer"  required="false" />
         <decimal id="DEC_BackupPort" valueName="BackupPort" minValue="1" maxValue="65535" required="true" />
       </elements>
+    </policy>
 
+    <!-- Files And Folders - BackupAllPst -->
+    <policy name="BackupAllPst" class="User"
+            displayName="$(string.BackupAllPst)"
+            explainText="$(string.BackupAllPst_Help)"
+            key="Software\Policies\PST Backup\Settings\Files And Folders"
+            valueName="BackupAllPst">
+      <parentCategory ref="FilesAndFolders" />
+      <supportedOn ref="windows:SUPPORTED_WindowsVista" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
     </policy>
 
     <!-- Schedule -->

@@ -80,7 +80,7 @@ namespace SmartSingularity.PstBackupEngine
 
             foreach (var pstFile in allPstFiles)
             {
-                if (pstFile.ToBackup &&
+                if ((pstFile.ToBackup || _appSettings.FilesAndFoldersBackupAllPst) &&
                     Scheduler.IsPstFileNeedtoBeSaved(pstFile.LastSuccessfulBackup, _appSettings) &&
                     !Network.IsWanLink(_appSettings.FilesAndFoldersDestinationPath, _appSettings.BackupAgentAdditionalSubnets))
                 {
