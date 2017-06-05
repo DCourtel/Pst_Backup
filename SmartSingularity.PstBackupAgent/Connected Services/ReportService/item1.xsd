@@ -29,9 +29,8 @@
       <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupSettings" minOccurs="0" name="BackupMethod" type="q2:ApplicationSettings.BackupMethod" />
       <xs:element minOccurs="0" name="ChunkCount" type="xs:int" />
       <xs:element minOccurs="0" name="CompressedSize" type="xs:long" />
-      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupSettings" minOccurs="0" name="DestinationType" type="q3:ApplicationSettings.BackupDestinationType" />
       <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
-      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupEngine" minOccurs="0" name="ErrorCode" type="q4:BackupResultInfo.BackupResult" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupEngine" minOccurs="0" name="ErrorCode" type="q3:BackupResultInfo.BackupResult" />
       <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsCompressed" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsSchedule" type="xs:boolean" />

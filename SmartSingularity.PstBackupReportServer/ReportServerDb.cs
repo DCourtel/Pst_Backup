@@ -286,7 +286,6 @@ namespace SmartSingularity.PstBackupReportServer
                 $"@compressedSize," +
                 $"@isCompressed," +
                 $"@backupMethod," +
-                $"@destinationType," +
                 $"@isSchedule," +
                 $"@startTime," +
                 $"@endTime," +
@@ -299,7 +298,6 @@ namespace SmartSingularity.PstBackupReportServer
             _sqlCommand.Parameters.AddWithValue("@isCompressed", bckSession.IsCompressed);
             _sqlCommand.Parameters.AddWithValue("@compressedSize", bckSession.CompressedSize);
             _sqlCommand.Parameters.AddWithValue("@backupMethod", bckSession.BackupMethod);
-            _sqlCommand.Parameters.AddWithValue("@destinationType", bckSession.DestinationType);
             _sqlCommand.Parameters.AddWithValue("@isSchedule", bckSession.IsSchedule);
             _sqlCommand.Parameters.AddWithValue("@startTime", bckSession.StartTime.ToString("yyyyMMdd HH:mm:ss"));
             _sqlCommand.Parameters.AddWithValue("@endTime", bckSession.EndTime.ToString("yyyyMMdd HH:mm:ss"));

@@ -26,7 +26,6 @@ namespace UnitTest_BackupUseCases
             public static void ClassInitialize(TestContext context)
             {
                 _appSettings.FilesAndFoldersDestinationPath = _destinationPath;
-                _appSettings.FilesAndFoldersDestinationType = ApplicationSettings.BackupDestinationType.FileSystem;
                 _appSettings.BackupAgentBackupMethod = ApplicationSettings.BackupMethod.Differential;
                 _pstFileToSave = new PSTRegistryEntry(Path.Combine(_sourcePath, _pstFilename));
             }

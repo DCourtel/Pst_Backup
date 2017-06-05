@@ -96,7 +96,6 @@ namespace SmartSingularity.PstBackupAgent
                     BackupMethod = _localSettings.BackupAgentBackupMethod,
                     ChunkCount = bckResult.ChunkCount,
                     CompressedSize = bckResult.CompressedSize,
-                    DestinationType = _localSettings.FilesAndFoldersDestinationType,
                     EndTime = bckResult.EndTime,
                     ErrorCode = bckResult.ErrorCode,
                     ErrorMessage = bckResult.ErrorMessage,
@@ -110,7 +109,6 @@ namespace SmartSingularity.PstBackupAgent
 
         private void ReportCanceledBackupSession()
         {
-            //ToDo : Report not started PST files too (?)
             try
             {
                 BackupResultInfo bckResult = new BackupResultInfo(pstFilesToSave[0]);

@@ -250,9 +250,6 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
         private long CompressedSizeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SmartSingularity.PstBackupSettings.ApplicationSettings.BackupDestinationType DestinationTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime EndTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -321,19 +318,6 @@ namespace SmartSingularity.PstBackupAgent.ReportService {
                 if ((this.CompressedSizeField.Equals(value) != true)) {
                     this.CompressedSizeField = value;
                     this.RaisePropertyChanged("CompressedSize");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SmartSingularity.PstBackupSettings.ApplicationSettings.BackupDestinationType DestinationType {
-            get {
-                return this.DestinationTypeField;
-            }
-            set {
-                if ((this.DestinationTypeField.Equals(value) != true)) {
-                    this.DestinationTypeField = value;
-                    this.RaisePropertyChanged("DestinationType");
                 }
             }
         }

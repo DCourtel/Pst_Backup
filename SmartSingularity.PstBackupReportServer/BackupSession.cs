@@ -43,12 +43,6 @@ namespace SmartSingularity.PstBackupReportServer
         public Settings.BackupMethod BackupMethod { get; set; }
 
         /// <summary>
-        /// Gets or Sets the type of destination used during the backup
-        /// </summary>
-        [DataMember]
-        public Settings.BackupDestinationType DestinationType { get; set; }
-
-        /// <summary>
         /// Gets or Sets if the PST file is schedule for a backup
         /// </summary>
         [DataMember]

@@ -147,14 +147,8 @@ namespace UnitTest_PstBackupSettings
                 Assert.IsTrue(IsRegistryKeyExists(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Files And Folders"));
                 Assert.IsTrue(IsRegistryValueExists(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Files And Folders", "CompressFiles", RegistryValueKind.DWord));
                 Assert.IsTrue(IsRegistryValueEquals(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Files And Folders", "CompressFiles", 0));
-                Assert.IsTrue(IsRegistryValueExists(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Files And Folders", "DestinationType", RegistryValueKind.DWord));
-                Assert.IsTrue(IsRegistryValueEquals(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Files And Folders", "DestinationType", 0));
                 Assert.IsTrue(IsRegistryValueExists(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Files And Folders", "DestinationPath", RegistryValueKind.String));
                 Assert.IsTrue(IsRegistryValueEquals(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Files And Folders", "DestinationPath", String.Empty));
-                Assert.IsTrue(IsRegistryValueExists(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Files And Folders", "BackupServer", RegistryValueKind.String));
-                Assert.IsTrue(IsRegistryValueEquals(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Files And Folders", "BackupServer", String.Empty));
-                Assert.IsTrue(IsRegistryValueExists(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Files And Folders", "BackupPort", RegistryValueKind.DWord));
-                Assert.IsTrue(IsRegistryValueEquals(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Files And Folders", "BackupPort", 443));
 
                 Assert.IsTrue(IsRegistryKeyExists(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Reporting"));
                 Assert.IsTrue(IsRegistryValueExists(RegistryHive.CurrentUser, @"SOFTWARE\PST Backup\Settings\Reporting", "Report", RegistryValueKind.DWord));
@@ -195,11 +189,8 @@ namespace UnitTest_PstBackupSettings
                 Assert.IsFalse(appSettings.IsBackupAgentDontBackupThroughtWanDefine);
                 Assert.IsFalse(appSettings.IsEventLogActivatedDefine);
                 Assert.IsFalse(appSettings.IsEventLogSeverityDefine);
-                Assert.IsFalse(appSettings.IsFilesAndFoldersBackupPortDefine);
-                Assert.IsFalse(appSettings.IsFilesAndFoldersBackupServerDefine);
                 Assert.IsFalse(appSettings.IsFilesAndFoldersCompressFilesDefine);
                 Assert.IsFalse(appSettings.IsFilesAndFoldersDestinationPathDefine);
-                Assert.IsFalse(appSettings.IsFilesAndFoldersDestinationTypeDefine);
                 Assert.IsFalse(appSettings.IsReportingDefine);
                 Assert.IsFalse(appSettings.IsReportingPortDefine);
                 Assert.IsFalse(appSettings.IsReportingServerDefine);
@@ -265,14 +256,8 @@ namespace UnitTest_PstBackupSettings
                 Assert.AreEqual(appSettings.FilesAndFoldersAdditionalNTFSReadWrite, "%userLogin%");
                 Assert.IsTrue(appSettings.FilesAndFoldersCompressFiles);
                 Assert.IsTrue(appSettings.IsFilesAndFoldersCompressFilesDefine);
-                Assert.AreEqual(appSettings.FilesAndFoldersDestinationType, SUT.BackupDestinationType.BackupServer);
-                Assert.IsTrue(appSettings.IsFilesAndFoldersDestinationTypeDefine);
                 Assert.AreEqual(appSettings.FilesAndFoldersDestinationPath, @"\\akio9901lms.ad.fr\Backup PST\%userLogin%");
                 Assert.IsTrue(appSettings.IsFilesAndFoldersDestinationPathDefine);
-                Assert.AreEqual(appSettings.FilesAndFoldersBackupServer, @"Akio0512lms.ad.fr");
-                Assert.IsTrue(appSettings.IsFilesAndFoldersBackupServerDefine);
-                Assert.AreEqual(appSettings.FilesAndFoldersBackupPort, 8090);
-                Assert.IsTrue(appSettings.IsFilesAndFoldersBackupPortDefine);
             }
 
             [TestMethod]
@@ -457,7 +442,6 @@ namespace UnitTest_PstBackupSettings
 
                 // Act
                 appSettings = new SUT(SUT.SourceSettings.Local);
-                appSettings.FilesAndFoldersDestinationType = SUT.BackupDestinationType.FileSystem;
                 appSettings.FilesAndFoldersDestinationPath = @"\\192.168.0.250\PST Files\Courtel\MyComputer";
 
                 // Assert
@@ -472,7 +456,6 @@ namespace UnitTest_PstBackupSettings
 
                 // Act
                 appSettings = new SUT(SUT.SourceSettings.Local);
-                appSettings.FilesAndFoldersDestinationType = SUT.BackupDestinationType.FileSystem;
                 appSettings.FilesAndFoldersDestinationPath = String.Empty;
 
                 // Assert
@@ -487,53 +470,7 @@ namespace UnitTest_PstBackupSettings
 
                 // Act
                 appSettings = new SUT(SUT.SourceSettings.Local);
-                appSettings.FilesAndFoldersDestinationType = SUT.BackupDestinationType.FileSystem;
                 appSettings.FilesAndFoldersDestinationPath = "   ";
-
-                // Assert
-                Assert.IsFalse(appSettings.IsDestinationProperlyDefine());
-            }
-
-            [TestMethod]
-            public void RetunsTrue_WhenBackupServerIsDefine()
-            {
-                // Arrange
-                SUT appSettings;
-
-                // Act
-                appSettings = new SUT(SUT.SourceSettings.Local);
-                appSettings.FilesAndFoldersDestinationType = SUT.BackupDestinationType.BackupServer;
-                appSettings.FilesAndFoldersBackupServer = "192.168.0.250";
-
-                // Assert
-                Assert.IsTrue(appSettings.IsDestinationProperlyDefine());
-            }
-
-            [TestMethod]
-            public void RetunsFalse_WhenBackupServerIsNotDefine()
-            {
-                // Arrange
-                SUT appSettings;
-
-                // Act
-                appSettings = new SUT(SUT.SourceSettings.Local);
-                appSettings.FilesAndFoldersDestinationType = SUT.BackupDestinationType.BackupServer;
-                appSettings.FilesAndFoldersBackupServer = String.Empty;
-
-                // Assert
-                Assert.IsFalse(appSettings.IsDestinationProperlyDefine());
-            }
-
-            [TestMethod]
-            public void RetunsFalse_WhenBackupServerIsWhitespaced()
-            {
-                // Arrange
-                SUT appSettings;
-
-                // Act
-                appSettings = new SUT(SUT.SourceSettings.Local);
-                appSettings.FilesAndFoldersDestinationType = SUT.BackupDestinationType.BackupServer;
-                appSettings.FilesAndFoldersBackupServer = "  ";
 
                 // Assert
                 Assert.IsFalse(appSettings.IsDestinationProperlyDefine());

@@ -301,7 +301,7 @@ namespace SmartSingularity.PstBackupSettings
         /// <returns>Returns true if the settings are correctly defined, false otherwise</returns>
         public bool IsDestinationProperlyDefine()
         {
-            return String.IsNullOrWhiteSpace(FilesAndFoldersDestinationPath);
+            return !String.IsNullOrWhiteSpace(FilesAndFoldersDestinationPath);
         }
 
         #endregion public Methods 
