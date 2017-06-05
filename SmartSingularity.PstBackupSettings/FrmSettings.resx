@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="nupBackupServerPort.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="tabReporting.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -135,29 +131,21 @@
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;rdBtnBackupServer.Parent" xml:space="preserve">
-    <value>grpBxBackupDestination</value>
-  </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tabBackupAgent.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;rdBtnBackupServer.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;cmbBxEvery.Parent" xml:space="preserve">
-    <value>grpBxSchedule</value>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Additional subnets allowed for backup (Ex. 192.168.10.0/24;192.168.20.0/24) : </value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tabReporting.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>tabEventLog</value>
@@ -166,13 +154,13 @@
     <value>tabEventLog</value>
   </data>
   <data name="&gt;&gt;txtBxDestination.Parent" xml:space="preserve">
-    <value>grpBxBackupDestination</value>
+    <value>tabFilesAndFolders</value>
   </data>
   <data name="&gt;&gt;tabBackupAgent.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>544, 339</value>
+    <value>544, 231</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -192,14 +180,14 @@
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>385, 13</value>
   </data>
-  <data name="&gt;&gt;txtBxReportingServerName.Parent" xml:space="preserve">
-    <value>tabReporting</value>
+  <data name="&gt;&gt;chkBxDontBackupOverWan.Name" xml:space="preserve">
+    <value>chkBxDontBackupOverWan</value>
   </data>
   <data name="tabReporting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 272</value>
+    <value>534, 164</value>
   </data>
   <data name="grpBxBackupMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 156</value>
+    <value>525, 73</value>
   </data>
   <data name="cmbBxWeekly.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -213,38 +201,23 @@
   <data name="&gt;&gt;chkBxDontBackupOverWan.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="nupBackupServerPort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 20</value>
-  </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="rdBtnMethodFull.Text" xml:space="preserve">
+    <value>Always Full Backup</value>
   </data>
   <data name="tabFilesAndFolders.Text" xml:space="preserve">
     <value>Files &amp; Folders</value>
   </data>
-  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="rdBtnWeekly.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 17</value>
   </data>
-  <data name="chkBxDontBackupOverWan.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
   <data name="rdBtnMethodDifferential.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 85</value>
+    <value>6, 42</value>
   </data>
   <data name="&gt;&gt;btnOk.Name" xml:space="preserve">
     <value>btnOk</value>
   </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>Additional subnets allowed for backup (Ex. 192.168.10.0/24;192.168.20.0/24) : </value>
-  </data>
   <data name="chkBxDontBackupOverWan.Size" type="System.Drawing.Size, System.Drawing">
     <value>386, 17</value>
-  </data>
-  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 0</value>
   </data>
   <data name="&gt;&gt;nupReportingServerPort.Parent" xml:space="preserve">
     <value>tabReporting</value>
@@ -252,20 +225,14 @@
   <data name="&gt;&gt;tabReporting.Name" xml:space="preserve">
     <value>tabReporting</value>
   </data>
-  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
   <data name="chkLstBxPstFiles.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 23</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>3, 6</value>
   </data>
-  <data name="&gt;&gt;txtBxBackupServerName.Parent" xml:space="preserve">
-    <value>grpBxBackupDestination</value>
-  </data>
-  <data name="label10.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="tabBackupAgent.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="tabEventLog.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -279,11 +246,11 @@
   <data name="&gt;&gt;nupReportingServerPort.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txtBxBackupServerName.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="nupMonthly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 125</value>
+    <value>98, 117</value>
   </data>
   <data name="&gt;&gt;txtBxReportingServerName.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -291,32 +258,26 @@
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
     <value>tabReporting</value>
   </data>
-  <data name="rdBtnMonthly.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 106</value>
-  </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Faster but weaker when used with file system. Recommended when the backup target a backup server.</value>
+    <value>79, 109</value>
   </data>
   <data name="cmbBxEventLogSeverity.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 21</value>
   </data>
-  <data name="&gt;&gt;label10.Name" xml:space="preserve">
-    <value>label10</value>
+  <data name="btnOk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>tabReporting</value>
   </data>
-  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>488, 43</value>
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="nupBackupServerPort.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <data name="&gt;&gt;nupEvery.Parent" xml:space="preserve">
+    <value>grpBxSchedule</value>
   </data>
-  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;rdBtnMethodFull.Name" xml:space="preserve">
+    <value>rdBtnMethodFull</value>
   </data>
   <data name="&gt;&gt;cmbBxWeekly.Name" xml:space="preserve">
     <value>cmbBxWeekly</value>
@@ -324,26 +285,20 @@
   <data name="&gt;&gt;tabFilesAndFolders.Parent" xml:space="preserve">
     <value>tabControl1</value>
   </data>
-  <data name="txtBxBackupServerName.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;tabReporting.Parent" xml:space="preserve">
     <value>tabControl1</value>
-  </data>
-  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 97</value>
   </data>
   <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;label11.Name" xml:space="preserve">
-    <value>label11</value>
-  </data>
   <data name="&gt;&gt;txtBxDestination.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>1</value>
   </data>
-  <data name="rdBtnBackupServer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 0</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 84</value>
   </data>
   <data name="rdBtnMonthly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -354,14 +309,8 @@
   <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="txtBxBackupServerName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 20</value>
-  </data>
   <data name="grpBxSchedule.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;rdBtnFileSystem.Parent" xml:space="preserve">
-    <value>grpBxBackupDestination</value>
   </data>
   <data name="&gt;&gt;nupMonthly.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -371,6 +320,9 @@
   </data>
   <data name="&gt;&gt;label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;cmbBxEvery.Name" xml:space="preserve">
     <value>cmbBxEvery</value>
@@ -397,31 +349,28 @@
     <value>False</value>
   </data>
   <data name="txtBxReportingServerName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 20</value>
+    <value>373, 20</value>
   </data>
   <data name="chkBxEventLog.Text" xml:space="preserve">
     <value>Log events for which severity is greater or equal to:</value>
   </data>
   <data name="&gt;&gt;rdBtnMethodFull.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;chkBxCompressFile.Parent" xml:space="preserve">
     <value>tabFilesAndFolders</value>
   </data>
-  <data name="rdBtnBackupServer.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="chkLstBxPstFiles.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
-  </data>
   <data name="rdBtnMethodFull.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 19</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;grpBxBackupMethod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="chkBxDontBackupOverWan.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -429,23 +378,14 @@
   <data name="cmbBxEvery.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
   </data>
-  <data name="&gt;&gt;rdBtnFileSystem.Name" xml:space="preserve">
-    <value>rdBtnFileSystem</value>
-  </data>
   <data name="&gt;&gt;rdBtnMonthly.Name" xml:space="preserve">
     <value>rdBtnMonthly</value>
-  </data>
-  <data name="tabReporting.Text" xml:space="preserve">
-    <value>Reporting</value>
   </data>
   <data name="&gt;&gt;chkBxEventLog.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
-  </data>
-  <data name="&gt;&gt;label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -454,7 +394,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="txtBxReportingServerName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 78</value>
+    <value>153, 81</value>
   </data>
   <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -468,9 +408,6 @@
   <data name="grpBxBackupMethod.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="txtBxBackupServerName.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
   <data name="&gt;&gt;tabBackupAgent.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
@@ -480,14 +417,8 @@
   <data name="chkBxEventLog.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;grpBxBackupDestination.Parent" xml:space="preserve">
-    <value>tabFilesAndFolders</value>
-  </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>542, 298</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 97</value>
+    <value>542, 190</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Cancel</value>
@@ -496,16 +427,220 @@
     <value>txtBxAdditionalSubnets</value>
   </data>
   <data name="tabBackupAgent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 272</value>
+    <value>534, 164</value>
   </data>
   <data name="nupReportingServerPort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 104</value>
+    <value>153, 107</value>
   </data>
   <data name="btnOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>376, 304</value>
+    <value>376, 196</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>525, 55</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rdBtnEvery.Text" xml:space="preserve">
+    <value>Every </value>
+  </data>
+  <data name="chkBxEventLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 71</value>
+  </data>
+  <data name="tabEventLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="chkBxReporting.Text" xml:space="preserve">
+    <value>Report events</value>
+  </data>
+  <data name="cmbBxEventLogSeverity.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 118</value>
+  </data>
+  <data name="chkLstBxPstFiles.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="chkLstBxPstFiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>525, 79</value>
+  </data>
+  <data name="grpBxSchedule.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="nupEvery.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 31</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabFilesAndFolders.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Pst Backup can send events to a remote server. So that this server can generate reports.</value>
+  </data>
+  <data name="&gt;&gt;nupMonthly.Name" xml:space="preserve">
+    <value>nupMonthly</value>
+  </data>
+  <data name="nupMonthly.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
+  </data>
+  <data name="txtBxReportingServerName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>tabFilesAndFolders</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;tabReporting.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkBxCompressFile.Text" xml:space="preserve">
+    <value>Compress files while saving</value>
+  </data>
+  <data name="&gt;&gt;cmbBxWeekly.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
+  </data>
+  <data name="&gt;&gt;rdBtnWeekly.Name" xml:space="preserve">
+    <value>rdBtnWeekly</value>
+  </data>
+  <data name="chkBxReporting.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;grpBxBackupMethod.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rdBtnMethodDifferential.Parent" xml:space="preserve">
+    <value>grpBxBackupMethod</value>
+  </data>
+  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+    <value>label9</value>
+  </data>
+  <data name="&gt;&gt;btnOk.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tabFilesAndFolders.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tabEventLog.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;chkLstBxPstFiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rdBtnWeekly.Text" xml:space="preserve">
+    <value>Weekly, on </value>
+  </data>
+  <data name="rdBtnMonthly.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;nupEvery.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Pst files to save: </value>
+  </data>
+  <data name="rdBtnMethodDifferential.Text" xml:space="preserve">
+    <value>Full Backup the first time, then differential</value>
+  </data>
+  <data name="&gt;&gt;txtBxReportingServerName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 13</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>tabReporting</value>
+  </data>
+  <data name="nupEvery.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtBxDestination.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtBxAdditionalSubnets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 20</value>
+  </data>
+  <data name="&gt;&gt;grpBxBackupMethod.Name" xml:space="preserve">
+    <value>grpBxBackupMethod</value>
+  </data>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;tabReporting.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpBxSchedule.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="&gt;&gt;chkBxEventLog.Name" xml:space="preserve">
+    <value>chkBxEventLog</value>
+  </data>
+  <data name="&gt;&gt;tabEventLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkBxEventLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 17</value>
+  </data>
+  <data name="txtBxDestination.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="rdBtnMethodDifferential.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtBxAdditionalSubnets.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;chkBxReporting.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>528, 60</value>
+  </data>
+  <data name="chkBxCompressFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 17</value>
+  </data>
+  <data name="&gt;&gt;rdBtnEvery.Name" xml:space="preserve">
+    <value>rdBtnEvery</value>
+  </data>
+  <data name="&gt;&gt;cmbBxEventLogSeverity.Parent" xml:space="preserve">
+    <value>tabEventLog</value>
+  </data>
+  <data name="&gt;&gt;rdBtnEvery.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkLstBxPstFiles.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tabFilesAndFolders.Size" type="System.Drawing.Size, System.Drawing">
+    <value>534, 164</value>
+  </data>
+  <data name="tabFilesAndFolders.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="&gt;&gt;tabBackupAgent.Name" xml:space="preserve">
+    <value>tabBackupAgent</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2173,300 +2308,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="chkBxDontBackupOverWan.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="grpBxBackupDestination.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="rdBtnEvery.Text" xml:space="preserve">
-    <value>Every </value>
-  </data>
-  <data name="chkBxEventLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 68</value>
-  </data>
-  <data name="tabEventLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="chkBxReporting.Text" xml:space="preserve">
-    <value>Report events</value>
-  </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>488, 35</value>
-  </data>
-  <data name="cmbBxEventLogSeverity.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 44</value>
-  </data>
-  <data name="rdBtnBackupServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 17</value>
-  </data>
-  <data name="chkLstBxPstFiles.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="chkLstBxPstFiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 94</value>
-  </data>
-  <data name="rdBtnBackupServer.Text" xml:space="preserve">
-    <value>Backup Server: </value>
-  </data>
-  <data name="&gt;&gt;rdBtnWeekly.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="nupEvery.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 31</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabFilesAndFolders.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Pst Backup can send events to a remote server. So that this server can generate reports.</value>
-  </data>
-  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="nupMonthly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 20</value>
-  </data>
-  <data name="btnOk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>tabFilesAndFolders</value>
-  </data>
-  <data name="tabBackupAgent.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>37, 105</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;tabReporting.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="chkBxCompressFile.Text" xml:space="preserve">
-    <value>Compress files while saving</value>
-  </data>
-  <data name="&gt;&gt;nupBackupServerPort.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cmbBxWeekly.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 13</value>
-  </data>
-  <data name="&gt;&gt;rdBtnWeekly.Name" xml:space="preserve">
-    <value>rdBtnWeekly</value>
-  </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
-    <value>label8</value>
-  </data>
-  <data name="&gt;&gt;rdBtnBackupServer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="chkBxReporting.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;grpBxBackupMethod.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rdBtnMethodDifferential.Parent" xml:space="preserve">
-    <value>grpBxBackupMethod</value>
-  </data>
-  <data name="&gt;&gt;label9.Name" xml:space="preserve">
-    <value>label9</value>
-  </data>
-  <data name="&gt;&gt;btnOk.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label11.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="cmbBxEvery.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 30</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tabFilesAndFolders.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="rdBtnBackupServer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="txtBxBackupServerName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <data name="chkBxReporting.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;tabEventLog.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
-  </data>
-  <data name="&gt;&gt;chkLstBxPstFiles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="rdBtnWeekly.Text" xml:space="preserve">
-    <value>Weekly, on </value>
-  </data>
-  <data name="&gt;&gt;grpBxBackupDestination.Name" xml:space="preserve">
-    <value>grpBxBackupDestination</value>
-  </data>
-  <data name="&gt;&gt;rdBtnMethodFull.Name" xml:space="preserve">
-    <value>rdBtnMethodFull</value>
-  </data>
-  <data name="&gt;&gt;chkBxCompressFile.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;nupEvery.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
-    <value>grpBxBackupMethod</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Pst files to save: </value>
-  </data>
-  <data name="rdBtnMethodFull.Text" xml:space="preserve">
-    <value>Always Full Backup</value>
-  </data>
-  <data name="rdBtnFileSystem.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="&gt;&gt;txtBxReportingServerName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
-  </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>tabReporting</value>
-  </data>
-  <data name="&gt;&gt;grpBxBackupDestination.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="nupBackupServerPort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>445, 95</value>
-  </data>
-  <data name="nupEvery.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;txtBxDestination.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="txtBxAdditionalSubnets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>499, 20</value>
-  </data>
-  <data name="&gt;&gt;grpBxBackupMethod.Name" xml:space="preserve">
-    <value>grpBxBackupMethod</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;grpBxBackupDestination.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Server name or IP address:  </value>
-  </data>
-  <data name="&gt;&gt;chkBxEventLog.Name" xml:space="preserve">
-    <value>chkBxEventLog</value>
-  </data>
-  <data name="&gt;&gt;tabEventLog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="chkBxEventLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 17</value>
-  </data>
-  <data name="grpBxBackupDestination.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 124</value>
-  </data>
-  <data name="rdBtnMethodDifferential.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;txtBxAdditionalSubnets.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;chkBxReporting.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>528, 60</value>
-  </data>
-  <data name="chkBxCompressFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 17</value>
-  </data>
-  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;tabReporting.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="grpBxBackupDestination.Text" xml:space="preserve">
-    <value>Destination </value>
-  </data>
-  <data name="&gt;&gt;cmbBxEventLogSeverity.Parent" xml:space="preserve">
-    <value>tabEventLog</value>
-  </data>
-  <data name="&gt;&gt;rdBtnEvery.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
-  </data>
-  <data name="&gt;&gt;chkLstBxPstFiles.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabFilesAndFolders.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 272</value>
-  </data>
-  <data name="txtBxDestination.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="rdBtnFileSystem.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tabFilesAndFolders.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="&gt;&gt;tabBackupAgent.Name" xml:space="preserve">
-    <value>tabBackupAgent</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Server name or IP: </value>
-  </data>
   <data name="&gt;&gt;chkLstBxPstFiles.Parent" xml:space="preserve">
     <value>tabFilesAndFolders</value>
   </data>
@@ -2479,12 +2320,6 @@
   <data name="chkBxReporting.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="rdBtnBackupServer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 67</value>
-  </data>
   <data name="txtBxReportingServerName.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -2492,10 +2327,10 @@
     <value>rdBtnMethodDifferential</value>
   </data>
   <data name="chkBxReporting.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 61</value>
+    <value>9, 64</value>
   </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="chkBxDontBackupOverWan.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="nupMonthly.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2503,17 +2338,8 @@
   <data name="chkBxCompressFile.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="rdBtnFileSystem.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>Server Port: </value>
-  </data>
   <data name="cmbBxWeekly.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 21</value>
-  </data>
-  <data name="grpBxSchedule.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;chkBxCompressFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2521,8 +2347,8 @@
   <data name="&gt;&gt;txtBxAdditionalSubnets.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txtBxBackupServerName.Name" xml:space="preserve">
-    <value>txtBxBackupServerName</value>
+  <data name="tabReporting.Text" xml:space="preserve">
+    <value>Reporting</value>
   </data>
   <data name="&gt;&gt;rdBtnMonthly.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -2533,14 +2359,14 @@
   <data name="tabEventLog.Text" xml:space="preserve">
     <value>Event Log</value>
   </data>
-  <data name="grpBxSchedule.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
+  <data name="cmbBxEvery.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 30</value>
   </data>
   <data name="&gt;&gt;tabFilesAndFolders.Name" xml:space="preserve">
     <value>tabFilesAndFolders</value>
   </data>
-  <data name="label8.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="&gt;&gt;chkBxDontBackupOverWan.Parent" xml:space="preserve">
+    <value>tabBackupAgent</value>
   </data>
   <data name="rdBtnMethodDifferential.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2563,17 +2389,11 @@
   <data name="&gt;&gt;chkBxReporting.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;nupMonthly.Name" xml:space="preserve">
-    <value>nupMonthly</value>
-  </data>
   <data name="&gt;&gt;cmbBxEvery.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="&gt;&gt;grpBxSchedule.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;btnOk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="nupMonthly.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2584,20 +2404,11 @@
   <data name="btnCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
-    <value>grpBxBackupMethod</value>
-  </data>
-  <data name="&gt;&gt;rdBtnFileSystem.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;rdBtnWeekly.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="txtBxAdditionalSubnets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 245</value>
+    <value>29, 138</value>
   </data>
   <data name="rdBtnEvery.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 17</value>
@@ -2605,8 +2416,8 @@
   <data name="&gt;&gt;cmbBxEventLogSeverity.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="txtBxReportingServerName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="chkBxReporting.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="chkBxReporting.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 17</value>
@@ -2614,8 +2425,8 @@
   <data name="&gt;&gt;rdBtnMonthly.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>grpBxBackupDestination</value>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Server name or IP address:  </value>
   </data>
   <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
     <value>tabControl1</value>
@@ -2626,26 +2437,17 @@
   <data name="&gt;&gt;cmbBxEventLogSeverity.Name" xml:space="preserve">
     <value>cmbBxEventLogSeverity</value>
   </data>
-  <data name="label7.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;rdBtnBackupServer.Name" xml:space="preserve">
-    <value>rdBtnBackupServer</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FrmSettings</value>
   </data>
   <data name="&gt;&gt;grpBxSchedule.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="rdBtnMethodDifferential.Text" xml:space="preserve">
-    <value>Full Backup the first time, then differential</value>
   </data>
   <data name="cmbBxEventLogSeverity.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tabEventLog.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
-  </data>
-  <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
   </data>
   <data name="cmbBxWeekly.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2656,9 +2458,6 @@
   <data name="chkBxDontBackupOverWan.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;grpBxBackupMethod.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;chkBxCompressFile.Name" xml:space="preserve">
     <value>chkBxCompressFile</value>
   </data>
@@ -2667,6 +2466,12 @@
   </data>
   <data name="btnOk.Text" xml:space="preserve">
     <value>&amp;Ok</value>
+  </data>
+  <data name="&gt;&gt;chkBxEventLog.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="grpBxSchedule.Text" xml:space="preserve">
     <value>Backup </value>
@@ -2679,6 +2484,9 @@
   </data>
   <data name="rdBtnEvery.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;nupReportingServerPort.Name" xml:space="preserve">
+    <value>nupReportingServerPort</value>
   </data>
   <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2701,9 +2509,6 @@
   <data name="&gt;&gt;rdBtnMethodFull.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="rdBtnBackupServer.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2717,19 +2522,16 @@
     <value>0</value>
   </data>
   <data name="tabEventLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 272</value>
+    <value>534, 164</value>
   </data>
   <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="&gt;&gt;btnOk.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdBtnEvery.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="rdBtnFileSystem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
   </data>
   <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2740,23 +2542,17 @@
   <data name="btnOk.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FrmSettings</value>
-  </data>
   <data name="chkBxDontBackupOverWan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 209</value>
+    <value>3, 96</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;nupEvery.Parent" xml:space="preserve">
-    <value>grpBxSchedule</value>
+  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="rdBtnMonthly.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 17</value>
-  </data>
-  <data name="grpBxBackupDestination.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="nupReportingServerPort.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2767,8 +2563,8 @@
   <data name="chkBxEventLog.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="txtBxBackupServerName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 94</value>
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="rdBtnMethodFull.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 17</value>
@@ -2777,7 +2573,7 @@
     <value>4, 22</value>
   </data>
   <data name="cmbBxWeekly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 78</value>
+    <value>94, 74</value>
   </data>
   <data name="&gt;&gt;tabEventLog.Parent" xml:space="preserve">
     <value>tabControl1</value>
@@ -2788,7 +2584,7 @@
   <data name="&gt;&gt;label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnOk.Size" type="System.Drawing.Size, System.Drawing">
@@ -2797,14 +2593,11 @@
   <data name="cmbBxEvery.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Pst Backup can write events into the Windows Events Log. These events can be simple information like 'Starting', 'Backuping File'. Or Warnings like 'Unable to write report'. Or Errors like 'Unable to read PST file', 'Unable to write PST file'...</value>
   </data>
   <data name="rdBtnMonthly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 125</value>
+    <value>6, 117</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -2818,29 +2611,14 @@
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdBtnMethodFull.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>4</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>457, 304</value>
-  </data>
-  <data name="&gt;&gt;nupBackupServerPort.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>457, 196</value>
   </data>
   <data name="&gt;&gt;rdBtnMethodDifferential.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;rdBtnFileSystem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 3</value>
+    <value>0</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2849,19 +2627,16 @@
     <value>0</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
+    <value>91, 13</value>
   </data>
   <data name="&gt;&gt;label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 81</value>
+  <data name="rdBtnMethodFull.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="rdBtnFileSystem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 17</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Schedule</value>
@@ -2872,23 +2647,14 @@
   <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;txtBxBackupServerName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="btnOk.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="&gt;&gt;txtBxDestination.Name" xml:space="preserve">
     <value>txtBxDestination</value>
   </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>37, 39</value>
-  </data>
-  <data name="&gt;&gt;rdBtnEvery.Name" xml:space="preserve">
-    <value>rdBtnEvery</value>
+  <data name="&gt;&gt;txtBxReportingServerName.Parent" xml:space="preserve">
+    <value>tabReporting</value>
   </data>
   <data name="nupEvery.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 20</value>
@@ -2897,16 +2663,13 @@
     <value>tabEventLog</value>
   </data>
   <data name="chkBxCompressFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 249</value>
+    <value>103, 141</value>
   </data>
   <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Slower but safer. Recommended when the backup target a file system.</value>
   </data>
   <data name="txtBxAdditionalSubnets.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2917,14 +2680,14 @@
   <data name="cmbBxEventLogSeverity.Items" xml:space="preserve">
     <value>Debug</value>
   </data>
-  <data name="&gt;&gt;label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;btnOk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="grpBxSchedule.Size" type="System.Drawing.Size, System.Drawing">
-    <value>520, 171</value>
+    <value>520, 152</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>Path: </value>
+    <value>Destination Path: </value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -2938,14 +2701,8 @@
   <data name="tabBackupAgent.Text" xml:space="preserve">
     <value>Backup Agent</value>
   </data>
-  <data name="grpBxBackupMethod.Text" xml:space="preserve">
-    <value>Backup Method </value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Pst Backup Settings</value>
-  </data>
-  <data name="&gt;&gt;chkBxDontBackupOverWan.Parent" xml:space="preserve">
-    <value>tabBackupAgent</value>
   </data>
   <data name="grpBxBackupMethod.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
@@ -2953,8 +2710,11 @@
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
   </data>
+  <data name="&gt;&gt;cmbBxEvery.Parent" xml:space="preserve">
+    <value>grpBxSchedule</value>
+  </data>
   <data name="txtBxDestination.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 20</value>
+    <value>422, 20</value>
   </data>
   <data name="grpBxBackupMethod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -2962,47 +2722,44 @@
   <data name="cmbBxEvery.Items2" xml:space="preserve">
     <value>Months</value>
   </data>
-  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>grpBxBackupDestination</value>
-  </data>
   <data name="cmbBxEvery.Items1" xml:space="preserve">
     <value>Weeks</value>
   </data>
   <data name="rdBtnWeekly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 79</value>
+    <value>6, 74</value>
   </data>
   <data name="&gt;&gt;rdBtnWeekly.Parent" xml:space="preserve">
     <value>grpBxSchedule</value>
   </data>
-  <data name="&gt;&gt;chkBxEventLog.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;chkBxCompressFile.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
   <data name="&gt;&gt;label9.Parent" xml:space="preserve">
-    <value>grpBxBackupDestination</value>
+    <value>tabFilesAndFolders</value>
   </data>
-  <data name="&gt;&gt;nupBackupServerPort.Name" xml:space="preserve">
-    <value>nupBackupServerPort</value>
+  <data name="grpBxBackupMethod.Text" xml:space="preserve">
+    <value>Backup Method </value>
   </data>
-  <data name="rdBtnFileSystem.Text" xml:space="preserve">
-    <value>File System:</value>
-  </data>
-  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
   </data>
   <data name="cmbBxEventLogSeverity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 66</value>
+    <value>278, 69</value>
   </data>
   <data name="cmbBxEventLogSeverity.Items3" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="txtBxDestination.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 41</value>
+    <value>103, 115</value>
   </data>
-  <data name="&gt;&gt;nupReportingServerPort.Name" xml:space="preserve">
-    <value>nupReportingServerPort</value>
+  <data name="&gt;&gt;rdBtnWeekly.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="chkBxDontBackupOverWan.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;nupMonthly.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -3017,22 +2774,16 @@
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 229</value>
+    <value>26, 120</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 272</value>
-  </data>
-  <data name="&gt;&gt;nupBackupServerPort.Parent" xml:space="preserve">
-    <value>grpBxBackupDestination</value>
+    <value>534, 164</value>
   </data>
   <data name="cmbBxEventLogSeverity.Items2" xml:space="preserve">
     <value>Warning</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="grpBxBackupDestination.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 119</value>
   </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
@@ -3045,12 +2796,6 @@
   </data>
   <data name="&gt;&gt;nupEvery.Name" xml:space="preserve">
     <value>nupEvery</value>
-  </data>
-  <data name="&gt;&gt;chkBxDontBackupOverWan.Name" xml:space="preserve">
-    <value>chkBxDontBackupOverWan</value>
-  </data>
-  <data name="nupBackupServerPort.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

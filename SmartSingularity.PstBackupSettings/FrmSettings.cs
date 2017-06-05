@@ -68,13 +68,9 @@ namespace SmartSingularity.PstBackupSettings
 
             try
             {
-                rdBtnFileSystem.Checked = _localSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.FileSystem;
-                rdBtnBackupServer.Checked = _localSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.BackupServer;
                 txtBxDestination.Text = _localSettings.FilesAndFoldersDestinationPath;
-                txtBxBackupServerName.Text = _localSettings.FilesAndFoldersBackupServer;
-                nupBackupServerPort.Value = (decimal)_localSettings.FilesAndFoldersBackupPort;
-                chkBxCompressFile.Checked = _localSettings.FilesAndFoldersCompressFiles && rdBtnFileSystem.Checked && (_localSettings.BackupAgentBackupMethod == ApplicationSettings.BackupMethod.Full);
-                chkBxCompressFile.Enabled = rdBtnFileSystem.Checked && (_localSettings.BackupAgentBackupMethod == ApplicationSettings.BackupMethod.Full);
+                chkBxCompressFile.Checked = _localSettings.FilesAndFoldersCompressFiles && _localSettings.BackupAgentBackupMethod == ApplicationSettings.BackupMethod.Full;
+                chkBxCompressFile.Enabled = _localSettings.BackupAgentBackupMethod == ApplicationSettings.BackupMethod.Full;
             }
             catch (Exception) { }
 
@@ -154,15 +150,8 @@ namespace SmartSingularity.PstBackupSettings
 
             try
             {
-                if (_gpoSettings.IsFilesAndFoldersDestinationTypeDefine)
-                {
-                    rdBtnFileSystem.Enabled = false;
-                    rdBtnBackupServer.Enabled = false;
-                }
-                txtBxDestination.Enabled = rdBtnFileSystem.Checked && !_gpoSettings.IsFilesAndFoldersDestinationPathDefine;
-                txtBxBackupServerName.Enabled = rdBtnBackupServer.Checked && !_gpoSettings.IsFilesAndFoldersBackupServerDefine;
-                nupBackupServerPort.Enabled = rdBtnBackupServer.Checked && !_gpoSettings.IsFilesAndFoldersBackupPortDefine;
-                chkBxCompressFile.Enabled = !_gpoSettings.IsFilesAndFoldersCompressFilesDefine && (_localSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.FileSystem) && (_localSettings.BackupAgentBackupMethod == ApplicationSettings.BackupMethod.Full);
+                txtBxDestination.Enabled = !_gpoSettings.IsFilesAndFoldersDestinationPathDefine;
+                chkBxCompressFile.Enabled = !_gpoSettings.IsFilesAndFoldersCompressFilesDefine && _localSettings.BackupAgentBackupMethod == ApplicationSettings.BackupMethod.Full;
                 if(_gpoSettings.FilesAndFoldersBackupAllPst)
                 {
                     SelectAllPstFiles();
@@ -243,21 +232,9 @@ namespace SmartSingularity.PstBackupSettings
                 {
                     _localSettings.FilesAndFoldersCompressFiles = chkBxCompressFile.Checked;
                 }
-                if (!_gpoSettings.IsFilesAndFoldersDestinationTypeDefine)
-                {
-                    _localSettings.FilesAndFoldersDestinationType = rdBtnFileSystem.Checked ? ApplicationSettings.BackupDestinationType.FileSystem : ApplicationSettings.BackupDestinationType.BackupServer;
-                }
                 if (!_gpoSettings.IsFilesAndFoldersDestinationPathDefine)
                 {
                     _localSettings.FilesAndFoldersDestinationPath = txtBxDestination.Text;
-                }
-                if (!_gpoSettings.IsFilesAndFoldersBackupServerDefine)
-                {
-                    _localSettings.FilesAndFoldersBackupServer = txtBxBackupServerName.Text;
-                }
-                if (!_gpoSettings.IsFilesAndFoldersBackupPortDefine)
-                {
-                    _localSettings.FilesAndFoldersBackupPort = (int)nupBackupServerPort.Value;
                 }
             }
             catch (Exception) { }
@@ -387,7 +364,7 @@ namespace SmartSingularity.PstBackupSettings
         private void ValidateData()
         {
             // Files and Folders
-            bool filesAndFoldersOk = (rdBtnFileSystem.Checked && !String.IsNullOrWhiteSpace(txtBxDestination.Text)) || (rdBtnBackupServer.Checked && !String.IsNullOrWhiteSpace(txtBxBackupServerName.Text));
+            bool filesAndFoldersOk = !String.IsNullOrWhiteSpace(txtBxDestination.Text);
 
             // Schedule Tab
             bool scheduleOk = (rdBtnEvery.Checked && cmbBxEvery.SelectedIndex != -1) || (rdBtnWeekly.Checked && cmbBxWeekly.SelectedIndex != -1) || (rdBtnMonthly.Checked && cmbBxWeekly.SelectedIndex != -1);
@@ -425,48 +402,11 @@ namespace SmartSingularity.PstBackupSettings
         // Files and Folders Tab
 
         /// <summary>
-        /// Occurs when the user change the destination type (File System or Backup Server)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void rdBtnDestination_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdBtnFileSystem.Checked) // Destination : File System
-            {
-                txtBxDestination.Enabled = !_gpoSettings.IsFilesAndFoldersDestinationPathDefine;
-                txtBxBackupServerName.Enabled = false;
-                nupBackupServerPort.Enabled = false;
-                chkBxCompressFile.Enabled = rdBtnMethodFull.Checked;
-                chkBxCompressFile.Checked = rdBtnMethodFull.Checked && _localSettings.FilesAndFoldersCompressFiles;
-            }
-            else                        // Destination : Backup Server
-            {
-                txtBxDestination.Enabled = false;
-                chkBxCompressFile.Checked = false;
-                chkBxCompressFile.Enabled = false;
-                txtBxBackupServerName.Enabled = !_gpoSettings.IsFilesAndFoldersBackupServerDefine;
-                nupBackupServerPort.Enabled = !_gpoSettings.IsFilesAndFoldersBackupPortDefine;
-            }
-
-            ValidateData();
-        }
-
-        /// <summary>
         /// Occurs when user change the destination path of the backup
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void txtBxDestination_TextChanged(object sender, EventArgs e)
-        {
-            ValidateData();
-        }
-
-        /// <summary>
-        /// Occurs when the user change the backup server name
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtBxBackupServerName_TextChanged(object sender, EventArgs e)
         {
             ValidateData();
         }
@@ -563,8 +503,8 @@ namespace SmartSingularity.PstBackupSettings
         /// <param name="e"></param>
         private void rdBtnMethodFull_CheckedChanged(object sender, EventArgs e)
         {
-            chkBxCompressFile.Enabled = rdBtnMethodFull.Checked && rdBtnFileSystem.Checked;
-            chkBxCompressFile.Checked = !chkBxCompressFile.Enabled ? false : (rdBtnFileSystem.Checked && _localSettings.FilesAndFoldersCompressFiles);
+            chkBxCompressFile.Enabled = rdBtnMethodFull.Checked;
+            chkBxCompressFile.Checked = !chkBxCompressFile.Enabled ? false : _localSettings.FilesAndFoldersCompressFiles;
         }
 
         /// <summary>

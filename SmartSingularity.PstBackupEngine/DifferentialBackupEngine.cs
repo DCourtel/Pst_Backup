@@ -22,10 +22,7 @@ namespace SmartSingularity.PstBackupEngine
         public DifferentialBackupEngine(ApplicationSettings appSettings) : base(appSettings)
         {
             _clientDb = new ClientDb(_dbPath);
-            if (appSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.FileSystem)
-            {
-                _clientDb.Initialize();
-            }
+            _clientDb.Initialize();
         }
 
 #if(DEBUG)
@@ -38,10 +35,7 @@ namespace SmartSingularity.PstBackupEngine
         {
             _dbPath = dbPath;
             _clientDb = new ClientDb(_dbPath);
-            if (appSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.FileSystem)
-            {
-                _clientDb.Initialize();
-            }
+            _clientDb.Initialize();
         }
 #endif
 
@@ -53,32 +47,25 @@ namespace SmartSingularity.PstBackupEngine
                 BackupResultInfo backupResult = new BackupResultInfo(pstFileToSave);
                 backupResult.IsCompressed = false;
 
-                if (AppSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.FileSystem)
-                {
-                    Logger.Write(30011, "Starting to backup " + pstFileToSave.SourcePath + " to file system with differential method", Logger.MessageSeverity.Debug);
-                    // Backup to SMB destination
-                    int fileId = CheckPrerequisitesForSmbBackup(pstFileToSave.SourcePath);
-                    string backupFile = _clientDb.GetBackupFilePath(pstFileToSave.SourcePath);
-                    List<string> remoteChunks = _clientDb.GetHashes(fileId);
-                    backupResult.ChunkCount = SynchonizeLocalAndRemoteFile(fileId, pstFileToSave.SourcePath, backupFile, remoteChunks);
+                Logger.Write(30011, "Starting to backup " + pstFileToSave.SourcePath + " to file system with differential method", Logger.MessageSeverity.Debug);
+                
+                int fileId = CheckPrerequisitesForSmbBackup(pstFileToSave.SourcePath);
+                string backupFile = _clientDb.GetBackupFilePath(pstFileToSave.SourcePath);
+                List<string> remoteChunks = _clientDb.GetHashes(fileId);
+                backupResult.ChunkCount = SynchonizeLocalAndRemoteFile(fileId, pstFileToSave.SourcePath, backupFile, remoteChunks);
 
-                    string backupFileNewName = FileSystem.GetNewName(backupFile);
-                    FileSystem.RenameFile(backupFile, backupFileNewName);
-                    _clientDb.RenameBackupFile(pstFileToSave.SourcePath, backupFileNewName);
-                    pstFileToSave.LastSuccessfulBackup = DateTime.Now;
-                    pstFileToSave.Save();
-                    backupResult.RemotePath = backupFileNewName;
-                    backupResult.CompressedSize = 0;
-                    backupResult.ErrorCode = BackupResultInfo.BackupResult.Success;
-                    backupResult.ErrorMessage = String.Empty;
-                    backupResult.EndTime = DateTime.UtcNow;
-                    Logger.Write(30012, pstFileToSave + " have been successfuly saved", Logger.MessageSeverity.Debug);
-                }
-                else
-                {
-                    // Backup to Server
+                string backupFileNewName = FileSystem.GetNewName(backupFile);
+                FileSystem.RenameFile(backupFile, backupFileNewName);
+                _clientDb.RenameBackupFile(pstFileToSave.SourcePath, backupFileNewName);
+                pstFileToSave.LastSuccessfulBackup = DateTime.Now;
+                pstFileToSave.Save();
+                backupResult.RemotePath = backupFileNewName;
+                backupResult.CompressedSize = 0;
+                backupResult.ErrorCode = BackupResultInfo.BackupResult.Success;
+                backupResult.ErrorMessage = String.Empty;
+                backupResult.EndTime = DateTime.UtcNow;
+                Logger.Write(30012, pstFileToSave + " have been successfuly saved", Logger.MessageSeverity.Debug);
 
-                }
                 if (!base.IsCancelRequired)
                 {
                     BackupFinished(new BackupFinishedEventArgs(pstFileToSave, backupResult));

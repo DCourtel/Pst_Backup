@@ -31,18 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSettings));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabFilesAndFolders = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtBxDestination = new System.Windows.Forms.TextBox();
             this.chkBxCompressFile = new System.Windows.Forms.CheckBox();
             this.chkLstBxPstFiles = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.grpBxBackupDestination = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.nupBackupServerPort = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.rdBtnBackupServer = new System.Windows.Forms.RadioButton();
-            this.rdBtnFileSystem = new System.Windows.Forms.RadioButton();
-            this.txtBxBackupServerName = new System.Windows.Forms.TextBox();
-            this.txtBxDestination = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.grpBxSchedule = new System.Windows.Forms.GroupBox();
             this.cmbBxWeekly = new System.Windows.Forms.ComboBox();
@@ -65,8 +58,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tabBackupAgent = new System.Windows.Forms.TabPage();
             this.grpBxBackupMethod = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.rdBtnMethodDifferential = new System.Windows.Forms.RadioButton();
             this.rdBtnMethodFull = new System.Windows.Forms.RadioButton();
             this.txtBxAdditionalSubnets = new System.Windows.Forms.TextBox();
@@ -76,8 +67,6 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabFilesAndFolders.SuspendLayout();
-            this.grpBxBackupDestination.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nupBackupServerPort)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.grpBxSchedule.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupMonthly)).BeginInit();
@@ -103,12 +92,24 @@
             // tabFilesAndFolders
             // 
             resources.ApplyResources(this.tabFilesAndFolders, "tabFilesAndFolders");
+            this.tabFilesAndFolders.Controls.Add(this.label9);
+            this.tabFilesAndFolders.Controls.Add(this.txtBxDestination);
             this.tabFilesAndFolders.Controls.Add(this.chkBxCompressFile);
             this.tabFilesAndFolders.Controls.Add(this.chkLstBxPstFiles);
             this.tabFilesAndFolders.Controls.Add(this.label1);
-            this.tabFilesAndFolders.Controls.Add(this.grpBxBackupDestination);
             this.tabFilesAndFolders.Name = "tabFilesAndFolders";
             this.tabFilesAndFolders.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // txtBxDestination
+            // 
+            resources.ApplyResources(this.txtBxDestination, "txtBxDestination");
+            this.txtBxDestination.Name = "txtBxDestination";
+            this.txtBxDestination.TextChanged += new System.EventHandler(this.txtBxDestination_TextChanged);
             // 
             // chkBxCompressFile
             // 
@@ -127,83 +128,6 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            // 
-            // grpBxBackupDestination
-            // 
-            resources.ApplyResources(this.grpBxBackupDestination, "grpBxBackupDestination");
-            this.grpBxBackupDestination.Controls.Add(this.label9);
-            this.grpBxBackupDestination.Controls.Add(this.nupBackupServerPort);
-            this.grpBxBackupDestination.Controls.Add(this.label8);
-            this.grpBxBackupDestination.Controls.Add(this.label2);
-            this.grpBxBackupDestination.Controls.Add(this.rdBtnBackupServer);
-            this.grpBxBackupDestination.Controls.Add(this.rdBtnFileSystem);
-            this.grpBxBackupDestination.Controls.Add(this.txtBxBackupServerName);
-            this.grpBxBackupDestination.Controls.Add(this.txtBxDestination);
-            this.grpBxBackupDestination.Name = "grpBxBackupDestination";
-            this.grpBxBackupDestination.TabStop = false;
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // nupBackupServerPort
-            // 
-            resources.ApplyResources(this.nupBackupServerPort, "nupBackupServerPort");
-            this.nupBackupServerPort.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.nupBackupServerPort.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nupBackupServerPort.Name = "nupBackupServerPort";
-            this.nupBackupServerPort.Value = new decimal(new int[] {
-            443,
-            0,
-            0,
-            0});
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // rdBtnBackupServer
-            // 
-            resources.ApplyResources(this.rdBtnBackupServer, "rdBtnBackupServer");
-            this.rdBtnBackupServer.Name = "rdBtnBackupServer";
-            this.rdBtnBackupServer.UseVisualStyleBackColor = true;
-            this.rdBtnBackupServer.CheckedChanged += new System.EventHandler(this.rdBtnDestination_CheckedChanged);
-            // 
-            // rdBtnFileSystem
-            // 
-            resources.ApplyResources(this.rdBtnFileSystem, "rdBtnFileSystem");
-            this.rdBtnFileSystem.Checked = true;
-            this.rdBtnFileSystem.Name = "rdBtnFileSystem";
-            this.rdBtnFileSystem.TabStop = true;
-            this.rdBtnFileSystem.UseVisualStyleBackColor = true;
-            this.rdBtnFileSystem.CheckedChanged += new System.EventHandler(this.rdBtnDestination_CheckedChanged);
-            // 
-            // txtBxBackupServerName
-            // 
-            resources.ApplyResources(this.txtBxBackupServerName, "txtBxBackupServerName");
-            this.txtBxBackupServerName.Name = "txtBxBackupServerName";
-            this.txtBxBackupServerName.TextChanged += new System.EventHandler(this.txtBxBackupServerName_TextChanged);
-            // 
-            // txtBxDestination
-            // 
-            resources.ApplyResources(this.txtBxDestination, "txtBxDestination");
-            this.txtBxDestination.Name = "txtBxDestination";
-            this.txtBxDestination.TextChanged += new System.EventHandler(this.txtBxDestination_TextChanged);
             // 
             // tabPage2
             // 
@@ -415,22 +339,10 @@
             // grpBxBackupMethod
             // 
             resources.ApplyResources(this.grpBxBackupMethod, "grpBxBackupMethod");
-            this.grpBxBackupMethod.Controls.Add(this.label11);
-            this.grpBxBackupMethod.Controls.Add(this.label10);
             this.grpBxBackupMethod.Controls.Add(this.rdBtnMethodDifferential);
             this.grpBxBackupMethod.Controls.Add(this.rdBtnMethodFull);
             this.grpBxBackupMethod.Name = "grpBxBackupMethod";
             this.grpBxBackupMethod.TabStop = false;
-            // 
-            // label11
-            // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.Name = "label11";
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
             // 
             // rdBtnMethodDifferential
             // 
@@ -500,9 +412,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabFilesAndFolders.ResumeLayout(false);
             this.tabFilesAndFolders.PerformLayout();
-            this.grpBxBackupDestination.ResumeLayout(false);
-            this.grpBxBackupDestination.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nupBackupServerPort)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.grpBxSchedule.ResumeLayout(false);
             this.grpBxSchedule.PerformLayout();
@@ -526,7 +435,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabFilesAndFolders;
         private System.Windows.Forms.CheckBox chkBxCompressFile;
-        private System.Windows.Forms.TextBox txtBxDestination;
         private System.Windows.Forms.CheckedListBox chkLstBxPstFiles;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -555,19 +463,11 @@
         private System.Windows.Forms.CheckBox chkBxDontBackupOverWan;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.GroupBox grpBxBackupDestination;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown nupBackupServerPort;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton rdBtnBackupServer;
-        private System.Windows.Forms.RadioButton rdBtnFileSystem;
-        private System.Windows.Forms.TextBox txtBxBackupServerName;
         private System.Windows.Forms.GroupBox grpBxBackupMethod;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.RadioButton rdBtnMethodDifferential;
         private System.Windows.Forms.RadioButton rdBtnMethodFull;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtBxDestination;
     }
 }
 
