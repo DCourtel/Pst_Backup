@@ -179,29 +179,15 @@
     </policy>
 
     <!-- Files And Folders - Destination Type -->
-    <policy name="DestinationType" class="User"
-            displayName="$(string.DestinationType)"
-            explainText="$(string.DestinationType_Help)"
-            presentation="$(presentation.DestinationType)"
+    <policy name="DestinationPath" class="User"
+            displayName="$(string.DestinationPath)"
+            explainText="$(string.DestinationPath_Help)"
+            presentation="$(presentation.DestinationPath)"
             key="Software\Policies\PST Backup\Settings\Files And Folders">
       <parentCategory ref="FilesAndFolders" />
       <supportedOn ref="windows:SUPPORTED_WindowsVista" />
       <elements>
-        <enum id="Enum_DestinationType" valueName="DestinationType">
-          <item displayName="$(string.DestinationTypeFileSystem)">
-            <value>
-              <decimal value="0" />
-            </value>
-          </item>
-          <item displayName="$(string.DestinationTypeBackupServer)">
-            <value>
-              <decimal value="1" />
-            </value>
-          </item>
-        </enum>
         <text id="TXT_DestinationPath" valueName="DestinationPath"  required="false" />
-        <text id="TXT_BackupServer" valueName="BackupServer"  required="false" />
-        <decimal id="DEC_BackupPort" valueName="BackupPort" minValue="1" maxValue="65535" required="true" />
       </elements>
     </policy>
 

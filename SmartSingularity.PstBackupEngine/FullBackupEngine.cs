@@ -19,28 +19,20 @@ namespace SmartSingularity.PstBackupEngine
         {
             PSTRegistryEntry pstFileToSave = (PSTRegistryEntry)objPstFileToSave;
             BackupResultInfo backupResult = new BackupResultInfo(pstFileToSave);
+            backupResult.IsCompressed = AppSettings.FilesAndFoldersCompressFiles;
             try
             {
+                Logger.Write(30015, "Starting to backup " + pstFileToSave.SourcePath + " to file system with full method\r\n", Logger.MessageSeverity.Debug);
+                // Backup to SMB destination
+                backupResult = backupResult.IsCompressed ? BackupWithCompression(pstFileToSave, backupResult) : BackupWithoutCompression(pstFileToSave, backupResult);
 
-                if (AppSettings.FilesAndFoldersDestinationType == ApplicationSettings.BackupDestinationType.FileSystem)
-                {
-                    Logger.Write(30015, "Starting to backup " + pstFileToSave.SourcePath + " to file system with full method\r\n", Logger.MessageSeverity.Debug);
-                    // Backup to SMB destination
-                    backupResult.IsCompressed = AppSettings.FilesAndFoldersCompressFiles;
-                    backupResult = AppSettings.FilesAndFoldersCompressFiles ? BackupToSmbWithCompression(pstFileToSave, backupResult) : BackupToSmbWithoutCompression(pstFileToSave, backupResult);
-                }
-                else
-                {
-                    // Backup to Server
-
-                }
                 backupResult.ErrorCode = BackupResultInfo.BackupResult.Success;
                 backupResult.ErrorMessage = String.Empty;
                 pstFileToSave.LastSuccessfulBackup = DateTime.UtcNow;
             }
             catch (BackupCanceledException ex)
             {
-                Logger.Write(24, "Backup of " + ex.PstFilename + " have been canceled by user", Logger.MessageSeverity.Warning);
+                Logger.Write(24, "Backup of " + ex.PstFilename + " have been canceled by the user", Logger.MessageSeverity.Warning);
             }
             catch (NotEnoughEstimatedDiskSpace ex)
             {
@@ -62,7 +54,7 @@ namespace SmartSingularity.PstBackupEngine
             }
         }
 
-        private BackupResultInfo BackupToSmbWithCompression(PSTRegistryEntry pstFileToSave, BackupResultInfo backupResult)
+        private BackupResultInfo BackupWithCompression(PSTRegistryEntry pstFileToSave, BackupResultInfo backupResult)
         {
             FileInfo sourceFile = new FileInfo(pstFileToSave.SourcePath);
             string finalDestinationFolder = FileSystem.ExpandDestinationFolder(AppSettings.FilesAndFoldersDestinationPath);
@@ -92,7 +84,7 @@ namespace SmartSingularity.PstBackupEngine
             return backupResult;
         }
 
-        private BackupResultInfo BackupToSmbWithoutCompression(PSTRegistryEntry pstFileToSave, BackupResultInfo backupResult)
+        private BackupResultInfo BackupWithoutCompression(PSTRegistryEntry pstFileToSave, BackupResultInfo backupResult)
         {
             FileInfo sourceFile = new FileInfo(pstFileToSave.SourcePath);
             string finalDestinationFolder = FileSystem.ExpandDestinationFolder(AppSettings.FilesAndFoldersDestinationPath);

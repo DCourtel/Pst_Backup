@@ -19,12 +19,6 @@ namespace SmartSingularity.PstBackupSettings
             Differential
         }
 
-        public enum BackupDestinationType
-        {
-            FileSystem,
-            BackupServer
-        }
-
         public enum BackupPolicy
         {
             EveryX,
@@ -65,10 +59,7 @@ namespace SmartSingularity.PstBackupSettings
         private Logger.MessageSeverity _eventLogseverity = Logger.MessageSeverity.Information;
 
         private bool _filesAndFoldersCompressFiles = false;
-        private BackupDestinationType _filesAndFoldersDestinationType = BackupDestinationType.FileSystem;
         private string _filesAndFoldersDestinationPath = String.Empty;
-        private string _filesAndFoldersBackupServer = String.Empty;
-        private int _filesAndFoldersBackupPort = 443;
         private bool _filesAndFoldersSetExclusiveNTFSPermissions = false;
         private string _filesAndFoldersAdditionalNTFSFullcontrol = String.Empty;
         private string _filesAndFoldersAdditionalNTFSReadWrite = String.Empty;
@@ -135,14 +126,11 @@ namespace SmartSingularity.PstBackupSettings
         public Logger.MessageSeverity EventLogSeverity { get { return _eventLogseverity; } set { _eventLogseverity = value; } }
 
         public bool FilesAndFoldersCompressFiles { get { return _filesAndFoldersCompressFiles; } set { _filesAndFoldersCompressFiles = value; } }
-        public BackupDestinationType FilesAndFoldersDestinationType { get { return _filesAndFoldersDestinationType; } set { _filesAndFoldersDestinationType = value; } }
         public string FilesAndFoldersDestinationPath { get { return _filesAndFoldersDestinationPath; } set { _filesAndFoldersDestinationPath = value; } }
-        public string FilesAndFoldersBackupServer { get { return _filesAndFoldersBackupServer; } set { _filesAndFoldersBackupServer = value; } }
-        public int FilesAndFoldersBackupPort { get { return _filesAndFoldersBackupPort; } set { _filesAndFoldersBackupPort = value; } }
         public bool FilesAndFoldersSetExclusiveNTFSPermissions { get { return _filesAndFoldersSetExclusiveNTFSPermissions; } set { _filesAndFoldersSetExclusiveNTFSPermissions = value; } }
         public string FilesAndFoldersAdditionalNTFSFullcontrol { get { return _filesAndFoldersAdditionalNTFSFullcontrol; } set { _filesAndFoldersAdditionalNTFSFullcontrol = value; } }
         public string FilesAndFoldersAdditionalNTFSReadWrite { get { return _filesAndFoldersAdditionalNTFSReadWrite; } set { _filesAndFoldersAdditionalNTFSReadWrite = value; } }
-        public bool FilesAndFoldersBackupAllPst { get { return _filesAndFoldersBackupAllPst; } set { _filesAndFoldersBackupAllPst = value; } } 
+        public bool FilesAndFoldersBackupAllPst { get { return _filesAndFoldersBackupAllPst; } set { _filesAndFoldersBackupAllPst = value; } }
 
         public bool ReportingReportToServer { get { return _reportToServer; } set { _reportToServer = value; } }
         public string ReportingServer { get { return _reportingServer; } set { _reportingServer = value; } }
@@ -162,10 +150,7 @@ namespace SmartSingularity.PstBackupSettings
         public bool IsEventLogSeverityDefine { get; set; }
 
         public bool IsFilesAndFoldersCompressFilesDefine { get; set; }
-        public bool IsFilesAndFoldersDestinationTypeDefine { get; set; }
         public bool IsFilesAndFoldersDestinationPathDefine { get; set; }
-        public bool IsFilesAndFoldersBackupServerDefine { get; set; }
-        public bool IsFilesAndFoldersBackupPortDefine { get; set; }
 
         public bool IsReportingDefine { get; set; }
         public bool IsReportingServerDefine { get; set; }
@@ -233,14 +218,8 @@ namespace SmartSingularity.PstBackupSettings
 
             if (gpoSettings.IsFilesAndFoldersCompressFilesDefine)
                 FilesAndFoldersCompressFiles = gpoSettings.FilesAndFoldersCompressFiles;
-            if (gpoSettings.IsFilesAndFoldersDestinationTypeDefine)
+            if (gpoSettings.IsFilesAndFoldersDestinationPathDefine)
                 FilesAndFoldersDestinationPath = gpoSettings.FilesAndFoldersDestinationPath;
-            if (!String.IsNullOrWhiteSpace(gpoSettings.FilesAndFoldersDestinationPath))
-                FilesAndFoldersDestinationPath = gpoSettings.FilesAndFoldersDestinationPath;
-            if (!String.IsNullOrWhiteSpace(gpoSettings.FilesAndFoldersBackupServer))
-                FilesAndFoldersBackupServer = gpoSettings.FilesAndFoldersBackupServer;
-            if (gpoSettings.IsFilesAndFoldersBackupPortDefine)
-                FilesAndFoldersBackupPort = gpoSettings.FilesAndFoldersBackupPort;
             FilesAndFoldersBackupAllPst = gpoSettings.FilesAndFoldersBackupAllPst;
 
             if (gpoSettings.IsReportingDefine)
@@ -285,10 +264,7 @@ namespace SmartSingularity.PstBackupSettings
                 SaveIntValue(settingsKey, "Event Log", "LogEvent", EventLogActivated ? 1 : 0);
 
                 SaveIntValue(settingsKey, "Files And Folders", "CompressFiles", FilesAndFoldersCompressFiles ? 1 : 0);
-                SaveIntValue(settingsKey, "Files And Folders", "DestinationType", (int)FilesAndFoldersDestinationType);
                 SaveStringValue(settingsKey, "Files And Folders", "DestinationPath", FilesAndFoldersDestinationPath.ToString());
-                SaveStringValue(settingsKey, "Files And Folders", "BackupServer", FilesAndFoldersBackupServer.ToString());
-                SaveIntValue(settingsKey, "Files And Folders", "BackupPort", FilesAndFoldersBackupPort);
 
                 SaveIntValue(settingsKey, "Reporting", "Report", ReportingReportToServer ? 1 : 0);
                 SaveStringValue(settingsKey, "Reporting", "Server", ReportingServer.ToString());
@@ -325,13 +301,7 @@ namespace SmartSingularity.PstBackupSettings
         /// <returns>Returns true if the settings are correctly defined, false otherwise</returns>
         public bool IsDestinationProperlyDefine()
         {
-            if ((FilesAndFoldersDestinationType == BackupDestinationType.FileSystem && String.IsNullOrWhiteSpace(FilesAndFoldersDestinationPath)) ||
-                (FilesAndFoldersDestinationType == BackupDestinationType.BackupServer && String.IsNullOrWhiteSpace(FilesAndFoldersBackupServer)))
-            {
-                return false;
-            }
-
-            return true;
+            return String.IsNullOrWhiteSpace(FilesAndFoldersDestinationPath);
         }
 
         #endregion public Methods 
@@ -556,15 +526,6 @@ namespace SmartSingularity.PstBackupSettings
                         IsFilesAndFoldersCompressFilesDefine = _readSettingsFrom == SourceSettings.GPO;
                     }
 
-                    data = filesAndFoldersKey.GetValue("DestinationType", null);
-                    if (data == null)
-                        CreateMissingIntValue(filesAndFoldersKey, "DestinationType", FilesAndFoldersCompressFiles ? 1 : 0);
-                    else
-                    {
-                        FilesAndFoldersDestinationType = (BackupDestinationType)((int)data);
-                        IsFilesAndFoldersDestinationTypeDefine = _readSettingsFrom == SourceSettings.GPO;
-                    }
-
                     data = filesAndFoldersKey.GetValue("DestinationPath", null);
                     if (data == null)
                         CreateMissingStringValue(filesAndFoldersKey, "DestinationPath", FilesAndFoldersDestinationPath);
@@ -572,24 +533,6 @@ namespace SmartSingularity.PstBackupSettings
                     {
                         FilesAndFoldersDestinationPath = data.ToString();
                         IsFilesAndFoldersDestinationPathDefine = true;
-                    }
-
-                    data = filesAndFoldersKey.GetValue("BackupServer", null);
-                    if (data == null)
-                        CreateMissingStringValue(filesAndFoldersKey, "BackupServer", FilesAndFoldersBackupServer);
-                    else
-                    {
-                        FilesAndFoldersBackupServer = data.ToString();
-                        IsFilesAndFoldersBackupServerDefine = true;
-                    }
-
-                    data = filesAndFoldersKey.GetValue("BackupPort", null);
-                    if (data == null)
-                        CreateMissingIntValue(filesAndFoldersKey, "BackupPort", FilesAndFoldersBackupPort);
-                    else
-                    {
-                        FilesAndFoldersBackupPort = (int)data;
-                        IsFilesAndFoldersBackupPortDefine = _readSettingsFrom == SourceSettings.GPO;
                     }
 
                     data = filesAndFoldersKey.GetValue("SetExclusiveNTFSPermissions", null);

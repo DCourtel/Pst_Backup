@@ -95,19 +95,14 @@
       </string>
 
       <!-- Files And Folders - Destination Type -->
-      <string id="DestinationType">Destination pour les sauvegardes.</string>
-      <string id="DestinationType_Help">Ce paramètre de stratégie vous permet de déterminer l'emplacement où seront envoyé les sauvegardes.
+      <string id="DestinationPath">Répertoire de destination pour les sauvegardes.</string>
+      <string id="DestinationPath_Help">Ce paramètre de stratégie vous permet de déterminer l'emplacement où seront envoyé les sauvegardes.
 
-        Si vous activez ce paramètre de stratégie, vous pourrez préciser si les sauvegardes se font vers en dossier ou vers un serveur de sauvegarde dédié.
-        Choisissez le type de destination dans la liste déroulante.
-        Si vous choisissez «Système de Fichiers» en tant que destination, vous devez indiquer le répertoire de destination au format UNC. 
+        Si vous activez ce paramètre de stratégie, vous devez indiquer le répertoire de destination au format UNC.
         Les variables %ComputerName% et %UserLogin% sont automatiquement résoluent par les postes clients.
-        Si vous choisissez «Serveur de Sauvegarde» en tant que destination, vous devez indiquer l'adresse IP ou le nom du serveur de sauvegarde dédié ainsi que le port sur lequel il écoute.
-        
+
         Si vous désactivez ou ne configurez pas ce paramètre de stratégie, les utilisateurs pourront modifier eux-mêmes ce paramètre localement sur leur poste.
       </string>
-      <string id="DestinationTypeFileSystem">Système de Fichiers</string>
-      <string id="DestinationTypeBackupServer">Serveur de Sauvegarde</string>
       
     <!-- Files And Folders - BackupAllPst -->
       <string id="BackupAllPst">Sauvegarder tous les fichiers PST connecté à Outlook.</string>
@@ -183,15 +178,10 @@
       </presentation>
 
       <!-- Files And Folders -->
-      <presentation id="DestinationType">
-        <dropdownList refId="Enum_DestinationType" defaultItem="0" noSort="true">Type de destination : </dropdownList>
+      <presentation id="DestinationPath">
         <textBox refId="TXT_DestinationPath">
           <label>Dossier de sauvegarde : </label>
         </textBox>
-        <textBox refId="TXT_BackupServer">
-          <label>Serveur de Sauvegarde : </label>
-        </textBox>
-        <decimalTextBox refId="DEC_BackupPort">Port : </decimalTextBox>
       </presentation>
 
       <!-- Schedule -->

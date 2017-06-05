@@ -96,20 +96,14 @@
       </string>
 
       <!-- Files And Folders -->
-      <string id="DestinationType">Backup destination.</string>
-      <string id="DestinationType_Help">This policy setting allows you to specify the place where backups will be sent.
+      <string id="DestinationPath">Backup destination.</string>
+      <string id="DestinationPath_Help">This policy setting allows you to specify the place where backups will be sent.
 
-        If you enable this policy setting, you will be able to choose if backups are sent to a folder or to a dedicated Backup Server.
-        Choose the type of destination in the dropdown list.
-        If you choose «File System» as the destination, you must provide the path to the folder as an UNC path.
+        If you enable this policy setting, you must provide the path to the folder as an UNC path.
         %ComputerName% and %UserLogin% variables are automatically resolved by clients.
-
-        If you choose «Backup Server» as the destination,you must provide the IP address or the name of the dedicated Backup Server as well as the port.
 
         If you disable or do not configure this policy setting, users can modify this setting themselves locally on their computer.
       </string>
-      <string id="DestinationTypeFileSystem">File System</string>
-      <string id="DestinationTypeBackupServer">Backup Server</string>
 
       <!-- Files And Folders - BackupAllPst -->
       <string id="BackupAllPst">Backup all Pst files connected in Outlook.</string>
@@ -185,15 +179,10 @@
       </presentation>
 
       <!-- Files And Folders -->
-      <presentation id="DestinationType">
-        <dropdownList refId="Enum_DestinationType" defaultItem="0" noSort="true">Destination Type:</dropdownList>
+      <presentation id="DestinationPath">
         <textBox refId="TXT_DestinationPath">
           <label>Backup Folder: </label>
         </textBox>
-        <textBox refId="TXT_BackupServer">
-          <label>Backup Server: </label>
-        </textBox>
-        <decimalTextBox refId="DEC_BackupPort">Port: </decimalTextBox>
       </presentation>
 
       <!-- Schedule -->

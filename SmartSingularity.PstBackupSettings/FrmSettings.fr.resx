@@ -117,9 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 111</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 13</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Répertoire de destination : </value>
+  </data>
+  <data name="txtBxDestination.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 108</value>
+  </data>
+  <data name="txtBxDestination.Size" type="System.Drawing.Size, System.Drawing">
+    <value>382, 20</value>
+  </data>
   <data name="chkBxCompressFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 249</value>
+    <value>149, 134</value>
   </data>
   <data name="chkBxCompressFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 17</value>
@@ -133,62 +152,11 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Fichiers Pst à sauvegarder : </value>
   </data>
-  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 44</value>
-  </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Chemin : </value>
-  </data>
-  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 97</value>
-  </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 13</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>Port du Serveur : </value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 97</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 13</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Nom du serveur ou IP : </value>
-  </data>
-  <data name="rdBtnBackupServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 17</value>
-  </data>
-  <data name="rdBtnBackupServer.Text" xml:space="preserve">
-    <value>Serveur de sauvegarde : </value>
-  </data>
-  <data name="rdBtnFileSystem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 17</value>
-  </data>
-  <data name="rdBtnFileSystem.Text" xml:space="preserve">
-    <value>Système de fichier : </value>
-  </data>
-  <data name="txtBxBackupServerName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 94</value>
-  </data>
-  <data name="txtBxBackupServerName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 20</value>
-  </data>
-  <data name="txtBxDestination.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 41</value>
-  </data>
-  <data name="txtBxDestination.Size" type="System.Drawing.Size, System.Drawing">
-    <value>382, 20</value>
-  </data>
   <data name="tabFilesAndFolders.Text" xml:space="preserve">
     <value>Fichiers et Dossiers</value>
   </data>
   <data name="cmbBxWeekly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 78</value>
+    <value>123, 73</value>
   </data>
   <data name="cmbBxEvery.Items" xml:space="preserve">
     <value>Jours</value>
@@ -203,7 +171,7 @@
     <value>181, 30</value>
   </data>
   <data name="nupMonthly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 125</value>
+    <value>123, 117</value>
   </data>
   <data name="nupEvery.Location" type="System.Drawing.Point, System.Drawing">
     <value>123, 31</value>
@@ -288,12 +256,6 @@ Ou des erreurs tels que "Impossible de lire le fichier PST", " Impossible d'écr
   </data>
   <data name="tabReporting.Text" xml:space="preserve">
     <value>Rapport</value>
-  </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Plus rapide mais moins sûre lorsqu'utilisée avec un système de fichiers. Recommandée lorsque la sauvegarde cible un serveur de sauvegarde.</value>
-  </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Plus lente mais plus sûre. Recommandée lorsque la cible de la sauvegarde est un système de fichiers.</value>
   </data>
   <data name="rdBtnMethodDifferential.Size" type="System.Drawing.Size, System.Drawing">
     <value>286, 17</value>
@@ -1993,5 +1955,8 @@ Ou des erreurs tels que "Impossible de lire le fichier PST", " Impossible d'écr
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAA
 </value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Paramètres Pst Backup</value>
   </data>
 </root>
