@@ -23,8 +23,7 @@ ___
 * Clients can be deployed through MSI  
 * Clients behaviors can be managed by GPO  
 * Available languages : English, Français  
-* _Backup to a Pst_Backup Server (to be done)_  
-* _Clients can report to a Pst_Backup Server (partially done)_  
+* Clients can report to a Pst_Backup Server  
 * _Pst_Backup can display graphical report (to be done)_  
 * _Send periodic email alerts to admin to notify on users that don't backup their PST files (to be done)_  
 * Etc…
