@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{76259FFC-FD4B-4C62-816B-E095A0A14781}</ProjectGuid>
+    <ProjectGuid>{3B630A34-736C-4CB9-8B84-5DE174CCF4E2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>FakeClient</RootNamespace>
-    <AssemblyName>FakeClient</AssemblyName>
+    <RootNamespace>SmartSingularity.FakeClients</RootNamespace>
+    <AssemblyName>SmartSingularity.FakeClients</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -47,6 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\ReportService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="FakeClient.cs" />
     <Compile Include="FakePstFile.cs" />
     <Compile Include="FakeUser.cs" />
@@ -70,6 +75,25 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Connected Services\ReportService\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReportService\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReportService\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReportService\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReportService\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReportService\item5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ReportService\ReportServer.wsdl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -84,18 +108,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SmartSingularity.PstBackupEngine\SmartSingularity.PstBackupEngine.csproj">
-      <Project>{b3175d98-927b-4566-8bb7-f915d1a17664}</Project>
-      <Name>SmartSingularity.PstBackupEngine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SmartSingularity.PstBackupLogger\SmartSingularity.PstBackupLogger.csproj">
-      <Project>{9abbf07f-0d27-4f25-bac9-c68728c43876}</Project>
-      <Name>SmartSingularity.PstBackupLogger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SmartSingularity.PstBackupReportServer\SmartSingularity.PstBackupReportServer.csproj">
-      <Project>{1f08865b-0db8-491a-92f4-9e2b364d0406}</Project>
-      <Name>SmartSingularity.PstBackupReportServer</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ReportService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReportService\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReportService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReportService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ReportService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

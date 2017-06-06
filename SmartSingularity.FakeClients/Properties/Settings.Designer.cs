@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FakeClient.Properties
+namespace SmartSingularity.FakeClients.Properties
 {
 
 

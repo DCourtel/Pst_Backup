@@ -1,4 +1,4 @@
-﻿namespace FakeClient
+﻿namespace SmartSingularity.FakeClients
 {
     partial class FrmFakeClientLauncher
     {
@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.nupClientsCount = new System.Windows.Forms.NumericUpDown();
             this.chkBxCreatePstFiles = new System.Windows.Forms.CheckBox();
@@ -35,18 +39,18 @@
             this.btnStartClients = new System.Windows.Forms.Button();
             this.btnStopClients = new System.Windows.Forms.Button();
             this.dgvClients = new System.Windows.Forms.DataGridView();
-            this.ClientObj = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ComputerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PstCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Activity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDeleteClients = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtBxPstFolder = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnCreateClients = new System.Windows.Forms.Button();
+            this.ClientObj = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ComputerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PstCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.nupClientsCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
             this.SuspendLayout();
@@ -111,6 +115,7 @@
             this.btnStartClients.TabIndex = 4;
             this.btnStartClients.Text = "&Démarrer les clients";
             this.btnStartClients.UseVisualStyleBackColor = true;
+            this.btnStartClients.Click += new System.EventHandler(this.btnStartClients_Click);
             // 
             // btnStopClients
             // 
@@ -122,15 +127,28 @@
             this.btnStopClients.TabIndex = 5;
             this.btnStopClients.Text = "&Arrêter les clients";
             this.btnStopClients.UseVisualStyleBackColor = true;
+            this.btnStopClients.Click += new System.EventHandler(this.btnStopClients_Click);
             // 
             // dgvClients
             // 
             this.dgvClients.AllowUserToAddRows = false;
             this.dgvClients.AllowUserToDeleteRows = false;
             this.dgvClients.AllowUserToOrderColumns = true;
+            this.dgvClients.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            this.dgvClients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvClients.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Khaki;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvClients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ClientObj,
@@ -138,69 +156,26 @@
             this.UserName,
             this.ClientVersion,
             this.PstCount,
-            this.Activity,
+            this.State,
             this.ClientID});
+            this.dgvClients.EnableHeadersVisualStyles = false;
             this.dgvClients.Location = new System.Drawing.Point(12, 122);
             this.dgvClients.Name = "dgvClients";
             this.dgvClients.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvClients.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvClients.RowHeadersVisible = false;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            this.dgvClients.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvClients.Size = new System.Drawing.Size(820, 215);
             this.dgvClients.TabIndex = 6;
-            // 
-            // ClientObj
-            // 
-            this.ClientObj.HeaderText = "ClientObj";
-            this.ClientObj.Name = "ClientObj";
-            this.ClientObj.ReadOnly = true;
-            this.ClientObj.Visible = false;
-            // 
-            // ComputerName
-            // 
-            this.ComputerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ComputerName.FillWeight = 15F;
-            this.ComputerName.HeaderText = "Computer Name";
-            this.ComputerName.Name = "ComputerName";
-            this.ComputerName.ReadOnly = true;
-            // 
-            // UserName
-            // 
-            this.UserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.UserName.FillWeight = 15F;
-            this.UserName.HeaderText = "User Name";
-            this.UserName.Name = "UserName";
-            this.UserName.ReadOnly = true;
-            // 
-            // ClientVersion
-            // 
-            this.ClientVersion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ClientVersion.FillWeight = 20F;
-            this.ClientVersion.HeaderText = "Client Version";
-            this.ClientVersion.Name = "ClientVersion";
-            this.ClientVersion.ReadOnly = true;
-            // 
-            // PstCount
-            // 
-            this.PstCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PstCount.FillWeight = 10F;
-            this.PstCount.HeaderText = "Pst Count";
-            this.PstCount.Name = "PstCount";
-            this.PstCount.ReadOnly = true;
-            // 
-            // Activity
-            // 
-            this.Activity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Activity.FillWeight = 10F;
-            this.Activity.HeaderText = "Activity";
-            this.Activity.Name = "Activity";
-            this.Activity.ReadOnly = true;
-            // 
-            // ClientID
-            // 
-            this.ClientID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ClientID.FillWeight = 30F;
-            this.ClientID.HeaderText = "Client ID";
-            this.ClientID.Name = "ClientID";
-            this.ClientID.ReadOnly = true;
             // 
             // btnDeleteClients
             // 
@@ -253,6 +228,61 @@
             this.btnCreateClients.UseVisualStyleBackColor = true;
             this.btnCreateClients.Click += new System.EventHandler(this.btnCreateClients_Click);
             // 
+            // ClientObj
+            // 
+            this.ClientObj.HeaderText = "ClientObj";
+            this.ClientObj.Name = "ClientObj";
+            this.ClientObj.ReadOnly = true;
+            this.ClientObj.Visible = false;
+            // 
+            // ComputerName
+            // 
+            this.ComputerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ComputerName.FillWeight = 15F;
+            this.ComputerName.HeaderText = "Computer Name";
+            this.ComputerName.Name = "ComputerName";
+            this.ComputerName.ReadOnly = true;
+            // 
+            // UserName
+            // 
+            this.UserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.UserName.FillWeight = 15F;
+            this.UserName.HeaderText = "User Name";
+            this.UserName.Name = "UserName";
+            this.UserName.ReadOnly = true;
+            // 
+            // ClientVersion
+            // 
+            this.ClientVersion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ClientVersion.FillWeight = 20F;
+            this.ClientVersion.HeaderText = "Client Version";
+            this.ClientVersion.Name = "ClientVersion";
+            this.ClientVersion.ReadOnly = true;
+            // 
+            // PstCount
+            // 
+            this.PstCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PstCount.FillWeight = 10F;
+            this.PstCount.HeaderText = "Pst Count";
+            this.PstCount.Name = "PstCount";
+            this.PstCount.ReadOnly = true;
+            // 
+            // State
+            // 
+            this.State.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.State.FillWeight = 10F;
+            this.State.HeaderText = "State";
+            this.State.Name = "State";
+            this.State.ReadOnly = true;
+            // 
+            // ClientID
+            // 
+            this.ClientID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ClientID.FillWeight = 30F;
+            this.ClientID.HeaderText = "Client ID";
+            this.ClientID.Name = "ClientID";
+            this.ClientID.ReadOnly = true;
+            // 
             // FrmFakeClientLauncher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,18 +321,18 @@
         private System.Windows.Forms.Button btnStartClients;
         private System.Windows.Forms.Button btnStopClients;
         private System.Windows.Forms.DataGridView dgvClients;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientObj;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ComputerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientVersion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PstCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Activity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientID;
         private System.Windows.Forms.Button btnDeleteClients;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtBxPstFolder;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.Button btnCreateClients;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientObj;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ComputerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientVersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PstCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn State;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientID;
     }
 }
 

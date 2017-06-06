@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Les informations générales relatives à un assembly dépendent de
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("FakeClient")]
+[assembly: AssemblyTitle("SmartSingularity.FakeClients")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FakeClient")]
+[assembly: AssemblyProduct("SmartSingularity.FakeClients")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Le GUID suivant est pour l'ID de la typelib si ce projet est exposé à COM
-[assembly: Guid("76259ffc-fd4b-4c62-816b-e095a0a14781")]
+[assembly: Guid("3b630a34-736c-4cb9-8b84-5de174ccf4e2")]
 
 // Les informations de version pour un assembly se composent des quatre valeurs suivantes :
 //

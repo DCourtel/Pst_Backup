@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupReportServer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupReportServer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:43000/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import schemaLocation="http://localhost:43000/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:43000/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupSettings" />
+  <xs:import schemaLocation="http://localhost:43000/?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupEngine" />
+  <xs:complexType name="Client">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ComputerName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastContactDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="Version" nillable="true" type="q1:Version" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Client" nillable="true" type="tns:Client" />
+  <xs:complexType name="PstFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="IsSetToBackup" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastSuccessfulBackup" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LocalPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Size" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PstFile" nillable="true" type="tns:PstFile" />
+  <xs:complexType name="BackupSession">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupSettings" minOccurs="0" name="BackupMethod" type="q2:ApplicationSettings.BackupMethod" />
+      <xs:element minOccurs="0" name="ChunkCount" type="xs:int" />
+      <xs:element minOccurs="0" name="CompressedSize" type="xs:long" />
+      <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupEngine" minOccurs="0" name="ErrorCode" type="q3:BackupResultInfo.BackupResult" />
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsCompressed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSchedule" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LocalPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RemotePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BackupSession" nillable="true" type="tns:BackupSession" />
+</xs:schema>

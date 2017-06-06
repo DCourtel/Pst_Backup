@@ -24,7 +24,7 @@ namespace SmartSingularity.PstBackupAgent
         private int _currentFileIndex = 0;
         private ReportService.ReportServerClient proxy;
         private System.Resources.ResourceManager _resMan = new System.Resources.ResourceManager("SmartSingularity.PstBackupAgent.Localization.Resources", typeof(FrmAgent).Assembly);
-
+        
         public FrmAgent()
         {
             InitializeComponent();
