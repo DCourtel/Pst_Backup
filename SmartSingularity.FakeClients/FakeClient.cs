@@ -31,9 +31,9 @@ namespace SmartSingularity.FakeClients
             UserName = FakeUser.GetRandomUserName();
             ClientVersion = GetRandomClientVersion();
             ClientId = Guid.NewGuid().ToString();
+            CreatePstFiles = createPstFiles;
             _pstFiles = GetFakePstFiles($"{pstLocalFolder}\\{ClientId}");
             LocalStorage = $"{pstLocalFolder}\\{ClientId}";
-            CreatePstFiles = createPstFiles;
             RowIndex = rowIndex;
 
             _proxy = new ReportService.ReportServerClient();
@@ -121,7 +121,7 @@ namespace SmartSingularity.FakeClients
 
             for (int i = 0; i < rnd.Next(1, 5); i++)
             {
-                FakePstFile pstFile = new FakePstFile(localFolder);
+                FakePstFile pstFile = new FakePstFile(localFolder, CreatePstFiles);
                 pstFiles.Add(pstFile);
             }
             return pstFiles;

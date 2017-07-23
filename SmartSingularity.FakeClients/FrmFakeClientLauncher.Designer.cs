@@ -39,11 +39,6 @@
             this.btnStartClients = new System.Windows.Forms.Button();
             this.btnStopClients = new System.Windows.Forms.Button();
             this.dgvClients = new System.Windows.Forms.DataGridView();
-            this.btnDeleteClients = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtBxPstFolder = new System.Windows.Forms.TextBox();
-            this.btnBrowse = new System.Windows.Forms.Button();
-            this.btnCreateClients = new System.Windows.Forms.Button();
             this.ClientObj = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ComputerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +46,11 @@
             this.PstCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDeleteClients = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtBxPstFolder = new System.Windows.Forms.TextBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.btnCreateClients = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nupClientsCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
             this.SuspendLayout();
@@ -177,57 +177,6 @@
             this.dgvClients.Size = new System.Drawing.Size(820, 215);
             this.dgvClients.TabIndex = 6;
             // 
-            // btnDeleteClients
-            // 
-            this.btnDeleteClients.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeleteClients.Enabled = false;
-            this.btnDeleteClients.Location = new System.Drawing.Point(12, 343);
-            this.btnDeleteClients.Name = "btnDeleteClients";
-            this.btnDeleteClients.Size = new System.Drawing.Size(135, 23);
-            this.btnDeleteClients.TabIndex = 7;
-            this.btnDeleteClients.Text = "Supprimer les clients";
-            this.btnDeleteClients.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 58);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(160, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Emplacement des fichiers PST : ";
-            // 
-            // txtBxPstFolder
-            // 
-            this.txtBxPstFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBxPstFolder.Location = new System.Drawing.Point(181, 55);
-            this.txtBxPstFolder.Name = "txtBxPstFolder";
-            this.txtBxPstFolder.Size = new System.Drawing.Size(570, 20);
-            this.txtBxPstFolder.TabIndex = 9;
-            this.txtBxPstFolder.Text = "E:\\Pst Backup\\Pst Files\\FakeClients";
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.Location = new System.Drawing.Point(757, 53);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowse.TabIndex = 10;
-            this.btnBrowse.Text = "&Parcourir…";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
-            // btnCreateClients
-            // 
-            this.btnCreateClients.Location = new System.Drawing.Point(12, 93);
-            this.btnCreateClients.Name = "btnCreateClients";
-            this.btnCreateClients.Size = new System.Drawing.Size(135, 23);
-            this.btnCreateClients.TabIndex = 11;
-            this.btnCreateClients.Text = "Générer les clients";
-            this.btnCreateClients.UseVisualStyleBackColor = true;
-            this.btnCreateClients.Click += new System.EventHandler(this.btnCreateClients_Click);
-            // 
             // ClientObj
             // 
             this.ClientObj.HeaderText = "ClientObj";
@@ -283,6 +232,57 @@
             this.ClientID.Name = "ClientID";
             this.ClientID.ReadOnly = true;
             // 
+            // btnDeleteClients
+            // 
+            this.btnDeleteClients.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeleteClients.Enabled = false;
+            this.btnDeleteClients.Location = new System.Drawing.Point(12, 343);
+            this.btnDeleteClients.Name = "btnDeleteClients";
+            this.btnDeleteClients.Size = new System.Drawing.Size(135, 23);
+            this.btnDeleteClients.TabIndex = 7;
+            this.btnDeleteClients.Text = "Supprimer les clients";
+            this.btnDeleteClients.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 58);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(160, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Emplacement des fichiers PST : ";
+            // 
+            // txtBxPstFolder
+            // 
+            this.txtBxPstFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBxPstFolder.Location = new System.Drawing.Point(181, 55);
+            this.txtBxPstFolder.Name = "txtBxPstFolder";
+            this.txtBxPstFolder.Size = new System.Drawing.Size(570, 20);
+            this.txtBxPstFolder.TabIndex = 9;
+            this.txtBxPstFolder.Text = "E:\\Pst Backup\\Pst Files\\FakeClients";
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowse.Location = new System.Drawing.Point(757, 53);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowse.TabIndex = 10;
+            this.btnBrowse.Text = "&Parcourir…";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // btnCreateClients
+            // 
+            this.btnCreateClients.Location = new System.Drawing.Point(12, 93);
+            this.btnCreateClients.Name = "btnCreateClients";
+            this.btnCreateClients.Size = new System.Drawing.Size(135, 23);
+            this.btnCreateClients.TabIndex = 11;
+            this.btnCreateClients.Text = "Générer les clients";
+            this.btnCreateClients.UseVisualStyleBackColor = true;
+            this.btnCreateClients.Click += new System.EventHandler(this.btnCreateClients_Click);
+            // 
             // FrmFakeClientLauncher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -305,6 +305,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fake Client Launcher";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmFakeClientLauncher_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nupClientsCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).EndInit();
             this.ResumeLayout(false);

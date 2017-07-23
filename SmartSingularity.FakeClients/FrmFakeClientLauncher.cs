@@ -100,5 +100,13 @@ namespace SmartSingularity.FakeClients
             };
             this.Invoke(updateClientState);
         }
+
+        private void FrmFakeClientLauncher_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (FakeClient client in _clients)
+            {
+                client.Dispose();
+            }
+        }
     }
 }
