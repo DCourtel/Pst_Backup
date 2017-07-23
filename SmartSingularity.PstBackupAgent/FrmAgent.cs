@@ -66,7 +66,7 @@ namespace SmartSingularity.PstBackupAgent
             }
         }
 
-        private void RegisterPstFiles(List<PSTRegistryEntry> pstFilesToRegister, string clientId)
+        private void RegisterPstFiles(string clientId, List<PSTRegistryEntry> pstFilesToRegister)
         {
             if (_localSettings.ReportingReportToServer)
             {
@@ -156,8 +156,8 @@ namespace SmartSingularity.PstBackupAgent
 #endif
                     (_bckEngine as CoreBackupEngine).SelectPstFilesToSave(allPstFiles, out pstFilesToSave, out pstFilesToNotSave);
 
-                    RegisterPstFiles(pstFilesToSave, _localSettings.ClientId);
-                    RegisterPstFiles(pstFilesToNotSave, _localSettings.ClientId);
+                    RegisterPstFiles(_localSettings.ClientId, pstFilesToSave);
+                    RegisterPstFiles(_localSettings.ClientId, pstFilesToNotSave);
                     pstFilesToSave.Sort();
                     DisplayFileList(pstFilesToSave);
                     if (pstFilesToSave.Count > 0)

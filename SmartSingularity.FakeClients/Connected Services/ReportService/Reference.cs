@@ -241,7 +241,7 @@ namespace SmartSingularity.FakeClients.ReportService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SmartSingularity.FakeClients.ReportService.ApplicationSettingsBackupMethod BackupMethodField;
+        private SmartSingularity.PstBackupSettings.ApplicationSettings.BackupMethod BackupMethodField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ChunkCountField;
@@ -253,7 +253,7 @@ namespace SmartSingularity.FakeClients.ReportService {
         private System.DateTime EndTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SmartSingularity.FakeClients.ReportService.BackupResultInfoBackupResult ErrorCodeField;
+        private SmartSingularity.PstBackupEngine.BackupResultInfo.BackupResult ErrorCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ErrorMessageField;
@@ -284,7 +284,7 @@ namespace SmartSingularity.FakeClients.ReportService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SmartSingularity.FakeClients.ReportService.ApplicationSettingsBackupMethod BackupMethod {
+        public SmartSingularity.PstBackupSettings.ApplicationSettings.BackupMethod BackupMethod {
             get {
                 return this.BackupMethodField;
             }
@@ -336,7 +336,7 @@ namespace SmartSingularity.FakeClients.ReportService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SmartSingularity.FakeClients.ReportService.BackupResultInfoBackupResult ErrorCode {
+        public SmartSingularity.PstBackupEngine.BackupResultInfo.BackupResult ErrorCode {
             get {
                 return this.ErrorCodeField;
             }
@@ -434,37 +434,6 @@ namespace SmartSingularity.FakeClients.ReportService {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ApplicationSettings.BackupMethod", Namespace="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupSettings")]
-    public enum ApplicationSettingsBackupMethod : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Full = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Differential = 1,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BackupResultInfo.BackupResult", Namespace="http://schemas.datacontract.org/2004/07/SmartSingularity.PstBackupEngine")]
-    public enum BackupResultInfoBackupResult : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotStarted = -1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Success = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Canceled = 10,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Failed = 20,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Postponed = 30,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

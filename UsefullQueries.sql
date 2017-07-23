@@ -12,5 +12,5 @@ DELETE FROM tbBackupSessions;
 */
 
 SELECT * FROM tbClients ORDER BY LastContactDate DESC;
-SELECT * FROM tbPstFiles ORDER BY Size;
-SELECT * FROM tbBackupSessions ORDER BY FileId,StartTime;
+SELECT * FROM tbPstFiles ORDER BY ClientID;
+SELECT * FROM tbBackupSessions ORDER BY FileID, StartTime;

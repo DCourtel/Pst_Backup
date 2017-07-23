@@ -99,7 +99,7 @@
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(757, 343);
+            this.btnClose.Location = new System.Drawing.Point(757, 395);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 3;
@@ -174,7 +174,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.SteelBlue;
             this.dgvClients.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClients.Size = new System.Drawing.Size(820, 215);
+            this.dgvClients.Size = new System.Drawing.Size(820, 267);
             this.dgvClients.TabIndex = 6;
             // 
             // ClientObj
@@ -236,7 +236,7 @@
             // 
             this.btnDeleteClients.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteClients.Enabled = false;
-            this.btnDeleteClients.Location = new System.Drawing.Point(12, 343);
+            this.btnDeleteClients.Location = new System.Drawing.Point(12, 395);
             this.btnDeleteClients.Name = "btnDeleteClients";
             this.btnDeleteClients.Size = new System.Drawing.Size(135, 23);
             this.btnDeleteClients.TabIndex = 7;
@@ -287,7 +287,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 378);
+            this.ClientSize = new System.Drawing.Size(844, 430);
             this.Controls.Add(this.btnCreateClients);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtBxPstFolder);

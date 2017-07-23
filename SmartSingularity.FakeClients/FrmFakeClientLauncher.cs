@@ -37,6 +37,7 @@ namespace SmartSingularity.FakeClients
         private void btnCreateClients_Click(object sender, EventArgs e)
         {
             dgvClients.Rows.Clear();
+            btnCreateClients.Enabled = false;
             _clients.Clear();
 
             for (int i = 0; i < nupClientsCount.Value; i++)
@@ -53,6 +54,7 @@ namespace SmartSingularity.FakeClients
 
                 dgvClients.Rows[index].Cells["ClientObj"].Value = client;
                 client.OnStateChanged += Client_OnStateChanged;
+                dgvClients.Refresh();
             }
             btnStartClients.Enabled = true;
         }
@@ -71,6 +73,7 @@ namespace SmartSingularity.FakeClients
                 }
                 catch (Exception) { }
             }
+            btnStopClients.Enabled = true;
         }
 
         private void btnStopClients_Click(object sender, EventArgs e)
@@ -82,7 +85,7 @@ namespace SmartSingularity.FakeClients
                     FakeClient client = (FakeClient)row.Cells["ClientObj"].Value;
                     client.Stop();
                 }
-                catch (Exception ex) { }
+                catch (Exception) { }
             }
         }
 

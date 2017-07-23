@@ -108,6 +108,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SmartSingularity.PstBackupClientDb\SmartSingularity.PstBackupClientDb.csproj">
+      <Project>{096eaa4d-cdb0-4f44-9ed7-794f854cbbe1}</Project>
+      <Name>SmartSingularity.PstBackupClientDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartSingularity.PstBackupEngine\SmartSingularity.PstBackupEngine.csproj">
+      <Project>{b3175d98-927b-4566-8bb7-f915d1a17664}</Project>
+      <Name>SmartSingularity.PstBackupEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartSingularity.PstBackupSettings\SmartSingularity.PstBackupSettings.csproj">
+      <Project>{8f64d51c-1790-4648-b451-8c546c50d18f}</Project>
+      <Name>SmartSingularity.PstBackupSettings</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
