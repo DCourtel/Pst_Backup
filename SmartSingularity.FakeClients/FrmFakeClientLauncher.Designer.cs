@@ -89,6 +89,8 @@
             // chkBxCreatePstFiles
             // 
             this.chkBxCreatePstFiles.AutoSize = true;
+            this.chkBxCreatePstFiles.Checked = true;
+            this.chkBxCreatePstFiles.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkBxCreatePstFiles.Location = new System.Drawing.Point(248, 29);
             this.chkBxCreatePstFiles.Name = "chkBxCreatePstFiles";
             this.chkBxCreatePstFiles.Size = new System.Drawing.Size(220, 17);

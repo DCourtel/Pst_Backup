@@ -17,7 +17,8 @@ namespace SmartSingularity.FakeClients
             Saving,
             Reporting,
             Comparing,
-            Altering
+            Altering,
+            Expanding
         }
 
         private ReportService.ReportServerClient _proxy;
@@ -103,12 +104,14 @@ namespace SmartSingularity.FakeClients
                 foreach (FakePstFile pstFile in _pstFiles)
                 {
                     State = ActivityState.Saving;
-                    ReportService.PstFile pstFileToSave = new ReportService.PstFile();
-                    pstFileToSave.Id = pstFile.FileId;
-                    pstFileToSave.IsSetToBackup = true;
-                    pstFileToSave.LocalPath = System.IO.Path.Combine(pstFile.LocalPath, pstFile.Filename);
-                    pstFileToSave.Size = pstFile.Size;
-
+                    pstFile.UpdateSize();
+                    ReportService.PstFile pstFileToSave = new ReportService.PstFile()
+                    {
+                        Id = pstFile.FileId,
+                        IsSetToBackup = true,
+                        LocalPath = System.IO.Path.Combine(pstFile.LocalPath, pstFile.Filename),
+                        Size = pstFile.Size
+                    };
                     _proxy.RegisterPstFile(ClientId, pstFileToSave);
                     PstBackupSettings.PSTRegistryEntry regEntry = new PstBackupSettings.PSTRegistryEntry(pstFileToSave.LocalPath);
                     if (!Stopping)
@@ -124,7 +127,6 @@ namespace SmartSingularity.FakeClients
 
         private void _backupEngine_OnBackupFinished(object sender, PstBackupEngine.BackupFinishedEventArgs e)
         {
-            State = ActivityState.Reporting;
             ReportService.BackupSession bckSession = new ReportService.BackupSession()
             {
                 BackupMethod = _appSettings.BackupAgentBackupMethod,
@@ -139,14 +141,21 @@ namespace SmartSingularity.FakeClients
                 StartTime = e.Result.StartTime
             };
 
-            _proxy.RegisterBackupResult(ClientId, bckSession);
             State = ActivityState.Comparing;
             if (!CompareLocalAndRemotePstFiles(e.Result.LocalPath, e.Result.RemotePath))
             {
-                throw new Exception($"Remote PST file [{e.Result.RemotePath}] and Local PST file [{e.Result.LocalPath}] are not identical.");
+                bckSession.ErrorCode = PstBackupEngine.BackupResultInfo.BackupResult.Failed;
+                bckSession.ErrorMessage = "Remote PST file and local PST file are not identical.";
             }
+
+            State = ActivityState.Reporting;
+            _proxy.RegisterBackupResult(ClientId, bckSession);
+
             State = ActivityState.Altering;
             AlterLocalPstFile(e.Result.LocalPath);
+
+            State = ActivityState.Expanding;
+            ExpandLocalPstFile(e.Result.LocalPath);
         }
 
         private void Register()
@@ -193,7 +202,7 @@ namespace SmartSingularity.FakeClients
                 using (System.IO.FileStream localStream = localPST.OpenRead())
                 {
                     using (System.IO.FileStream remoteStream = remotePST.OpenRead())
-                    {   
+                    {
                         int currentPosition = 0;
                         int bytesRead = 0;
                         byte[] localBytes = new byte[10240];
@@ -206,7 +215,7 @@ namespace SmartSingularity.FakeClients
                             if (!CompareArrays(localBytes, remoteBytes))
                                 return false;
                             currentPosition += bytesRead;
-                        } while (currentPosition < localStream.Length); 
+                        } while (currentPosition < localStream.Length);
                     }
                 }
                 return true;
@@ -222,11 +231,48 @@ namespace SmartSingularity.FakeClients
             }
             return true;
         }
-        private void AlterLocalPstFile(string pstFile)
+        private void AlterLocalPstFile(string pstFilePath)
         {
-            //ToDo : Introduce minor modifications to the local PST file
-        }
+            System.IO.FileInfo pstFile = new System.IO.FileInfo(pstFilePath);
+            int changeCount = rnd.Next(3, 8);
 
+            try
+            {
+                using (System.IO.FileStream pstStream = pstFile.OpenWrite())
+                {
+                    do
+                    {
+                        int origin = (int)(pstFile.Length / changeCount - rnd.Next(100_000, 200_000));
+                        pstStream.Position = origin;
+                        pstStream.Write(GetRandomBytes(), 0, 2048);
+                        changeCount--;
+                    } while (changeCount > 0);
+                }
+            }
+            catch (Exception) { }
+        }
+        private byte[] GetRandomBytes()
+        {
+            byte[] randomBytes = new byte[2048];
+
+            for (int i = 0; i < randomBytes.Length; i++)
+            {
+                randomBytes[i] = (byte)rnd.Next(0, 255);
+            }
+
+            return randomBytes;
+        }
+        private void ExpandLocalPstFile(string pstFilePath)
+        {
+            try
+            {
+                using (System.IO.FileStream pstFile = new System.IO.FileInfo(pstFilePath).Open(System.IO.FileMode.Append, System.IO.FileAccess.Write))
+                {
+                    pstFile.Write(GetRandomBytes(), 0, 2048);
+                }
+            }
+            catch (Exception) { }
+        }
         public void Dispose()
         {
             _chrono.Stop();
@@ -237,6 +283,7 @@ namespace SmartSingularity.FakeClients
             try
             {
                 System.IO.Directory.Delete(LocalStorage, true);
+                System.IO.Directory.Delete(_appSettings.FilesAndFoldersDestinationPath, true);
             }
             catch (Exception) { }
         }

@@ -41,6 +41,15 @@ namespace SmartSingularity.FakeClients
 
         #region Methods
 
+        public void UpdateSize()
+        {
+            System.IO.FileInfo info = new System.IO.FileInfo(System.IO.Path.Combine(LocalPath, Filename));
+            if(info.Exists)
+            {
+                Size = info.Length;
+            }
+        }
+
         private long GetRandomFileSize()
         {
             return (long)rnd.Next(31457280, 73400320);
