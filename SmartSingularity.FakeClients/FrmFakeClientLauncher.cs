@@ -43,7 +43,7 @@ namespace SmartSingularity.FakeClients
             for (int i = 0; i < nupClientsCount.Value; i++)
             {
                 int index = dgvClients.Rows.Add();
-                FakeClient client = new FakeClient(txtBxPstFolder.Text, chkBxCreatePstFiles.Checked, index);
+                FakeClient client = new FakeClient(txtBxPstFolder.Text, chkBxCreatePstFiles.Checked, chkBxCompressPstFile.Checked, index);
                 _clients.Add(client);
                 dgvClients.Rows[index].Cells["ComputerName"].Value = client.ComputerName;
                 dgvClients.Rows[index].Cells["UserName"].Value = client.UserName;
@@ -57,6 +57,7 @@ namespace SmartSingularity.FakeClients
                 dgvClients.Refresh();
             }
             btnStartClients.Enabled = true;
+            btnDeleteClients.Enabled = true;
         }
 
         private void btnStartClients_Click(object sender, EventArgs e)
@@ -87,6 +88,19 @@ namespace SmartSingularity.FakeClients
                 }
                 catch (Exception) { }
             }
+        }
+
+        private void btnDeleteClients_Click(object sender, EventArgs e)
+        {
+            foreach (FakeClient client in _clients)
+            {
+                client.Stop();
+                client.Dispose();
+            }
+            _threadList.Clear();
+            dgvClients.Rows.Clear();
+            btnStartClients.Enabled = false;
+            btnStopClients.Enabled = false;
         }
 
         private void Client_OnStateChanged(object sender, EventArgs e)

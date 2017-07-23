@@ -30,7 +30,7 @@ namespace SmartSingularity.FakeClients
         private PstBackupEngine.CoreBackupEngine _backupEngine;
         private PstBackupSettings.ApplicationSettings _appSettings = new PstBackupSettings.ApplicationSettings(PstBackupSettings.ApplicationSettings.SourceSettings.Local);
 
-        public FakeClient(string pstLocalFolder, bool createPstFiles, int rowIndex)
+        public FakeClient(string pstLocalFolder, bool createPstFiles, bool compressPstFile, int rowIndex)
         {
             ComputerName = GetRandomComputerName();
             UserName = FakeUser.GetRandomUserName();
@@ -41,6 +41,7 @@ namespace SmartSingularity.FakeClients
             LocalStorage = $"{pstLocalFolder}\\{ClientId}";
             RowIndex = rowIndex;
             _appSettings.BackupAgentBackupMethod = PstBackupSettings.ApplicationSettings.BackupMethod.Full;
+            _appSettings.FilesAndFoldersCompressFiles = compressPstFile;
             _appSettings.FilesAndFoldersDestinationPath = @"\\192.168.0.250\Share\Transit\PstFiles\" + ClientId;
             _backupEngine = PstBackupEngine.CoreBackupEngine.GetBackupEngine(_appSettings);
             _backupEngine.OnBackupFinished += _backupEngine_OnBackupFinished;
@@ -195,8 +196,28 @@ namespace SmartSingularity.FakeClients
         }
         private bool CompareLocalAndRemotePstFiles(string localPath, string remotePath)
         {
+            bool result = true;
             System.IO.FileInfo localPST = new System.IO.FileInfo(localPath);
             System.IO.FileInfo remotePST = new System.IO.FileInfo(remotePath);
+            if (_appSettings.FilesAndFoldersCompressFiles)
+            {
+                System.IO.FileInfo uncompressedPST = new System.IO.FileInfo(System.IO.Path.Combine(remotePST.DirectoryName, "uncompressed_PST.pst"));
+
+                using (System.IO.FileStream compressedFile = remotePST.OpenRead())
+                using (System.IO.Stream sourceFile = new System.IO.Compression.GZipStream(compressedFile, System.IO.Compression.CompressionMode.Decompress))
+                using (System.IO.Stream outputFile = System.IO.File.Create(uncompressedPST.FullName))
+                {
+                    int bufferLength = 1024 * 1024;
+                    byte[] buffer = new byte[bufferLength];
+                    int readBytes = 0;
+                    while ((readBytes = sourceFile.Read(buffer, 0, bufferLength)) > 0)
+                    {
+                        outputFile.Write(buffer, 0, readBytes);
+                    }
+                }
+                remotePST = uncompressedPST;
+            }
+
             if (localPST.Exists && remotePST.Exists && localPST.Length == remotePST.Length)
             {
                 using (System.IO.FileStream localStream = localPST.OpenRead())
@@ -213,14 +234,19 @@ namespace SmartSingularity.FakeClients
                             bytesRead = localStream.Read(localBytes, 0, 10240);
                             remoteStream.Read(remoteBytes, 0, 10240);
                             if (!CompareArrays(localBytes, remoteBytes))
-                                return false;
+                                result = false;
                             currentPosition += bytesRead;
                         } while (currentPosition < localStream.Length);
                     }
                 }
-                return true;
             }
-            return false;
+            else
+                result = false;
+            if (_appSettings.FilesAndFoldersCompressFiles)
+            {
+                remotePST.Delete();
+            }
+            return result;
         }
         private bool CompareArrays(byte[] array1, byte[] array2)
         {

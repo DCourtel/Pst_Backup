@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.nupClientsCount = new System.Windows.Forms.NumericUpDown();
             this.chkBxCreatePstFiles = new System.Windows.Forms.CheckBox();
@@ -51,6 +51,7 @@
             this.txtBxPstFolder = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnCreateClients = new System.Windows.Forms.Button();
+            this.chkBxCompressPstFile = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nupClientsCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
             this.SuspendLayout();
@@ -104,7 +105,7 @@
             this.btnClose.Location = new System.Drawing.Point(757, 395);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 3;
+            this.btnClose.TabIndex = 12;
             this.btnClose.Text = "&Fermer";
             this.btnClose.UseVisualStyleBackColor = true;
             // 
@@ -114,7 +115,7 @@
             this.btnStartClients.Location = new System.Drawing.Point(356, 93);
             this.btnStartClients.Name = "btnStartClients";
             this.btnStartClients.Size = new System.Drawing.Size(135, 23);
-            this.btnStartClients.TabIndex = 4;
+            this.btnStartClients.TabIndex = 8;
             this.btnStartClients.Text = "&Démarrer les clients";
             this.btnStartClients.UseVisualStyleBackColor = true;
             this.btnStartClients.Click += new System.EventHandler(this.btnStartClients_Click);
@@ -126,7 +127,7 @@
             this.btnStopClients.Location = new System.Drawing.Point(714, 93);
             this.btnStopClients.Name = "btnStopClients";
             this.btnStopClients.Size = new System.Drawing.Size(118, 23);
-            this.btnStopClients.TabIndex = 5;
+            this.btnStopClients.TabIndex = 9;
             this.btnStopClients.Text = "&Arrêter les clients";
             this.btnStopClients.UseVisualStyleBackColor = true;
             this.btnStopClients.Click += new System.EventHandler(this.btnStopClients_Click);
@@ -137,20 +138,20 @@
             this.dgvClients.AllowUserToDeleteRows = false;
             this.dgvClients.AllowUserToOrderColumns = true;
             this.dgvClients.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            this.dgvClients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            this.dgvClients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvClients.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Khaki;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Khaki;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvClients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ClientObj,
@@ -164,20 +165,20 @@
             this.dgvClients.Location = new System.Drawing.Point(12, 122);
             this.dgvClients.Name = "dgvClients";
             this.dgvClients.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClients.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvClients.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvClients.RowHeadersVisible = false;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            this.dgvClients.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            this.dgvClients.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvClients.Size = new System.Drawing.Size(820, 267);
-            this.dgvClients.TabIndex = 6;
+            this.dgvClients.TabIndex = 10;
             // 
             // ClientObj
             // 
@@ -241,9 +242,10 @@
             this.btnDeleteClients.Location = new System.Drawing.Point(12, 395);
             this.btnDeleteClients.Name = "btnDeleteClients";
             this.btnDeleteClients.Size = new System.Drawing.Size(135, 23);
-            this.btnDeleteClients.TabIndex = 7;
+            this.btnDeleteClients.TabIndex = 11;
             this.btnDeleteClients.Text = "Supprimer les clients";
             this.btnDeleteClients.UseVisualStyleBackColor = true;
+            this.btnDeleteClients.Click += new System.EventHandler(this.btnDeleteClients_Click);
             // 
             // label2
             // 
@@ -251,7 +253,7 @@
             this.label2.Location = new System.Drawing.Point(15, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(160, 13);
-            this.label2.TabIndex = 8;
+            this.label2.TabIndex = 4;
             this.label2.Text = "Emplacement des fichiers PST : ";
             // 
             // txtBxPstFolder
@@ -261,7 +263,7 @@
             this.txtBxPstFolder.Location = new System.Drawing.Point(181, 55);
             this.txtBxPstFolder.Name = "txtBxPstFolder";
             this.txtBxPstFolder.Size = new System.Drawing.Size(570, 20);
-            this.txtBxPstFolder.TabIndex = 9;
+            this.txtBxPstFolder.TabIndex = 5;
             this.txtBxPstFolder.Text = "E:\\Pst Backup\\Pst Files\\FakeClients";
             // 
             // btnBrowse
@@ -270,7 +272,7 @@
             this.btnBrowse.Location = new System.Drawing.Point(757, 53);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowse.TabIndex = 10;
+            this.btnBrowse.TabIndex = 6;
             this.btnBrowse.Text = "&Parcourir…";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
@@ -280,16 +282,29 @@
             this.btnCreateClients.Location = new System.Drawing.Point(12, 93);
             this.btnCreateClients.Name = "btnCreateClients";
             this.btnCreateClients.Size = new System.Drawing.Size(135, 23);
-            this.btnCreateClients.TabIndex = 11;
+            this.btnCreateClients.TabIndex = 7;
             this.btnCreateClients.Text = "Générer les clients";
             this.btnCreateClients.UseVisualStyleBackColor = true;
             this.btnCreateClients.Click += new System.EventHandler(this.btnCreateClients_Click);
+            // 
+            // chkBxCompressPstFile
+            // 
+            this.chkBxCompressPstFile.AutoSize = true;
+            this.chkBxCompressPstFile.Checked = true;
+            this.chkBxCompressPstFile.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBxCompressPstFile.Location = new System.Drawing.Point(492, 29);
+            this.chkBxCompressPstFile.Name = "chkBxCompressPstFile";
+            this.chkBxCompressPstFile.Size = new System.Drawing.Size(117, 17);
+            this.chkBxCompressPstFile.TabIndex = 3;
+            this.chkBxCompressPstFile.Text = "Compress PST files";
+            this.chkBxCompressPstFile.UseVisualStyleBackColor = true;
             // 
             // FrmFakeClientLauncher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(844, 430);
+            this.Controls.Add(this.chkBxCompressPstFile);
             this.Controls.Add(this.btnCreateClients);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtBxPstFolder);
@@ -336,6 +351,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PstCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn State;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientID;
+        private System.Windows.Forms.CheckBox chkBxCompressPstFile;
     }
 }
 
