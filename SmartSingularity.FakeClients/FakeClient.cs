@@ -18,7 +18,8 @@ namespace SmartSingularity.FakeClients
             Reporting,
             Comparing,
             Altering,
-            Expanding
+            Expanding,
+            Stopping
         }
 
         private ReportService.ReportServerClient _proxy;
@@ -94,15 +95,15 @@ namespace SmartSingularity.FakeClients
 
         public void Stop()
         {
-            _chrono.Stop();
+            State = ActivityState.Stopping;
         }
 
         private void _chrono_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _chrono.Stop();
-            if (!Stopping)
+            foreach (FakePstFile pstFile in _pstFiles)
             {
-                foreach (FakePstFile pstFile in _pstFiles)
+                if (!Stopping)
                 {
                     State = ActivityState.Saving;
                     pstFile.UpdateSize();
@@ -115,15 +116,17 @@ namespace SmartSingularity.FakeClients
                     };
                     _proxy.RegisterPstFile(ClientId, pstFileToSave);
                     PstBackupSettings.PSTRegistryEntry regEntry = new PstBackupSettings.PSTRegistryEntry(pstFileToSave.LocalPath);
-                    if (!Stopping)
-                    {
-                        _backupEngine.Backup((object)regEntry);
-                    }
+                    _backupEngine.Backup((object)regEntry);
                 }
+            }
+            if (!Stopping)
+            {
                 State = ActivityState.Sleeping;
                 _chrono.Interval = rnd.Next(3 * 60 * 1000, 10 * 60 * 1000);
                 _chrono.Start();
             }
+            else
+                State = ActivityState.Stopped;
         }
 
         private void _backupEngine_OnBackupFinished(object sender, PstBackupEngine.BackupFinishedEventArgs e)

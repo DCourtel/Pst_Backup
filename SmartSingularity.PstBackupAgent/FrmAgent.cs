@@ -24,7 +24,7 @@ namespace SmartSingularity.PstBackupAgent
         private int _currentFileIndex = 0;
         private ReportService.ReportServerClient proxy;
         private System.Resources.ResourceManager _resMan = new System.Resources.ResourceManager("SmartSingularity.PstBackupAgent.Localization.Resources", typeof(FrmAgent).Assembly);
-        
+
         public FrmAgent()
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace SmartSingularity.PstBackupAgent
             txtBxDestination.Text = _localSettings.FilesAndFoldersDestinationPath;
             try
             {
-                proxy = new ReportService.ReportServerClient("BasicHttpBinding_IReportServer");
+                proxy = new ReportService.ReportServerClient("BasicHttpBinding_IReportServer", GetServerUriFromSettings());                
             }
             catch (Exception ex)
             {
@@ -43,6 +43,11 @@ namespace SmartSingularity.PstBackupAgent
         }
 
         #region (Methods)
+
+        private System.ServiceModel.EndpointAddress GetServerUriFromSettings()
+        {
+            return new System.ServiceModel.EndpointAddress($"http://{_gpoSettings.ReportingServer}:{_gpoSettings.ReportingPort}/Report");
+        }
 
         private void RegisterClient()
         {
@@ -89,36 +94,49 @@ namespace SmartSingularity.PstBackupAgent
         {
             if (_localSettings.ReportingReportToServer)
             {
-                ReportService.BackupSession bckSession = new ReportService.BackupSession()
+                try
                 {
-                    LocalPath = bckResult.LocalPath,
-                    RemotePath = bckResult.RemotePath,
-                    BackupMethod = _localSettings.BackupAgentBackupMethod,
-                    ChunkCount = bckResult.ChunkCount,
-                    CompressedSize = bckResult.CompressedSize,
-                    EndTime = bckResult.EndTime,
-                    ErrorCode = bckResult.ErrorCode,
-                    ErrorMessage = bckResult.ErrorMessage,
-                    IsCompressed = bckResult.IsCompressed,
-                    IsSchedule = isSchedule,
-                    StartTime = bckResult.StartTime
-                };
-                proxy.RegisterBackupResult(_localSettings.ClientId, bckSession);
+                    ReportService.BackupSession bckSession = new ReportService.BackupSession()
+                    {
+                        LocalPath = bckResult.LocalPath,
+                        RemotePath = bckResult.RemotePath,
+                        BackupMethod = _localSettings.BackupAgentBackupMethod,
+                        ChunkCount = bckResult.ChunkCount,
+                        CompressedSize = bckResult.CompressedSize,
+                        EndTime = bckResult.EndTime,
+                        ErrorCode = bckResult.ErrorCode,
+                        ErrorMessage = bckResult.ErrorMessage,
+                        IsCompressed = bckResult.IsCompressed,
+                        IsSchedule = isSchedule,
+                        StartTime = bckResult.StartTime
+                    };
+                    proxy.RegisterBackupResult(_localSettings.ClientId, bckSession);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Write(20030, "An error occurs while trying to register Backup Session Result\r\n" + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
+                }
             }
         }
 
         private void ReportCanceledBackupSession()
         {
-            try
+            if (_localSettings.ReportingReportToServer)
             {
-                BackupResultInfo bckResult = new BackupResultInfo(pstFilesToSave[0]);
-                bckResult.EndTime = DateTime.UtcNow;
-                bckResult.RemotePath = String.Empty;
-                bckResult.ErrorCode = BackupResultInfo.BackupResult.Canceled;
-                bckResult.ErrorMessage = String.Empty;
-                ReportBackupSessionResult(bckResult, true);
+                try
+                {
+                    BackupResultInfo bckResult = new BackupResultInfo(pstFilesToSave[0]);
+                    bckResult.EndTime = DateTime.UtcNow;
+                    bckResult.RemotePath = String.Empty;
+                    bckResult.ErrorCode = BackupResultInfo.BackupResult.Canceled;
+                    bckResult.ErrorMessage = String.Empty;
+                    ReportBackupSessionResult(bckResult, true);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Write(20031, "An error occurs while trying to register a Canceled Backup Session\r\n" + ex.Message, Logger.MessageSeverity.Error, System.Diagnostics.EventLogEntryType.Error);
+                }
             }
-            catch (Exception) { }
         }
 
         private ReportService.PstFile GetPstFile(PSTRegistryEntry regEntry)
