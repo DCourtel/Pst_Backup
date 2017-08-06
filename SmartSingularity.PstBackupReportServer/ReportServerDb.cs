@@ -15,7 +15,62 @@ namespace SmartSingularity.PstBackupReportServer
         public ReportServerDb(string dbPath)
         {
             this._dbPath = dbPath;
+            if (!System.IO.File.Exists(dbPath))
+            {
+                DropDatabase();
+                CreateDatabase(dbPath);
+                CreateTables(dbPath);
+            }
             _dbConnection = new SqlConnection($"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PstBackup;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;AttachDbFileName = {_dbPath};");
+        }
+
+        private void DropDatabase()
+        {
+            using (SqlConnection db = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True"))
+            {
+                db.Open();
+                SqlCommand cmd = db.CreateCommand();
+                cmd.CommandText = $"DROP DATABASE PstBackup";
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception) { }
+                db.Close();
+            }
+        }
+
+        private void CreateDatabase(string dbPath)
+        {
+            System.IO.FileInfo dbFile = new System.IO.FileInfo(dbPath);
+            if (!dbFile.Directory.Exists)
+            {
+                dbFile.Directory.Create();
+            }
+            using (SqlConnection db = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True"))
+            {
+                db.Open();
+                SqlCommand cmd = db.CreateCommand();
+                cmd.CommandText = $"CREATE DATABASE PstBackup ON (NAME = 'PstBackup', FILENAME = '{dbPath}')";
+                cmd.ExecuteNonQuery();
+                db.Close();
+            }
+        }
+
+        private void CreateTables(string dbPath)
+        {
+            using (SqlConnection db = new SqlConnection($"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PstBackup;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;AttachDbFileName = {_dbPath};"))
+            {
+                db.Open();
+                SqlCommand cmd = db.CreateCommand();
+                cmd.CommandText = "CREATE TABLE [dbo].[tbClients]([Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, " +
+                                    "[Version] VARCHAR(15) NOT NULL, " +
+                                    "[ComputerName] NVARCHAR(64) NOT NULL, " +
+                                    "[UserName] NVARCHAR(32) NOT NULL, " +
+                                    "[LastContactDate] DATETIME NOT NULL);";
+                cmd.ExecuteNonQuery();
+                db.Close();
+            }
         }
 
         /// <summary>
@@ -292,7 +347,7 @@ namespace SmartSingularity.PstBackupReportServer
                 $"@chunkCount," +
                 $"@errorCode," +
                 $"@errorMessage);", _dbConnection);
-            
+
             _sqlCommand.Parameters.AddWithValue("@fileId", fileId);
             _sqlCommand.Parameters.AddWithValue("@remotePath", bckSession.RemotePath);
             _sqlCommand.Parameters.AddWithValue("@isCompressed", bckSession.IsCompressed);
