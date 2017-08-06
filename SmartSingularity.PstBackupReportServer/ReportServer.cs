@@ -11,11 +11,13 @@ namespace SmartSingularity.PstBackupReportServer
     {
         private ReportServerDb _reportServerDb;
 
+#if (DEBUG)
         public ReportServer()
         {
             _reportServerDb = new ReportServerDb(@"E:\Pst Backup\Test Files\ReportServerDb\Test-PstBackup.mdf");
             _reportServerDb.Connect();
-        }
+        } 
+#endif
 
         public ReportServer(string dbPath)
         {
