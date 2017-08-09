@@ -69,6 +69,7 @@ namespace SmartSingularity.PstBackupReportServer
                                     "[UserName] NVARCHAR(32) NOT NULL, " +
                                     "[LastContactDate] DATETIME NOT NULL);";
                 cmd.ExecuteNonQuery();
+                // ToDo : Create other tables
                 db.Close();
             }
         }

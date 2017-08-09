@@ -97,6 +97,7 @@
     <Compile Include="FrmAgent.Designer.cs">
       <DependentUpon>FrmAgent.cs</DependentUpon>
     </Compile>
+    <Compile Include="NativeMode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmAgent.fr.resx">

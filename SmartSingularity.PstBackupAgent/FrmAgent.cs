@@ -24,6 +24,7 @@ namespace SmartSingularity.PstBackupAgent
         private int _currentFileIndex = 0;
         private ReportService.ReportServerClient proxy;
         private System.Resources.ResourceManager _resMan = new System.Resources.ResourceManager("SmartSingularity.PstBackupAgent.Localization.Resources", typeof(FrmAgent).Assembly);
+        private uint _previousExecutionState;
 
         public FrmAgent()
         {
@@ -33,7 +34,7 @@ namespace SmartSingularity.PstBackupAgent
             txtBxDestination.Text = _localSettings.FilesAndFoldersDestinationPath;
             try
             {
-                proxy = new ReportService.ReportServerClient("BasicHttpBinding_IReportServer", GetServerUriFromSettings());                
+                proxy = new ReportService.ReportServerClient("BasicHttpBinding_IReportServer", GetServerUriFromSettings());
             }
             catch (Exception ex)
             {
@@ -180,6 +181,7 @@ namespace SmartSingularity.PstBackupAgent
                     DisplayFileList(pstFilesToSave);
                     if (pstFilesToSave.Count > 0)
                     {
+                        _previousExecutionState = SetExecutionState(NativeMethods.ES_CONTINUOUS | NativeMethods.ES_SYSTEM_REQUIRED);
                         SetMaximumOverAllProgressBar(pstFilesToSave.Count);
                         LaunchBackup(pstFilesToSave[0]);
                         this.ShowDialog();
@@ -281,6 +283,18 @@ namespace SmartSingularity.PstBackupAgent
             catch (Exception) { }
         }
 
+        private uint SetExecutionState(uint mode)
+        {
+            uint result = 0;
+            try
+            {
+                result = NativeMethods.SetThreadExecutionState(mode);
+            }
+            catch (Exception) { }
+
+            return result;
+        }
+
         #endregion (Methods)
 
         #region (Events)
@@ -327,6 +341,7 @@ namespace SmartSingularity.PstBackupAgent
                     }
                     catch (Exception) { }
                 }
+                SetExecutionState(_previousExecutionState);
                 Action closeApp = () =>
                 {
                     try

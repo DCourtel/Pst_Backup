@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceProcess;
+using System.ServiceModel;
 using SmartSingularity.PstBackupReportServer;
 
 
@@ -7,7 +8,7 @@ namespace SmartSingularity.PstBackupWinService
 {
     public partial class PstBackupWinService : ServiceBase
     {
-        private ReportServer _server;
+        internal static ServiceHost _svcHost = null;
 
         public PstBackupWinService()
         {
@@ -19,18 +20,25 @@ namespace SmartSingularity.PstBackupWinService
         protected override void OnStart(string[] args)
         {
             this.EventLog.WriteEntry("Service is starting ...", System.Diagnostics.EventLogEntryType.Information, 0);
-
-            string databasePath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-            databasePath = System.IO.Path.Combine(databasePath, "PstBackup" ,"PstBackup.mdf");
-            this.EventLog.WriteEntry($"Database is located at : {databasePath}", System.Diagnostics.EventLogEntryType.Information);
-            _server = new ReportServer(databasePath);
+            
+            if (_svcHost != null)
+            {
+                _svcHost.Close();
+            }
+            
+            _svcHost = new ServiceHost(typeof(ReportServer), new Uri[] { new Uri(@"http://localhost:43000/Report") });
+            _svcHost.Open();            
         }
 
         protected override void OnStop()
         {
             this.EventLog.WriteEntry("Service is stopping...", System.Diagnostics.EventLogEntryType.Information, 1);
-            _server?.Dispose();
-            _server = null;
+
+            if (_svcHost != null)
+            {
+                _svcHost.Close();
+                _svcHost = null;
+            }
         }
 
         protected override void OnShutdown()

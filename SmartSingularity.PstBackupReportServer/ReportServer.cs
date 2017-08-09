@@ -16,14 +16,22 @@ namespace SmartSingularity.PstBackupReportServer
         {
             _reportServerDb = new ReportServerDb(@"E:\Pst Backup\Test Files\ReportServerDb\Test-PstBackup.mdf");
             _reportServerDb.Connect();
-        } 
+        }
 #endif
 
-        public ReportServer(string dbPath)
+#if (!DEBUG)
+        public ReportServer()
         {
-            _reportServerDb = new ReportServerDb(dbPath);
+            // ToDo : Handles Log Settings
+            Logger.IsLogActivated = true;
+            Logger.MinimalSeverity = Logger.MessageSeverity.Debug;
+            string databasePath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            databasePath = System.IO.Path.Combine(databasePath, "PstBackup", "PstBackup.mdf");
+            Logger.Write(1, $"Démarrage de ReportServer. Database at {databasePath}", Logger.MessageSeverity.Information);
+            _reportServerDb = new ReportServerDb(databasePath);
             _reportServerDb.Connect();
-        }
+        } 
+#endif
 
         public void Dispose()
         {

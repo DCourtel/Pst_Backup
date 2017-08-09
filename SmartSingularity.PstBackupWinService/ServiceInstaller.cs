@@ -12,7 +12,7 @@ namespace SmartSingularity.PstBackupWinService
             ServiceProcessInstaller processInstaller = new ServiceProcessInstaller();
             System.ServiceProcess.ServiceInstaller serviceInstaller = new System.ServiceProcess.ServiceInstaller();
 
-            processInstaller.Account = ServiceAccount.LocalService;
+            processInstaller.Account = ServiceAccount.LocalSystem;
             processInstaller.Username = null;
             processInstaller.Password = null;
 
