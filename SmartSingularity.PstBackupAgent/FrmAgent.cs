@@ -24,7 +24,6 @@ namespace SmartSingularity.PstBackupAgent
         private int _currentFileIndex = 0;
         private ReportService.ReportServerClient proxy;
         private System.Resources.ResourceManager _resMan = new System.Resources.ResourceManager("SmartSingularity.PstBackupAgent.Localization.Resources", typeof(FrmAgent).Assembly);
-        private uint _previousExecutionState;
 
         public FrmAgent()
         {
@@ -181,7 +180,7 @@ namespace SmartSingularity.PstBackupAgent
                     DisplayFileList(pstFilesToSave);
                     if (pstFilesToSave.Count > 0)
                     {
-                        _previousExecutionState = SetExecutionState(NativeMethods.ES_CONTINUOUS | NativeMethods.ES_SYSTEM_REQUIRED);
+                        SetExecutionState(ExecutionState.ES_CONTINUOUS | ExecutionState.ES_SYSTEM_REQUIRED);
                         SetMaximumOverAllProgressBar(pstFilesToSave.Count);
                         LaunchBackup(pstFilesToSave[0]);
                         this.ShowDialog();
@@ -283,16 +282,13 @@ namespace SmartSingularity.PstBackupAgent
             catch (Exception) { }
         }
 
-        private uint SetExecutionState(uint mode)
+        private void SetExecutionState(uint mode)
         {
-            uint result = 0;
             try
             {
-                result = NativeMethods.SetThreadExecutionState(mode);
+                ExecutionState.SetThreadExecutionState(mode);
             }
             catch (Exception) { }
-
-            return result;
         }
 
         #endregion (Methods)
@@ -312,6 +308,7 @@ namespace SmartSingularity.PstBackupAgent
                 proxy.Close();
             }
             catch (Exception) { }
+            SetExecutionState(ExecutionState.ES_CONTINUOUS);
             Close();
         }
 
@@ -341,7 +338,7 @@ namespace SmartSingularity.PstBackupAgent
                     }
                     catch (Exception) { }
                 }
-                SetExecutionState(_previousExecutionState);
+                SetExecutionState(ExecutionState.ES_CONTINUOUS);
                 Action closeApp = () =>
                 {
                     try
