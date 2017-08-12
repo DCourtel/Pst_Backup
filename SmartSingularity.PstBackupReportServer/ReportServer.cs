@@ -14,7 +14,15 @@ namespace SmartSingularity.PstBackupReportServer
 #if (DEBUG)
         public ReportServer()
         {
-            _reportServerDb = new ReportServerDb(@"E:\Pst Backup\Test Files\ReportServerDb\Test-PstBackup.mdf");
+            //_reportServerDb = new ReportServerDb(@"E:\Pst Backup\Test Files\ReportServerDb\Test-PstBackup.mdf");
+            //_reportServerDb.Connect();
+
+            Logger.IsLogActivated = true;
+            Logger.MinimalSeverity = Logger.MessageSeverity.Debug;
+            string databasePath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            databasePath = System.IO.Path.Combine(databasePath, "PstBackup", "PstBackup.mdf");
+            Logger.Write(1, $"Démarrage de ReportServer. Database at {databasePath}", Logger.MessageSeverity.Information, System.Diagnostics.EventLogEntryType.Information,"PstBackupServer");
+            _reportServerDb = new ReportServerDb(databasePath);
             _reportServerDb.Connect();
         }
 #endif
@@ -59,7 +67,7 @@ namespace SmartSingularity.PstBackupReportServer
         /// <param name="client">All informations on the client computer</param>
         public void RegisterClient(Client client)
         {
-            Logger.Write(30020, $"Registering the client {client.ComputerName}\\{client.Username} [{client.Version.ToString()}]", Logger.MessageSeverity.Debug);
+            Logger.Write(30020, $"Registering the client {client.ComputerName}\\{client.Username} [{client.Version.ToString()}]", Logger.MessageSeverity.Information, System.Diagnostics.EventLogEntryType.Information, "PstBackupServer");
             _reportServerDb.RegisterClient(client);
         }
 

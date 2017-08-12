@@ -1,1 +1,1 @@
-"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\installutil.exe" "C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\SmartSingularity.PstBackupWinService\bin\Release\SmartSingularity.PstBackupWinService.exe"
+"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\installutil.exe" "C:\Users\Courtel\Documents\Visual Studio 2017\Projects\SmartSingularity.PstBackup\SmartSingularity.PstBackupWinService\bin\Debug\SmartSingularity.PstBackupWinService.exe"

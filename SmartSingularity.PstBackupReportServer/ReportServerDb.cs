@@ -63,13 +63,36 @@ namespace SmartSingularity.PstBackupReportServer
             {
                 db.Open();
                 SqlCommand cmd = db.CreateCommand();
+                
+                // Table tbClients
                 cmd.CommandText = "CREATE TABLE [dbo].[tbClients]([Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, " +
                                     "[Version] VARCHAR(15) NOT NULL, " +
                                     "[ComputerName] NVARCHAR(64) NOT NULL, " +
                                     "[UserName] NVARCHAR(32) NOT NULL, " +
                                     "[LastContactDate] DATETIME NOT NULL);";
                 cmd.ExecuteNonQuery();
-                // ToDo : Create other tables
+
+                // Table tbPstFiles
+                cmd.CommandText = "CREATE TABLE [dbo].[tbPstFiles]([ClientId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, " +
+                                    "[LocalPath] NVARCHAR(300) NOT NULL, " +
+                                    "[FileId] UNIQUEIDENTIFIER NOT NULL, " +
+                                    "[IsSetToBackup] BIT NOT NULL, " +
+                                    "[Size] BIGINT NOT NULL, " +
+                                    "[LastSuccessfulBackup] DATETIME NULL)";
+                cmd.ExecuteNonQuery();
+
+                // Table tbBackupSessions
+                cmd.CommandText = "CREATE TABLE [dbo].[tbBackupSessions]([FileId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, " +
+                                    "[RemotePath] NVARCHAR(300) NOT NULL, " +
+                                    "[IsCompressed] BIT NOT NULL, " +
+                                    "[BackupMethod] INT NOT NULL, " +
+                                    "[IsSchedule] BIT NOT NULL, " +
+                                    "[StartTime] DATETIME NOT NULL, " +
+                                    "[EndTime] DATETIME NOT NULL, " +
+                                    "[ChunkCount] INT NOT NULL, " +
+                                    "[ErrorCode] INT NOT NULL, " +
+                                    "[ErrorMessage] NVARCHAR(300) NOT NULL)";
+                cmd.ExecuteNonQuery();
                 db.Close();
             }
         }
