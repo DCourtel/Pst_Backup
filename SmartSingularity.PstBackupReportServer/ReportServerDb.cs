@@ -63,9 +63,10 @@ namespace SmartSingularity.PstBackupReportServer
             {
                 db.Open();
                 SqlCommand cmd = db.CreateCommand();
-                
+
                 // Table tbClients
-                cmd.CommandText = "CREATE TABLE [dbo].[tbClients]([Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, " +
+                cmd.CommandText = "CREATE TABLE [dbo].[tbClients](" + 
+                                    "[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, " +
                                     "[Version] VARCHAR(15) NOT NULL, " +
                                     "[ComputerName] NVARCHAR(64) NOT NULL, " +
                                     "[UserName] NVARCHAR(32) NOT NULL, " +
@@ -73,17 +74,20 @@ namespace SmartSingularity.PstBackupReportServer
                 cmd.ExecuteNonQuery();
 
                 // Table tbPstFiles
-                cmd.CommandText = "CREATE TABLE [dbo].[tbPstFiles]([ClientId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, " +
+                cmd.CommandText = "CREATE TABLE [dbo].[tbPstFiles](" + 
+                                    "[ClientId] UNIQUEIDENTIFIER NOT NULL, " +
                                     "[LocalPath] NVARCHAR(300) NOT NULL, " +
-                                    "[FileId] UNIQUEIDENTIFIER NOT NULL, " +
+                                    "[FileId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, " +
                                     "[IsSetToBackup] BIT NOT NULL, " +
                                     "[Size] BIGINT NOT NULL, " +
-                                    "[LastSuccessfulBackup] DATETIME NULL)";
+                                    "[LastSuccessfulBackup] DATETIME NULL);";
                 cmd.ExecuteNonQuery();
 
                 // Table tbBackupSessions
-                cmd.CommandText = "CREATE TABLE [dbo].[tbBackupSessions]([FileId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, " +
+                cmd.CommandText = "CREATE TABLE [dbo].[tbBackupSessions](" + 
+                                    "[FileId] UNIQUEIDENTIFIER NOT NULL, " +
                                     "[RemotePath] NVARCHAR(300) NOT NULL, " +
+                                    "[CompressedSize]  BIGINT NOT NULL, " +
                                     "[IsCompressed] BIT NOT NULL, " +
                                     "[BackupMethod] INT NOT NULL, " +
                                     "[IsSchedule] BIT NOT NULL, " +
@@ -91,10 +95,17 @@ namespace SmartSingularity.PstBackupReportServer
                                     "[EndTime] DATETIME NOT NULL, " +
                                     "[ChunkCount] INT NOT NULL, " +
                                     "[ErrorCode] INT NOT NULL, " +
-                                    "[ErrorMessage] NVARCHAR(300) NOT NULL)";
+                                    "[ErrorMessage] NVARCHAR(300) NOT NULL," + 
+                                    "PRIMARY KEY([FileId], [StartTime]));";
                 cmd.ExecuteNonQuery();
                 db.Close();
             }
+        }
+
+        private void AddParameter(SqlCommand command, string parameterName, System.Data.SqlDbType parameterType, object value)
+        {
+            command.Parameters.Add(parameterName, parameterType);
+            command.Parameters[parameterName].Value = value;
         }
 
         /// <summary>
@@ -152,7 +163,7 @@ namespace SmartSingularity.PstBackupReportServer
         public void DeleteClient(Client client)
         {
             var _sqlCommand = new SqlCommand("DELETE FROM tbClients WHERE Id LIKE @clientId;", _dbConnection);
-            _sqlCommand.Parameters.AddWithValue("@clientId", client.Id);
+            AddParameter(_sqlCommand, "@clientId", System.Data.SqlDbType.UniqueIdentifier, new Guid(client.Id));
 
             _sqlCommand.ExecuteNonQuery();
         }
@@ -168,7 +179,7 @@ namespace SmartSingularity.PstBackupReportServer
 
             using (var _sqlCommand = new SqlCommand("SELECT * FROM tbClients WHERE Id LIKE @clientId;", _dbConnection))
             {
-                _sqlCommand.Parameters.AddWithValue("@clientId", client.Id);
+                AddParameter(_sqlCommand, "@clientId", System.Data.SqlDbType.UniqueIdentifier, new Guid(client.Id));
                 using (var reader = _sqlCommand.ExecuteReader())
                 {
                     result = reader.HasRows;
@@ -186,7 +197,7 @@ namespace SmartSingularity.PstBackupReportServer
         public Client GetClient(string clientId)
         {
             var _sqlCommand = new SqlCommand("SELECT * FROM tbClients WHERE Id LIKE @clientId;", _dbConnection);
-            _sqlCommand.Parameters.AddWithValue("@clientId", clientId);
+            AddParameter(_sqlCommand, "@clientId", System.Data.SqlDbType.UniqueIdentifier, clientId);
             Client client = new Client();
 
             using (SqlDataReader reader = _sqlCommand.ExecuteReader())
@@ -214,11 +225,12 @@ namespace SmartSingularity.PstBackupReportServer
                 "@version," +
                 "@computerName," +
                 "@userName," +
-                $"'{justNow.ToString("yyyyMMdd HH:mm:ss")}');", _dbConnection);
-            _sqlCommand.Parameters.AddWithValue("@clientId", client.Id);
-            _sqlCommand.Parameters.AddWithValue("@version", client.Version.ToString());
-            _sqlCommand.Parameters.AddWithValue("@computerName", client.ComputerName);
-            _sqlCommand.Parameters.AddWithValue("@userName", client.Username);
+                "@lastContactDate);", _dbConnection);
+            AddParameter(_sqlCommand, "@clientId", System.Data.SqlDbType.UniqueIdentifier, new Guid(client.Id));
+            AddParameter(_sqlCommand, "@version", System.Data.SqlDbType.NVarChar, client.Version.ToString().Substring(0, System.Math.Min(15, client.Version.ToString().Length)));
+            AddParameter(_sqlCommand, "@computerName", System.Data.SqlDbType.NVarChar, client.ComputerName.Substring(0, System.Math.Min(64, client.ComputerName.Length)));
+            AddParameter(_sqlCommand, "@userName", System.Data.SqlDbType.NVarChar, client.Username.Substring(0, System.Math.Min(32, client.Username.Length)));
+            AddParameter(_sqlCommand, "@lastContactDate", System.Data.SqlDbType.DateTime, justNow);
 
             _sqlCommand.ExecuteNonQuery();
         }
@@ -230,12 +242,13 @@ namespace SmartSingularity.PstBackupReportServer
                 "Version=@version, " +
                 "ComputerName=@computerName, " +
                 "UserName=@userName, " +
-                $"LastContactDate='{justNow.ToString("yyyyMMdd HH:mm:ss")}' " +
+                $"LastContactDate=@lastContactDate " +
                 $"WHERE Id LIKE @clientId;", _dbConnection);
-            _sqlCommand.Parameters.AddWithValue("@version", client.Version.ToString());
-            _sqlCommand.Parameters.AddWithValue("@computerName", client.ComputerName);
-            _sqlCommand.Parameters.AddWithValue(@"userName", client.Username);
-            _sqlCommand.Parameters.AddWithValue("@clientId", client.Id);
+            AddParameter(_sqlCommand, "@version", System.Data.SqlDbType.NVarChar, client.Version.ToString().Substring(0, System.Math.Min(15, client.Version.ToString().Length)));
+            AddParameter(_sqlCommand, "@computerName", System.Data.SqlDbType.NVarChar, client.ComputerName.Substring(0, System.Math.Min(64, client.ComputerName.Length)));
+            AddParameter(_sqlCommand, @"userName", System.Data.SqlDbType.NVarChar, client.Username.Substring(0, System.Math.Min(32, client.Username.Length)));
+            AddParameter(_sqlCommand, @"lastContactDate", System.Data.SqlDbType.DateTime, justNow);
+            AddParameter(_sqlCommand, "@clientId", System.Data.SqlDbType.UniqueIdentifier, new Guid(client.Id));
 
             _sqlCommand.ExecuteNonQuery();
         }
@@ -269,8 +282,8 @@ namespace SmartSingularity.PstBackupReportServer
             bool result = false;
             using (var _sqlCommand = new SqlCommand("SELECT * FROM tbPstFiles WHERE ClientID LIKE @clientId AND LocalPath LIKE @localPath;", _dbConnection))
             {
-                _sqlCommand.Parameters.AddWithValue("@clientId", clientId);
-                _sqlCommand.Parameters.AddWithValue("@localPath", localPath);
+                AddParameter(_sqlCommand, "@clientId", System.Data.SqlDbType.UniqueIdentifier, new Guid(clientId));
+                AddParameter(_sqlCommand, "@localPath", System.Data.SqlDbType.NVarChar, localPath.Substring(0, System.Math.Min(300, localPath.Length)));
                 using (SqlDataReader reader = _sqlCommand.ExecuteReader())
                 {
                     result = reader.HasRows;
@@ -291,8 +304,8 @@ namespace SmartSingularity.PstBackupReportServer
 
             using (var _sqlCommand = new SqlCommand("SELECT * FROM tbPstFiles WHERE ClientId LIKE @clientId AND LocalPath LIKE @localPath;", _dbConnection))
             {
-                _sqlCommand.Parameters.AddWithValue("@clientId", clientId);
-                _sqlCommand.Parameters.AddWithValue("@localPath", localPath);
+                AddParameter(_sqlCommand, "@clientId", System.Data.SqlDbType.UniqueIdentifier, new Guid(clientId));
+                AddParameter(_sqlCommand, "@localPath", System.Data.SqlDbType.NVarChar, localPath.Substring(0, System.Math.Min(300, localPath.Length)));
                 using (SqlDataReader reader = _sqlCommand.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -315,10 +328,10 @@ namespace SmartSingularity.PstBackupReportServer
         private void RegisterNewPstFile(string clientId, PstFile pstFile)
         {
             var _sqlCommand = new SqlCommand($"INSERT INTO tbPstFiles VALUES (@clientId,@localPath,'{Guid.NewGuid()}',@isSetToBackup,@size,null);", _dbConnection);
-            _sqlCommand.Parameters.AddWithValue("@clientId", clientId);
-            _sqlCommand.Parameters.AddWithValue("@localPath", pstFile.LocalPath);
-            _sqlCommand.Parameters.AddWithValue("@isSetToBackup", pstFile.IsSetToBackup);
-            _sqlCommand.Parameters.AddWithValue("@size", pstFile.Size);
+            AddParameter(_sqlCommand, "@clientId", System.Data.SqlDbType.UniqueIdentifier, new Guid(clientId));
+            AddParameter(_sqlCommand, "@localPath", System.Data.SqlDbType.NVarChar, pstFile.LocalPath.Substring(0, System.Math.Min(300, pstFile.LocalPath.Length)));
+            AddParameter(_sqlCommand, "@isSetToBackup", System.Data.SqlDbType.Bit, pstFile.IsSetToBackup);
+            AddParameter(_sqlCommand, "@size", System.Data.SqlDbType.BigInt, pstFile.Size);
             _sqlCommand.ExecuteNonQuery();
         }
 
@@ -329,21 +342,22 @@ namespace SmartSingularity.PstBackupReportServer
                 "Size=@size," +
                 "LastSuccessfulBackup=@lastSuccessfulBackup " +
                 "WHERE ClientId LIKE @clientId AND LocalPath LIKE @localPath;", _dbConnection);
-            _sqlCommand.Parameters.AddWithValue("@isSetToBackup", pstFile.IsSetToBackup);
-            _sqlCommand.Parameters.AddWithValue("@size", pstFile.Size);
-            _sqlCommand.Parameters.AddWithValue("@lastSuccessfulBackup", ((object)pstFile.LastSuccessfulBackup?.ToString("yyyyMMdd HH:mm:ss") ?? DBNull.Value));
-            _sqlCommand.Parameters.AddWithValue("@clientId", clientId);
-            _sqlCommand.Parameters.AddWithValue("@localPath", pstFile.LocalPath);
+            AddParameter(_sqlCommand, "@isSetToBackup", System.Data.SqlDbType.Bit, pstFile.IsSetToBackup);
+            AddParameter(_sqlCommand, "@size", System.Data.SqlDbType.BigInt, pstFile.Size);
+            AddParameter(_sqlCommand, "@lastSuccessfulBackup", System.Data.SqlDbType.DateTime, ((object)pstFile.LastSuccessfulBackup ?? DBNull.Value));
+            AddParameter(_sqlCommand, "@clientId", System.Data.SqlDbType.UniqueIdentifier, new Guid(clientId));
+            AddParameter(_sqlCommand, "@localPath", System.Data.SqlDbType.NVarChar, pstFile.LocalPath.Substring(0, System.Math.Min(300, pstFile.LocalPath.Length)));
             _sqlCommand.ExecuteNonQuery();
         }
 
         private void UpdateBackupSuccessDate(string clientId, string fileId, DateTime backupDate)
         {
             var _sqlCommand = new SqlCommand($"UPDATE tbPstFiles SET " +
-                $"LastSuccessfulBackup='{backupDate.ToString("yyyyMMdd HH:mm:ss")}' " +
+                $"LastSuccessfulBackup=@backupDate " +
                 $"WHERE ClientId LIKE @clientId AND fileId LIKE @fileId;", _dbConnection);
-            _sqlCommand.Parameters.AddWithValue("@clientId", clientId);
-            _sqlCommand.Parameters.AddWithValue("@fileId", fileId);
+            AddParameter(_sqlCommand, "@backupDate", System.Data.SqlDbType.DateTime, backupDate);
+            AddParameter(_sqlCommand, "@clientId", System.Data.SqlDbType.UniqueIdentifier, new Guid(clientId));
+            AddParameter(_sqlCommand, "@fileId", System.Data.SqlDbType.UniqueIdentifier, new Guid(fileId));
             _sqlCommand.ExecuteNonQuery();
         }
 
@@ -372,17 +386,17 @@ namespace SmartSingularity.PstBackupReportServer
                 $"@errorCode," +
                 $"@errorMessage);", _dbConnection);
 
-            _sqlCommand.Parameters.AddWithValue("@fileId", fileId);
-            _sqlCommand.Parameters.AddWithValue("@remotePath", bckSession.RemotePath);
-            _sqlCommand.Parameters.AddWithValue("@isCompressed", bckSession.IsCompressed);
-            _sqlCommand.Parameters.AddWithValue("@compressedSize", bckSession.CompressedSize);
-            _sqlCommand.Parameters.AddWithValue("@backupMethod", bckSession.BackupMethod);
-            _sqlCommand.Parameters.AddWithValue("@isSchedule", bckSession.IsSchedule);
-            _sqlCommand.Parameters.AddWithValue("@startTime", bckSession.StartTime.ToString("yyyyMMdd HH:mm:ss"));
-            _sqlCommand.Parameters.AddWithValue("@endTime", bckSession.EndTime.ToString("yyyyMMdd HH:mm:ss"));
-            _sqlCommand.Parameters.AddWithValue("@chunkCount", bckSession.ChunkCount);
-            _sqlCommand.Parameters.AddWithValue("@errorCode", bckSession.ErrorCode);
-            _sqlCommand.Parameters.AddWithValue("@errorMessage", bckSession.ErrorMessage);
+            AddParameter(_sqlCommand, "@fileId", System.Data.SqlDbType.UniqueIdentifier, new Guid(fileId));
+            AddParameter(_sqlCommand, "@remotePath", System.Data.SqlDbType.NVarChar, bckSession.RemotePath.Substring(0, System.Math.Min(300, bckSession.RemotePath.Length)));
+            AddParameter(_sqlCommand, "@isCompressed", System.Data.SqlDbType.Bit, bckSession.IsCompressed);
+            AddParameter(_sqlCommand, "@compressedSize", System.Data.SqlDbType.BigInt, bckSession.CompressedSize);
+            AddParameter(_sqlCommand, "@backupMethod", System.Data.SqlDbType.Int, bckSession.BackupMethod);
+            AddParameter(_sqlCommand, "@isSchedule", System.Data.SqlDbType.Bit, bckSession.IsSchedule);
+            AddParameter(_sqlCommand, "@startTime", System.Data.SqlDbType.DateTime, bckSession.StartTime);
+            AddParameter(_sqlCommand, "@endTime", System.Data.SqlDbType.DateTime, bckSession.EndTime);
+            AddParameter(_sqlCommand, "@chunkCount", System.Data.SqlDbType.Int, bckSession.ChunkCount);
+            AddParameter(_sqlCommand, "@errorCode", System.Data.SqlDbType.Int, bckSession.ErrorCode);
+            AddParameter(_sqlCommand, "@errorMessage", System.Data.SqlDbType.NVarChar, bckSession.ErrorMessage.Substring(0, System.Math.Min( 300, bckSession.ErrorMessage.Length)));
             _sqlCommand.ExecuteNonQuery();
 
             if (bckSession.ErrorCode == PstBackupEngine.BackupResultInfo.BackupResult.Success)

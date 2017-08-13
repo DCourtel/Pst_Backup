@@ -17,17 +17,18 @@ CREATE TABLE [dbo].[tbClients]
 )
 CREATE TABLE [dbo].[tbPstFiles]
 (
-	[ClientId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+	[ClientId] UNIQUEIDENTIFIER NOT NULL, 
     [LocalPath] NVARCHAR(300) NOT NULL, 
-    [FileId] UNIQUEIDENTIFIER NOT NULL, 
+    [FileId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
     [IsSetToBackup] BIT NOT NULL, 
     [Size] BIGINT NOT NULL, 
     [LastSuccessfulBackup] DATETIME NULL
 )
 CREATE TABLE [dbo].[tbBackupSessions]
 (
-	[FileId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+	[FileId] UNIQUEIDENTIFIER NOT NULL, 
     [RemotePath] NVARCHAR(300) NOT NULL, 
+	[CompressedSize]  BIGINT   NOT NULL,
     [IsCompressed] BIT NOT NULL, 
     [BackupMethod] INT NOT NULL, 
     [IsSchedule] BIT NOT NULL, 
@@ -35,7 +36,8 @@ CREATE TABLE [dbo].[tbBackupSessions]
     [EndTime] DATETIME NOT NULL, 
     [ChunkCount] INT NOT NULL, 
     [ErrorCode] INT NOT NULL, 
-    [ErrorMessage] NVARCHAR(300) NOT NULL
+    [ErrorMessage] NVARCHAR(300) NOT NULL,
+	PRIMARY KEY([FileId], [StartTime])
 )
 */
 

@@ -27,7 +27,6 @@ namespace SmartSingularity.FakeClients
         private List<FakePstFile> _pstFiles = new List<FakePstFile>();
         private ActivityState _state = ActivityState.Stopped;
         private System.Timers.Timer _chrono = new System.Timers.Timer(1000);
-        private bool _stopping = false;
         private PstBackupEngine.CoreBackupEngine _backupEngine;
         private PstBackupSettings.ApplicationSettings _appSettings = new PstBackupSettings.ApplicationSettings(PstBackupSettings.ApplicationSettings.SourceSettings.Local);
 
@@ -54,8 +53,7 @@ namespace SmartSingularity.FakeClients
         }
 
         #region Properties
-
-        public bool Stopping { get { return _stopping; } set { _stopping = value; } }
+        
         public string ComputerName { get; set; }
         public string UserName { get; set; }
         public Version ClientVersion { get; set; }
@@ -95,7 +93,15 @@ namespace SmartSingularity.FakeClients
 
         public void Stop()
         {
-            State = ActivityState.Stopping;
+            if(State == ActivityState.Sleeping)
+            {
+                _chrono.Stop();
+                State = ActivityState.Stopped;
+            }
+            else if(State != ActivityState.Stopped && State != ActivityState.Stopping)
+            {
+                State = ActivityState.Stopping;
+            }            
         }
 
         private void _chrono_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -103,7 +109,7 @@ namespace SmartSingularity.FakeClients
             _chrono.Stop();
             foreach (FakePstFile pstFile in _pstFiles)
             {
-                if (!Stopping)
+                if (State != ActivityState.Stopping)
                 {
                     State = ActivityState.Saving;
                     pstFile.UpdateSize();
@@ -114,15 +120,22 @@ namespace SmartSingularity.FakeClients
                         LocalPath = System.IO.Path.Combine(pstFile.LocalPath, pstFile.Filename),
                         Size = pstFile.Size
                     };
-                    _proxy.RegisterPstFile(ClientId, pstFileToSave);
+                    try
+                    {
+                        _proxy.RegisterPstFile(ClientId, pstFileToSave);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Windows.Forms.MessageBox.Show(ex.Message);
+                    }
                     PstBackupSettings.PSTRegistryEntry regEntry = new PstBackupSettings.PSTRegistryEntry(pstFileToSave.LocalPath);
                     _backupEngine.Backup((object)regEntry);
                 }
             }
-            if (!Stopping)
+            if (State != ActivityState.Stopping)
             {
                 State = ActivityState.Sleeping;
-                _chrono.Interval = rnd.Next(3 * 60 * 1000, 10 * 60 * 1000);
+                _chrono.Interval = rnd.Next(3 * 5 * 1000, 10 * 5 * 1000);
                 _chrono.Start();
             }
             else
@@ -145,21 +158,40 @@ namespace SmartSingularity.FakeClients
                 StartTime = e.Result.StartTime
             };
 
-            State = ActivityState.Comparing;
-            if (!CompareLocalAndRemotePstFiles(e.Result.LocalPath, e.Result.RemotePath))
+            if (State != ActivityState.Stopping)
             {
-                bckSession.ErrorCode = PstBackupEngine.BackupResultInfo.BackupResult.Failed;
-                bckSession.ErrorMessage = "Remote PST file and local PST file are not identical.";
+                State = ActivityState.Comparing;
+                if (!CompareLocalAndRemotePstFiles(e.Result.LocalPath, e.Result.RemotePath))
+                {
+                    bckSession.ErrorCode = PstBackupEngine.BackupResultInfo.BackupResult.Failed;
+                    bckSession.ErrorMessage = "Remote PST file and local PST file are not identical.";
+                } 
             }
 
-            State = ActivityState.Reporting;
-            _proxy.RegisterBackupResult(ClientId, bckSession);
+            if (State != ActivityState.Stopping)
+            {
+                State = ActivityState.Reporting;
+                try
+                {
+                    _proxy.RegisterBackupResult(ClientId, bckSession);
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                } 
+            }
 
-            State = ActivityState.Altering;
-            AlterLocalPstFile(e.Result.LocalPath);
+            if (State != ActivityState.Stopping)
+            {
+                State = ActivityState.Altering;
+                AlterLocalPstFile(e.Result.LocalPath); 
+            }
 
-            State = ActivityState.Expanding;
-            ExpandLocalPstFile(e.Result.LocalPath);
+            if (State != ActivityState.Stopping)
+            {
+                State = ActivityState.Expanding;
+                ExpandLocalPstFile(e.Result.LocalPath); 
+            }
         }
 
         private void Register()
@@ -176,7 +208,8 @@ namespace SmartSingularity.FakeClients
                 };
                 _proxy.RegisterClient(client);
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            { System.Windows.Forms.MessageBox.Show(ex.Message); }
         }
         private string GetRandomComputerName()
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using Logger = SmartSingularity.PstBackupLogger.Logger;
 
 namespace SmartSingularity.PstBackupReportServer
 {
+    [ServiceBehavior(IncludeExceptionDetailInFaults = true, InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Single)]
     public class ReportServer : IReportServer, IDisposable
     {
         private ReportServerDb _reportServerDb;
@@ -21,7 +23,7 @@ namespace SmartSingularity.PstBackupReportServer
             Logger.MinimalSeverity = Logger.MessageSeverity.Debug;
             string databasePath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             databasePath = System.IO.Path.Combine(databasePath, "PstBackup", "PstBackup.mdf");
-            Logger.Write(1, $"Démarrage de ReportServer. Database at {databasePath}", Logger.MessageSeverity.Information, System.Diagnostics.EventLogEntryType.Information,"PstBackupServer");
+            Logger.Write(1, $"Démarrage de ReportServer. Database at {databasePath}", Logger.MessageSeverity.Information);
             _reportServerDb = new ReportServerDb(databasePath);
             _reportServerDb.Connect();
         }
@@ -67,7 +69,7 @@ namespace SmartSingularity.PstBackupReportServer
         /// <param name="client">All informations on the client computer</param>
         public void RegisterClient(Client client)
         {
-            Logger.Write(30020, $"Registering the client {client.ComputerName}\\{client.Username} [{client.Version.ToString()}]", Logger.MessageSeverity.Information, System.Diagnostics.EventLogEntryType.Information, "PstBackupServer");
+            Logger.Write(30020, $"Registering the client {client.ComputerName}\\{client.Username} [{client.Version.ToString()}]", Logger.MessageSeverity.Information);
             _reportServerDb.RegisterClient(client);
         }
 
